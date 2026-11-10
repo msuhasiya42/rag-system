@@ -1,5 +1,7 @@
 # RAG System
 
+> 📖 **New to RAG?** Start with the [RAG Engineering Glossary](docs/RAG_GLOSSARY.md) — 28 terms explained from scratch using the Berkshire report, with diagrams, examples, and our evaluation results.
+
 Ask questions about company PDFs and get answers that cite the document and page. Built with Flask,
 Pinecone (vector index, and `llama-text-embed-v2` embeddings through Pinecone Inference), Amazon
 Bedrock (answer model; Titan embeddings as an alternative) and AWS Textract for scanned pages.
