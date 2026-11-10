@@ -209,6 +209,9 @@ Formula: `RRF(chunk) = sum(weight_for_list / (k + rank_in_list))`. A missing chu
 
 These definitions follow the repository's `evaluation.py`: evidence is checked against source page/section labels, not exact chunk IDs.
 
+For what each test checks, worked metric examples and the limits of the evaluation, see
+[EVALUATION.md](EVALUATION.md).
+
 ### Our reported held-out evaluation
 
 Results below are **reported in the README**, not independently rerun here. The held-out split contains **33 answerable questions**, evaluated at k=10 and summarized at Hit@5:
