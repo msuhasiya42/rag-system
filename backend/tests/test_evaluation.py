@@ -113,3 +113,15 @@ def test_evidence_is_supported_by_any_of_its_alternative_locations() -> None:
     assert auditor.supported_by(_hit("Report on Internal Control", 89).chunk)
     assert auditor.supported_by(_hit("FORM 10-K > Item 8. Financial Statements", 91).chunk)
     assert not auditor.supported_by(_hit("Item 7", 91).chunk)
+
+
+def test_unanswerable_questions_are_not_retrieved() -> None:
+    asked: list[str] = []
+
+    def retrieve(question: str, k: int) -> list[SearchHit]:
+        asked.append(question)
+        return []
+
+    results = run_retrieval_eval(retrieve, [_case(BALANCE), _case(answerable=False)], k=5)
+
+    assert len(asked) == len(results) == 1

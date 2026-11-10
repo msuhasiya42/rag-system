@@ -4,13 +4,13 @@ from rag_system.answering import AnswerService
 from rag_system.chat import run_chat
 from rag_system.domain import Chunk
 from rag_system.retrieval import DenseRetriever
-from tests.fakes import FakeChatModel, FakeEmbedder, InMemoryVectorStore
+from tests.fakes import FakeChatModel, FakeEmbedder, InMemoryVectorStore, as_units
 
 
 def _service(model: FakeChatModel) -> AnswerService:
     store = InMemoryVectorStore()
     chunk = Chunk("report#00000", "report", "report.pdf", 0, "Revenue was 12 million", 3, 3)
-    store.upsert([chunk], FakeEmbedder().embed_documents([chunk.text]))
+    store.upsert(as_units([chunk]), FakeEmbedder().embed_documents([chunk.text]))
     return AnswerService(DenseRetriever(FakeEmbedder(), store), model)
 
 

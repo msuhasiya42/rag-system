@@ -26,6 +26,10 @@ PIPELINE_DESCRIPTIONS: dict[Pipeline, str] = {
 USES_SPARSE: frozenset[Pipeline] = frozenset({"hybrid", "advanced"})
 USES_RERANKER: frozenset[Pipeline] = frozenset({"advanced", "basic-rerank"})
 
+# Stores may return several table rows of one chunk; fetch extra so that after removing
+# repeats there are still top_k distinct chunks.
+OVERFETCH = 3
+
 # The usual RRF constant from Cormack et al. (2009): damps the gap between ranks 1 and 2 so one
 # list's top result cannot dominate the fusion on its own.
 RRF_K = 60
@@ -41,7 +45,8 @@ class DenseRetriever(Retriever):
         self._store = store
 
     def retrieve(self, question: str, top_k: int) -> list[SearchHit]:
-        return self._store.search(self._embedder.embed_query(question), top_k)
+        hits = self._store.search(self._embedder.embed_query(question), top_k * OVERFETCH)
+        return unique_chunks(hits)[:top_k]
 
 
 class SparseRetriever(Retriever):
@@ -50,7 +55,8 @@ class SparseRetriever(Retriever):
         self._store = store
 
     def retrieve(self, question: str, top_k: int) -> list[SearchHit]:
-        return self._store.search(self._encoder.encode_query(question), top_k)
+        hits = self._store.search(self._encoder.encode_query(question), top_k * OVERFETCH)
+        return unique_chunks(hits)[:top_k]
 
 
 class HybridRetriever(Retriever):
@@ -116,6 +122,18 @@ class RerankingRetriever(Retriever):
         return reciprocal_rank_fusion([candidates, reranked], k=self._rrf_k, weights=weights)[
             :top_k
         ]
+
+
+def unique_chunks(hits: Sequence[SearchHit]) -> list[SearchHit]:
+    """Keep each chunk once, at its best rank (small-to-big: a matching row stands for its
+    chunk)."""
+    seen: set[str] = set()
+    unique = []
+    for hit in hits:
+        if hit.chunk.id not in seen:
+            seen.add(hit.chunk.id)
+            unique.append(hit)
+    return unique
 
 
 def reciprocal_rank_fusion(

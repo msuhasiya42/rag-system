@@ -6,6 +6,7 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
+from rag_system.answer_eval import AnswerResult, AnswerSummary
 from rag_system.answering import format_pages
 from rag_system.domain import SearchHit
 from rag_system.evaluation import CaseResult, Summary
@@ -17,16 +18,13 @@ def format_report(results: Sequence[CaseResult], summary: Summary, ks: Sequence[
     rows = [f"{'id':4} {'category':13} {'first':>5} {'R@5':>5}  top result"]
     for result in results:
         top = _describe(result.hits[0]) if result.hits else "-"
-        if not result.case.evidence:  # unanswerable: show how confident the top result looks
-            rows.append(f"{result.case.id:4} {result.case.category:13} {'-':>5} {'-':>5}  {top}")
-            continue
         rank = result.first_relevant_rank()
         rows.append(
             f"{result.case.id:4} {result.case.category:13} {rank or 'miss':>5} "
             f"{result.recall_at(5):>5.0%}  {top}"
         )
     metrics = [
-        f"Questions scored: {summary.questions} (unanswerable ones excluded)",
+        f"Questions scored: {summary.questions} (unanswerable ones are not retrieved)",
         "Hit@K       " + _by_k(summary.hit, ks),
         "Recall@K    " + _by_k(summary.recall, ks),
         "Precision@K " + _by_k(summary.precision, ks),
@@ -119,3 +117,139 @@ def format_rank_matrix(runs: Sequence[tuple[str, Sequence[CaseResult]]]) -> str:
             + " ".join(f"{rank:>13}" for rank in ranks)
         )
     return "\n".join(rows)
+
+
+def format_answer_report(results: Sequence[AnswerResult], summary: AnswerSummary) -> str:
+    rows = [f"{'id':4} {'category':13} {'verdict':10} {'faithful':8} {'cites':5} {'cause':10}"]
+    for r in results:
+        verdict = r.verdict.correctness if r.verdict else "ERROR"
+        faithful = ("yes" if r.verdict.faithful else "NO") if r.verdict else "-"
+        rows.append(
+            f"{r.case.id:4} {r.case.category:13} {verdict:10} {faithful:8} "
+            f"{'ok' if r.citations_valid else 'BAD':5} {r.failure_cause:10}"
+        )
+    numbers = f"{summary.key_numbers_found:.0%}" if summary.key_numbers_found is not None else "n/a"
+    lines = [
+        f"Questions: {summary.questions} ({summary.answerable} answerable graded, "
+        f"{summary.errors} errors)",
+        f"Answer accuracy (answerable): correct {summary.correct:.0%}, "
+        f"partial {summary.partial:.0%}, incorrect {summary.incorrect:.0%}",
+        f"Unanswerable handled correctly (said not in report): {summary.abstention_correct:.0%}",
+        f"Faithful to sources: {summary.faithful:.0%}",
+        f"Valid citations: {summary.citations_valid:.0%}",
+        f"Key numbers found in answers (no LLM): {numbers}",
+        f"Not correct because of: retrieval {summary.retrieval_failures}, "
+        f"generation {summary.generation_failures}",
+    ]
+    return "\n".join(rows) + "\n\n" + "\n".join(lines)
+
+
+def save_answer_results(
+    directory: Path,
+    label: str,
+    config: Mapping[str, object],
+    results: Sequence[AnswerResult],
+    summary: AnswerSummary,
+) -> Path:
+    directory.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
+    path = directory / f"{stamp}-{label}-answers.json"
+    payload = {
+        "label": label,
+        "createdAt": stamp,
+        "config": dict(config),
+        "summary": asdict(summary),
+        "cases": [
+            {
+                "id": r.case.id,
+                "split": r.case.split,
+                "category": r.case.category,
+                "question": r.case.question,
+                "expectedFacts": r.case.expected_facts,
+                "answer": r.answer.text,
+                "answerModel": r.answer_model,
+                "judgeModel": r.judge_model,
+                "verdict": r.verdict.model_dump() if r.verdict else None,
+                "error": r.error,
+                "citationsValid": r.citations_valid,
+                "keyNumbersFound": r.key_numbers_found,
+                "evidenceInContext": r.evidence_in_context,
+                "failureCause": r.failure_cause,
+                "sources": [
+                    format_pages(hit) + " | " + hit.chunk.section for hit in r.answer.sources
+                ],
+                "latencyMs": round(r.latency_ms),
+            }
+            for r in results
+        ],
+    }
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
+    path.with_suffix(".md").write_text(format_answer_markdown(label, config, results, summary))
+    return path
+
+
+def format_answer_markdown(
+    label: str,
+    config: Mapping[str, object],
+    results: Sequence[AnswerResult],
+    summary: AnswerSummary,
+) -> str:
+    """One readable page: the scores, then every question with its answer and verdict."""
+    numbers = f"{summary.key_numbers_found:.0%}" if summary.key_numbers_found is not None else "n/a"
+    lines = [
+        f"# Answer evaluation: {label}",
+        "",
+        "Settings: " + ", ".join(f"{key} = {value}" for key, value in config.items()),
+        "",
+        "| Measure | Result |",
+        "|---|---|",
+        f"| Answerable questions graded | {summary.answerable} |",
+        f"| Correct | {summary.correct:.0%} |",
+        f"| Partial | {summary.partial:.0%} |",
+        f"| Incorrect | {summary.incorrect:.0%} |",
+        f"| Unanswerable handled correctly | {summary.abstention_correct:.0%} |",
+        f"| Faithful to sources | {summary.faithful:.0%} |",
+        f"| Valid citations | {summary.citations_valid:.0%} |",
+        f"| Key numbers found (no LLM) | {numbers} |",
+        f"| Not correct: retrieval / generation | {summary.retrieval_failures} / "
+        f"{summary.generation_failures} |",
+        f"| Errors | {summary.errors} |",
+        "",
+        "Verdicts come from an LLM judge (the answer model itself, the only working model), so",
+        "they may be lenient; the key-number check does not use an LLM.",
+        "",
+    ]
+    for r in results:
+        verdict = r.verdict.correctness.upper() if r.verdict else "ERROR"
+        lines += [
+            f"## {r.case.id} · {verdict} · {r.case.category} · {r.case.split} split",
+            "",
+            f"**Question:** {r.case.question}",
+            "",
+            "**Expected:** " + "; ".join(r.case.expected_facts),
+            "",
+            "**Answer** (" + (r.answer_model or "no model") + "):",
+            "",
+            "> " + (r.answer.text or r.error or "(empty)").replace("\n", "\n> "),
+            "",
+        ]
+        if r.verdict:
+            faithful = "yes" if r.verdict.faithful else "no"
+            lines.append(
+                f"**Judge:** {r.verdict.correctness}; faithful: {faithful}; {r.verdict.explanation}"
+            )
+        checks = [
+            f"citations {'ok' if r.citations_valid else 'invalid'}",
+            f"evidence in context: {'yes' if r.evidence_in_context else 'no'}",
+        ]
+        if r.key_numbers_found is not None:
+            checks.append(f"key numbers found: {r.key_numbers_found:.0%}")
+        if r.failure_cause:
+            checks.append(f"failure cause: {r.failure_cause}")
+        lines += ["", "**Checks:** " + ", ".join(checks), "", "**Sources:**", ""]
+        lines += [
+            f"{n}. {hit.chunk.section or '(no section)'}, {format_pages(hit)}"
+            for n, hit in enumerate(r.answer.sources, start=1)
+        ]
+        lines.append("")
+    return "\n".join(lines)

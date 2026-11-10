@@ -1,7 +1,7 @@
 from rag_system.answering import NO_RESULTS_ANSWER, AnswerService
 from rag_system.domain import Chunk
 from rag_system.retrieval import DenseRetriever
-from tests.fakes import FakeChatModel, FakeEmbedder, InMemoryVectorStore
+from tests.fakes import FakeChatModel, FakeEmbedder, InMemoryVectorStore, as_units
 
 
 def _chunk(index: int, text: str, page: int) -> Chunk:
@@ -11,7 +11,7 @@ def _chunk(index: int, text: str, page: int) -> Chunk:
 def _store_with(*chunks: Chunk) -> InMemoryVectorStore:
     store = InMemoryVectorStore()
     embedder = FakeEmbedder()
-    store.upsert(chunks, embedder.embed_documents([chunk.text for chunk in chunks]))
+    store.upsert(as_units(chunks), embedder.embed_documents([chunk.text for chunk in chunks]))
     return store
 
 

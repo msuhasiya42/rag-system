@@ -15,8 +15,15 @@ import re
 from collections.abc import Iterator
 from dataclasses import dataclass
 
-from rag_system.domain import Chunk, TextLine
-from rag_system.ingestion.structure import Block, BlockKind, PlacedLine, Section, is_table_row
+from rag_system.domain import Chunk, SearchUnit, TextLine
+from rag_system.ingestion.structure import (
+    Block,
+    BlockKind,
+    PlacedLine,
+    Section,
+    is_table_row,
+    split_table_row,
+)
 
 PATH_SEPARATOR = " > "
 _WORD = re.compile(r"[A-Za-z]{3}")
@@ -35,16 +42,131 @@ def chunk_sections(
     size_chars: int,
     overlap_chars: int,
 ) -> list[Chunk]:
+    packed = _chunk_with_lines(document_id, document_name, sections, size_chars, overlap_chars)
+    return [chunk for chunk, _ in packed]
+
+
+def search_units(
+    document_id: str,
+    document_name: str,
+    sections: list[Section],
+    size_chars: int,
+    overlap_chars: int,
+    table_rows: bool,
+) -> list[SearchUnit]:
+    """Every chunk, plus (with ``table_rows``) one unit per labelled table row."""
+    packed = _chunk_with_lines(document_id, document_name, sections, size_chars, overlap_chars)
+    units = [SearchUnit.for_chunk(chunk) for chunk, _ in packed]
+    if table_rows:
+        units.extend(_table_row_units(sections, packed))
+    return units
+
+
+def _chunk_with_lines(
+    document_id: str,
+    document_name: str,
+    sections: list[Section],
+    size_chars: int,
+    overlap_chars: int,
+) -> list[tuple[Chunk, list[PlacedLine]]]:
     if overlap_chars >= size_chars:
         raise ValueError("overlap_chars must be smaller than size_chars")
-    chunks: list[Chunk] = []
+    packed: list[tuple[Chunk, list[PlacedLine]]] = []
     for section in sections:
         path = PATH_SEPARATOR.join(section.path)
         for lines in _pack(section.blocks, size_chars, overlap_chars):
             if not any(_WORD.search(line.text) for line in lines):
                 continue  # only numbers or symbols, e.g. a lone year on a cover page
-            chunks.append(_make_chunk(document_id, document_name, len(chunks), path, lines))
-    return chunks
+            chunk = _make_chunk(document_id, document_name, len(packed), path, lines)
+            packed.append((chunk, lines))
+    return packed
+
+
+def _table_row_units(
+    sections: list[Section], packed: list[tuple[Chunk, list[PlacedLine]]]
+) -> list[SearchUnit]:
+    """One unit per labelled row, written as a sentence that carries what a lone row lacks:
+    the table, the group label above the row, and each value paired with its column year
+    ("CONSOLIDATED BALANCE SHEETS: Total assets: 2025: 1,222,176; 2024: 1,153,881")."""
+    owner: dict[int, Chunk] = {}  # line object -> the first chunk that holds it
+    for chunk, lines in packed:
+        for line in lines:
+            owner.setdefault(id(line), chunk)
+    rows_per_chunk: dict[str, int] = {}
+    units: list[SearchUnit] = []
+    for section in sections:
+        title = _table_title(section.path)
+        for block in section.blocks:
+            if block.kind != BlockKind.TABLE:
+                continue
+            header_end = _table_header_end(block.lines)
+            header = block.lines[:header_end]
+            years = _column_years(header)
+            units_note = _units_note(header)
+            # "Assets:" above the first row is a group label, not a column heading.
+            group = next((line.text for line in reversed(header) if line.text.endswith(":")), "")
+            for line in block.lines[header_end:]:
+                if not (is_table_row(line.text) and _has_label(line.text)):
+                    group = line.text if line.text.endswith(":") else group
+                    continue
+                parent = owner.get(id(line))
+                if parent is None:
+                    continue
+                number = rows_per_chunk.get(parent.id, 0)
+                rows_per_chunk[parent.id] = number + 1
+                text = _linearize(title, group, line.text, years, units_note)
+                units.append(SearchUnit(f"{parent.id}-r{number:03d}", text, parent, line.text))
+    return units
+
+
+_YEAR = re.compile(r"\b(?:19|20)\d{2}\b")
+_UNITS_NOTE = re.compile(r"\((?:dollars )?in (?:millions|thousands|billions)[^)]*\)", re.IGNORECASE)
+
+
+def _linearize(title: str, group: str, row: str, years: list[str], units_note: str) -> str:
+    label, cells = split_table_row(row)
+    label = label.rstrip("*").strip()
+    # "Total ..." rows sum the whole table, not the group above them.
+    if group and not label.lower().startswith("total"):
+        label = f"{group.rstrip(':')} {label}"
+    if years and len(cells) >= len(years):
+        paired = [f"{year}: {cell}" for year, cell in zip(years, cells, strict=False)]
+        values = "; ".join(paired + cells[len(years) :])
+    else:
+        values = " ".join(cells)
+    note = f" {units_note}" if units_note else ""
+    return f"{title}: {label}: {values}{note}" if title else f"{label}: {values}{note}"
+
+
+def _table_title(path: tuple[str, ...]) -> str:
+    """The section the table sits in; a short title ("Other") gets its parent for context."""
+    if not path:
+        return ""
+    if len(path[-1]) < 12 and len(path) > 1:
+        return f"{path[-2]} > {path[-1]}"
+    return path[-1]
+
+
+def _column_years(header: list[PlacedLine]) -> list[str]:
+    """The column years from the headings, e.g. "2025 2024 2023 2025 vs 2024" -> 2025, 2024,
+    2023 (stops where years repeat, as in percentage-change columns)."""
+    for line in reversed(header):
+        found = _YEAR.findall(line.text)
+        if len(found) >= 2:
+            years: list[str] = []
+            for year in found:
+                if year in years:
+                    break
+                years.append(year)
+            return years
+    return []
+
+
+def _units_note(header: list[PlacedLine]) -> str:
+    for line in header:
+        if match := _UNITS_NOTE.search(line.text):
+            return match.group(0)
+    return ""
 
 
 @dataclass(frozen=True)
@@ -92,10 +214,7 @@ def _units(blocks: list[Block], size_chars: int) -> Iterator[_Unit]:
 
 def _split_table(lines: list[PlacedLine], size_chars: int) -> list[list[PlacedLine]]:
     """Split between rows; every piece starts with the column headings."""
-    header_end = next(
-        (i for i, line in enumerate(lines) if is_table_row(line.text) and _has_label(line.text)),
-        0,
-    )
+    header_end = _table_header_end(lines)
     header, rows = lines[:header_end], lines[header_end:]
     if _length(header) > size_chars // 2:  # headings too long to repeat
         header, rows = [], lines
@@ -150,6 +269,15 @@ def _tail(lines: list[PlacedLine], overlap_chars: int) -> list[PlacedLine]:
         tail.insert(0, line)
         total += len(line.text) + 1
     return tail
+
+
+def _table_header_end(lines: list[PlacedLine]) -> int:
+    """Lines before the first labelled row are column headings ("(dollars in millions)",
+    "2025 2024"); 0 when no row has a label."""
+    return next(
+        (i for i, line in enumerate(lines) if is_table_row(line.text) and _has_label(line.text)),
+        0,
+    )
 
 
 def _has_label(text: str) -> bool:

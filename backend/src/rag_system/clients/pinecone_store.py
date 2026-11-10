@@ -13,7 +13,7 @@ from typing import Any
 from pinecone import Pinecone, ServerlessSpec
 from pinecone.errors import PineconeError
 
-from rag_system.domain import Chunk, SearchHit, SparseVector
+from rag_system.domain import Chunk, SearchHit, SearchUnit, SparseVector
 from rag_system.ports import UpstreamServiceError, VectorStore
 
 logger = logging.getLogger(__name__)
@@ -81,8 +81,7 @@ class _PineconeIndex:
         except PineconeError as error:
             raise UpstreamServiceError(f"Pinecone query failed: {error}") from error
         return [
-            SearchHit(chunk=_chunk_from(match.id, match.metadata or {}), score=match.score)
-            for match in response.matches
+            _hit_from(match.id, match.metadata or {}, match.score) for match in response.matches
         ]
 
     def _ids_with_prefix(self, prefix: str) -> Iterator[str]:
@@ -101,11 +100,11 @@ class PineconeDenseStore(_PineconeIndex, VectorStore[Sequence[float]]):
         super().__init__(client, index_name, namespace)
         self._dimension = dimension
 
-    def upsert(self, chunks: Sequence[Chunk], vectors: Sequence[Sequence[float]]) -> None:
+    def upsert(self, units: Sequence[SearchUnit], vectors: Sequence[Sequence[float]]) -> None:
         self._upsert_records(
             [
-                {"id": chunk.id, "values": list(vector), "metadata": _metadata(chunk)}
-                for chunk, vector in zip(chunks, vectors, strict=True)
+                {"id": unit.id, "values": list(vector), "metadata": _metadata(unit)}
+                for unit, vector in zip(units, vectors, strict=True)
             ]
         )
 
@@ -117,11 +116,11 @@ class PineconeDenseStore(_PineconeIndex, VectorStore[Sequence[float]]):
 
 
 class PineconeSparseStore(_PineconeIndex, VectorStore[SparseVector]):
-    def upsert(self, chunks: Sequence[Chunk], vectors: Sequence[SparseVector]) -> None:
+    def upsert(self, units: Sequence[SearchUnit], vectors: Sequence[SparseVector]) -> None:
         self._upsert_records(
             [
-                {"id": chunk.id, "sparse_values": _sparse(vector), "metadata": _metadata(chunk)}
-                for chunk, vector in zip(chunks, vectors, strict=True)
+                {"id": unit.id, "sparse_values": _sparse(vector), "metadata": _metadata(unit)}
+                for unit, vector in zip(units, vectors, strict=True)
                 if vector.indices  # Pinecone rejects empty sparse vectors
             ]
         )
@@ -139,8 +138,13 @@ def _sparse(vector: SparseVector) -> dict[str, list[int] | list[float]]:
     return {"indices": vector.indices, "values": vector.values}
 
 
-def _metadata(chunk: Chunk) -> dict[str, str | int]:
+def _metadata(unit: SearchUnit) -> dict[str, str | int]:
+    """The parent chunk's fields, so a matching row can return its whole chunk without a
+    second lookup. Rows repeat the chunk text; at under 2 KB per record that is cheap."""
+    chunk = unit.chunk
     return {
+        "chunk_id": chunk.id,
+        "matched": unit.matched,
         "document_id": chunk.document_id,
         "document_name": chunk.document_name,
         "chunk_index": chunk.chunk_index,
@@ -151,9 +155,14 @@ def _metadata(chunk: Chunk) -> dict[str, str | int]:
     }
 
 
-def _chunk_from(vector_id: str, metadata: Mapping[str, Any]) -> Chunk:
+def _hit_from(record_id: str, metadata: Mapping[str, Any], score: float) -> SearchHit:
+    return SearchHit(_chunk_from(record_id, metadata), score, str(metadata.get("matched", "")))
+
+
+def _chunk_from(record_id: str, metadata: Mapping[str, Any]) -> Chunk:
     return Chunk(
-        id=vector_id,
+        # Records written before table-row units existed have no chunk_id: they are chunks.
+        id=str(metadata.get("chunk_id") or record_id),
         document_id=str(metadata.get("document_id", "")),
         document_name=str(metadata.get("document_name", "")),
         chunk_index=int(metadata.get("chunk_index", 0)),

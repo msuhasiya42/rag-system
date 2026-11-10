@@ -6,12 +6,15 @@ import sys
 from pathlib import Path
 from typing import cast
 
+from rag_system.answer_eval import AnswerJudge, run_answer_eval, summarize_answers
 from rag_system.chat import format_answer, format_hits, run_chat
 from rag_system.config import Settings
 from rag_system.eval_report import (
+    format_answer_report,
     format_rank_matrix,
     format_report,
     format_scoreboard,
+    save_answer_results,
     save_results,
 )
 from rag_system.evaluation import (
@@ -33,9 +36,13 @@ from rag_system.wiring import (
     ConfigurationError,
     Pinecones,
     build_answer_service,
+    build_chat_model,
     build_ingestion_service,
     build_retriever,
 )
+
+# Evaluation re-runs score the same questions and candidates; reuse earlier reranker results.
+RERANK_CACHE = Path("evals/.cache/rerank.json")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -58,14 +65,24 @@ def main(argv: list[str] | None = None) -> int:
     evaluate.add_argument("--k", type=int, default=10, help="Chunks retrieved per question.")
     evaluate.add_argument("--label", default=None, help="Save results under evals/results/.")
 
+    answers = commands.add_parser(
+        "eval-answers", help="Answer every golden question and grade the answers."
+    )
+    answers.add_argument("--golden", type=Path, default=Path("evals/golden.json"))
+    answers.add_argument("--label", default=None, help="Save results under evals/results/.")
+    answers.add_argument("--limit", type=int, default=None, help="Only the first N questions.")
+    answers.add_argument(
+        "--pause", type=float, default=4.0, help="Seconds between model calls (free-tier limits)."
+    )
+
     chat = commands.add_parser("chat", help="Ask questions interactively in the terminal.")
 
     serve = commands.add_parser("serve", help="Run the Flask development server.")
     serve.add_argument("--port", type=int, default=5001)  # macOS AirPlay uses 5000
 
-    for command in (ask, search, chat, serve):
+    for command in (ask, search, chat, serve, answers):
         command.add_argument("--pipeline", choices=PIPELINES, default=None)
-    for command in (ask, search, chat):
+    for command in (ask, search, chat, answers):
         command.add_argument("--top-k", type=int, default=None)
     evaluate.add_argument(
         "--pipeline", choices=(*PIPELINES, "all"), default=None, help="'all' compares every one."
@@ -85,6 +102,16 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "eval":
             return _evaluate(settings, args.golden, args.k, args.label, args.pipeline)
         pipeline: Pipeline = args.pipeline or settings.retrieval_pipeline
+        if args.command == "eval-answers":
+            return _evaluate_answers(
+                settings,
+                args.golden,
+                pipeline,
+                args.top_k or settings.default_top_k,
+                args.label,
+                args.limit,
+                args.pause,
+            )
         if args.command == "serve":
             return _serve(settings, args.port, pipeline)
         top_k = args.top_k or settings.default_top_k
@@ -112,7 +139,8 @@ def _ingest(settings: Settings, paths: list[Path]) -> int:
         print(
             f"{report.document_name}: {report.page_count} pages "
             f"({report.ocr_pages} OCR, {report.empty_pages} empty), "
-            f"{report.section_count} sections -> {report.chunk_count} chunks"
+            f"{report.section_count} sections -> {report.chunk_count} chunks "
+            f"+ {report.table_row_count} table rows"
         )
     return 0
 
@@ -167,7 +195,8 @@ def _evaluate_one(
     verbose: bool,
 ) -> list[CaseResult]:
     print(f"=== {pipeline}: {PIPELINE_DESCRIPTIONS[pipeline]} ===")
-    results = run_retrieval_eval(build_retriever(settings, pipeline).retrieve, cases, k)
+    retriever = build_retriever(settings, pipeline, rerank_cache=RERANK_CACHE)
+    results = run_retrieval_eval(retriever.retrieve, cases, k)
     summary = summarize(results, ks)
     if verbose:
         print(format_report(results, summary, ks))
@@ -182,6 +211,7 @@ def _evaluate_one(
             "namespace": settings.pinecone_namespace,
             "chunkSizeChars": settings.chunk_size_chars,
             "chunkOverlapChars": settings.chunk_overlap_chars,
+            "indexTableRows": settings.index_table_rows,
             "candidates": settings.retrieval_candidates,
             "rerankModel": settings.rerank_model if pipeline in USES_RERANKER else None,
             "rerankBlendWeight": settings.rerank_blend_weight
@@ -195,6 +225,39 @@ def _evaluate_one(
         path = save_results(Path("evals/results"), f"{label}-{pipeline}", config, results, summary)
         print(f"Saved {path}")
     return results
+
+
+def _evaluate_answers(
+    settings: Settings,
+    golden: Path,
+    pipeline: Pipeline,
+    top_k: int,
+    label: str | None,
+    limit: int | None,
+    pause: float,
+) -> int:
+    cases = load_golden_set(golden).cases[:limit]
+    service = build_answer_service(settings, pipeline, rerank_cache=RERANK_CACHE)
+    # The judge is the answer model: the only working model on this account. A model grading
+    # its own answers can be lenient; the key-number check does not depend on it.
+    judge = AnswerJudge(build_chat_model(settings))
+    print(f"Answering {len(cases)} questions with pipeline '{pipeline}', top {top_k} sources")
+    results = run_answer_eval(service, judge, cases, top_k, pause, progress=print)
+    summary = summarize_answers(results)
+    print("\n" + format_answer_report(results, summary))
+    if label:
+        config = {
+            "pipeline": pipeline,
+            "topK": top_k,
+            "answerProvider": settings.answer_provider,
+            "answerModels": settings.gemini_model_ids
+            if settings.answer_provider == "gemini"
+            else settings.answer_model_ids,
+            "namespace": settings.pinecone_namespace,
+        }
+        path = save_answer_results(Path("evals/results"), label, config, results, summary)
+        print(f"\nSaved {path}")
+    return 0
 
 
 def _chat(settings: Settings, top_k: int, pipeline: Pipeline) -> int:

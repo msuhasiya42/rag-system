@@ -133,19 +133,26 @@ def build_sections(pages: list[PageText], outline: list[OutlineEntry]) -> list[S
 
 def is_table_row(text: str) -> bool:
     """A line ending in two or more numeric cells: "Goodwill 55,945 56,860", "2025 2024"."""
-    cells = 0
-    has_digit = False
-    for token in reversed(text.split()):
+    _, cells = split_table_row(text)
+    return len(cells) >= 2 and any(_NUMBER.match(cell) for cell in cells)
+
+
+def split_table_row(text: str) -> tuple[str, list[str]]:
+    """("Cash and cash equivalents* $ 47,719 $ 44,333") -> ("Cash and cash equivalents*",
+    ["47,719", "44,333"]). Cells are the trailing numbers and dashes; "$" signs are dropped."""
+    tokens = text.split()
+    cells: list[str] = []
+    end = len(tokens)
+    while end > 0:
+        token = tokens[end - 1]
         if token == "$":
-            continue
-        if _NUMBER.match(token):
-            cells += 1
-            has_digit = True
-        elif token in _DASH:
-            cells += 1
+            end -= 1
+        elif _NUMBER.match(token) or token in _DASH:
+            cells.insert(0, token)
+            end -= 1
         else:
             break
-    return cells >= 2 and has_digit
+    return " ".join(tokens[:end]), cells
 
 
 def _close(

@@ -1,8 +1,10 @@
 """Build the real services from settings. The only module that knows every concrete client."""
 
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import boto3
+import httpx
 from botocore.config import Config
 from pinecone import Pinecone
 
@@ -11,6 +13,7 @@ if TYPE_CHECKING:  # stubs are a dev dependency
 
 from rag_system.answering import AnswerService
 from rag_system.clients.bedrock import BedrockChatModel, TitanEmbedder
+from rag_system.clients.openai_compatible import GEMINI_BASE_URL, OpenAICompatibleChatModel
 from rag_system.clients.pinecone_inference import (
     PineconeEmbedder,
     PineconeReranker,
@@ -20,7 +23,8 @@ from rag_system.clients.pinecone_store import PineconeDenseStore, PineconeSparse
 from rag_system.clients.textract import TextractOcr
 from rag_system.config import Settings
 from rag_system.ingestion.pipeline import IngestionService, SparseIndexing
-from rag_system.ports import Embedder
+from rag_system.ports import ChatModel, Embedder, Reranker
+from rag_system.rerank_cache import CachingReranker
 from rag_system.retrieval import (
     DenseRetriever,
     HybridRetriever,
@@ -72,14 +76,19 @@ class Pinecones:
         return created
 
 
-def build_retriever(settings: Settings, pipeline: Pipeline | None = None) -> Retriever:
+def build_retriever(
+    settings: Settings, pipeline: Pipeline | None = None, rerank_cache: Path | None = None
+) -> Retriever:
+    """``rerank_cache`` reuses earlier reranker scores (for evaluation runs)."""
     pipeline = pipeline or settings.retrieval_pipeline
     pinecones = Pinecones(settings)
     dense: Retriever = DenseRetriever(_embedder(settings, pinecones.client), pinecones.dense)
     if pipeline == "basic":
         return dense
     candidates = settings.retrieval_candidates
-    reranker = PineconeReranker(pinecones.client, settings.rerank_model)
+    reranker: Reranker = PineconeReranker(pinecones.client, settings.rerank_model)
+    if rerank_cache is not None:
+        reranker = CachingReranker(reranker, settings.rerank_model, rerank_cache)
 
     def reranked(inner: Retriever) -> Retriever:
         return RerankingRetriever(
@@ -99,12 +108,29 @@ def build_retriever(settings: Settings, pipeline: Pipeline | None = None) -> Ret
     return reranked(hybrid)
 
 
-def build_answer_service(settings: Settings, pipeline: Pipeline | None = None) -> AnswerService:
-    bedrock = _aws_session(settings).client("bedrock-runtime", config=_AWS_CONFIG)
+def build_answer_service(
+    settings: Settings, pipeline: Pipeline | None = None, rerank_cache: Path | None = None
+) -> AnswerService:
     return AnswerService(
-        retriever=build_retriever(settings, pipeline),
-        model=BedrockChatModel(bedrock, settings.answer_model_ids, settings.answer_max_tokens),
+        retriever=build_retriever(settings, pipeline, rerank_cache),
+        model=build_chat_model(settings),
     )
+
+
+def build_chat_model(settings: Settings) -> ChatModel:
+    if settings.answer_provider == "gemini":
+        if settings.gemini_api_key is None:
+            raise ConfigurationError("RAG_GEMINI_API_KEY is not set. Add it to backend/.env.")
+        return OpenAICompatibleChatModel(
+            httpx.Client(timeout=settings.answer_timeout_seconds),
+            GEMINI_BASE_URL,
+            settings.gemini_api_key.get_secret_value(),
+            settings.gemini_model_ids,
+            settings.answer_max_tokens,
+            reasoning_effort="low",
+        )
+    bedrock = _aws_session(settings).client("bedrock-runtime", config=_AWS_CONFIG)
+    return BedrockChatModel(bedrock, settings.answer_model_ids, settings.answer_max_tokens)
 
 
 def build_ingestion_service(settings: Settings, pinecones: Pinecones) -> IngestionService:
@@ -120,6 +146,7 @@ def build_ingestion_service(settings: Settings, pinecones: Pinecones) -> Ingesti
         ocr_min_text_chars=settings.ocr_min_text_chars,
         chunk_size_chars=settings.chunk_size_chars,
         chunk_overlap_chars=settings.chunk_overlap_chars,
+        index_table_rows=settings.index_table_rows,
     )
 
 

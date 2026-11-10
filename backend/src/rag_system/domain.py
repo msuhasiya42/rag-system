@@ -72,9 +72,26 @@ class SparseVector:
 
 
 @dataclass(frozen=True)
+class SearchUnit:
+    """What gets embedded and indexed. Usually a whole chunk; for tables also each row on its
+    own ("small-to-big"): a row's vector is about that one line item, while a table chunk's
+    vector blends twenty of them. Search matches the small unit and returns its chunk."""
+
+    id: str
+    text: str  # the text that is embedded
+    chunk: Chunk  # what retrieval returns
+    matched: str = ""  # the row that matched, for row units
+
+    @classmethod
+    def for_chunk(cls, chunk: Chunk) -> "SearchUnit":
+        return cls(chunk.id, chunk.contextual_text(), chunk)
+
+
+@dataclass(frozen=True)
 class SearchHit:
     chunk: Chunk
     score: float
+    matched: str = ""  # set when a table row, not the whole chunk, matched
 
 
 @dataclass(frozen=True)

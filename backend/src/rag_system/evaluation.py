@@ -130,8 +130,12 @@ Retrieve = Callable[[str, int], list[SearchHit]]
 
 
 def run_retrieval_eval(retrieve: Retrieve, cases: Sequence[GoldenCase], k: int) -> list[CaseResult]:
+    """Retrieval metrics need evidence, so unanswerable questions are skipped: retrieving for
+    them costs embedding and rerank calls and scores nothing. They matter for answer checks."""
     results = []
     for case in cases:
+        if not case.evidence:
+            continue
         started = time.perf_counter()
         hits = retrieve(case.question, k)
         results.append(CaseResult(case, hits, (time.perf_counter() - started) * 1000))

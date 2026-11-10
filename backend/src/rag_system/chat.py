@@ -52,5 +52,8 @@ def format_hits(hits: list[SearchHit], preview_chars: int = 300) -> str:
     blocks = []
     for number, hit in enumerate(hits, start=1):
         preview = " ".join(hit.chunk.text.split())[:preview_chars]
-        blocks.append(f"[{number}] {describe_source(hit)}  (score {hit.score:.3f})\n    {preview}")
+        matched = f"\n    matched row: {hit.matched}" if hit.matched else ""
+        blocks.append(
+            f"[{number}] {describe_source(hit)}  (score {hit.score:.3f}){matched}\n    {preview}"
+        )
     return "\n\n".join(blocks) or "No results."

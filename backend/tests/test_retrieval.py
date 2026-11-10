@@ -2,7 +2,7 @@ from collections.abc import Sequence
 
 import pytest
 
-from rag_system.domain import Chunk, SearchHit
+from rag_system.domain import Chunk, SearchHit, SearchUnit
 from rag_system.retrieval import (
     DenseRetriever,
     HybridRetriever,
@@ -17,6 +17,7 @@ from tests.fakes import (
     FakeSparseEncoder,
     InMemorySparseStore,
     InMemoryVectorStore,
+    as_units,
 )
 
 
@@ -80,8 +81,8 @@ def test_hybrid_finds_an_exact_term_that_dense_search_ranks_low() -> None:
     embedder, encoder = FakeEmbedder(), FakeSparseEncoder()
     dense_store, sparse_store = InMemoryVectorStore(), InMemorySparseStore()
     texts = [chunk.text for chunk in chunks]
-    dense_store.upsert(chunks, embedder.embed_documents(texts))
-    sparse_store.upsert(chunks, encoder.encode_documents(texts))
+    dense_store.upsert(as_units(chunks), embedder.embed_documents(texts))
+    sparse_store.upsert(as_units(chunks), encoder.encode_documents(texts))
     dense = DenseRetriever(embedder, dense_store)
     sparse = SparseRetriever(encoder, sparse_store)
 
@@ -142,3 +143,21 @@ def test_blended_reranking_ranks_every_candidate_before_fusing() -> None:
     RerankingRetriever(inner, reranker, candidates=4, blend_weight=2.0, rrf_k=1).retrieve("q", 2)
 
     assert reranker.calls == [("q", 4, 4)]  # all candidates reranked, top 2 taken after fusion
+
+
+def test_rows_of_one_chunk_count_once_and_keep_the_matched_row() -> None:
+    table = _chunk("balance", "Cash 47,719\nTotal assets 1,222,176")
+    other = _chunk("prose", "We discuss total assets growth in prose")
+    units = [
+        SearchUnit("doc#balance-r0", "Cash 47,719", table, "Cash 47,719"),
+        SearchUnit("doc#balance-r1", "Total assets 1,222,176", table, "Total assets 1,222,176"),
+        SearchUnit.for_chunk(table),
+        SearchUnit.for_chunk(other),
+    ]
+    embedder, store = FakeEmbedder(), InMemoryVectorStore()
+    store.upsert(units, embedder.embed_documents([unit.text for unit in units]))
+
+    hits = DenseRetriever(embedder, store).retrieve("total assets 1,222,176", top_k=2)
+
+    assert _ids(hits) == ["balance", "prose"]  # two distinct chunks, not two rows of one
+    assert hits[0].matched == "Total assets 1,222,176"

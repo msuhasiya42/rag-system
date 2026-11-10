@@ -9,7 +9,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Protocol, TypeVar
 
-from rag_system.domain import Chunk, SearchHit, SparseVector
+from rag_system.domain import SearchHit, SearchUnit, SparseVector
 
 # The kind of vector a store holds: dense (list of floats) or sparse.
 VectorT = TypeVar("VectorT", contravariant=True)
@@ -43,11 +43,14 @@ class SparseEncoder(Protocol):
 
 
 class VectorStore(Protocol[VectorT]):
-    def upsert(self, chunks: Sequence[Chunk], vectors: Sequence[VectorT]) -> None: ...
+    def upsert(self, units: Sequence[SearchUnit], vectors: Sequence[VectorT]) -> None: ...
 
     def delete_document(self, document_id: str) -> None: ...
 
-    def search(self, vector: VectorT, top_k: int) -> list[SearchHit]: ...
+    def search(self, vector: VectorT, top_k: int) -> list[SearchHit]:
+        """Best-matching units, each returned as its chunk. Several table rows of one chunk
+        can match, so a chunk may appear more than once; retrievers remove the repeats."""
+        ...
 
 
 class Reranker(Protocol):

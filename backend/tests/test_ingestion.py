@@ -29,7 +29,7 @@ def test_ingest_indexes_text_and_ocr_pages(mixed_pdf: Path) -> None:
     assert report.document_id == "mixed-report"
     assert (report.page_count, report.ocr_pages, report.empty_pages) == (3, 1, 1)
     assert report.chunk_count == len(store.records)
-    chunks = [chunk for chunk, _ in store.records.values()]
+    chunks = [unit.chunk for unit, _ in store.records.values()]
     revenue = next(chunk for chunk in chunks if "Annual revenue grew" in chunk.text)
     assert revenue.section == "Revenue Overview"  # from the bookmark and bold heading
     assert any("Scanned invoice total" in chunk.text for chunk in chunks)

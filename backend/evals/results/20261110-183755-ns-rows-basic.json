@@ -1,0 +1,4055 @@
+{
+  "label": "ns-rows-basic",
+  "createdAt": "20261110-183755",
+  "config": {
+    "pipeline": "basic",
+    "embeddingProvider": "pinecone",
+    "embeddingModel": "llama-text-embed-v2",
+    "index": "rag-system",
+    "namespace": "documents-rows",
+    "chunkSizeChars": 1800,
+    "chunkOverlapChars": 300,
+    "indexTableRows": true,
+    "candidates": 20,
+    "rerankModel": null,
+    "rerankBlendWeight": null,
+    "sparseModel": null,
+    "rrfK": null,
+    "sparseWeight": null,
+    "k": 10
+  },
+  "summary": {
+    "questions": 52,
+    "hit": {
+      "1": 0.7307692307692307,
+      "3": 0.8461538461538461,
+      "5": 0.9230769230769231,
+      "10": 0.9423076923076923
+    },
+    "recall": {
+      "1": 0.6923076923076923,
+      "3": 0.8269230769230769,
+      "5": 0.9134615384615384,
+      "10": 0.9423076923076923
+    },
+    "precision": {
+      "1": 0.7307692307692307,
+      "3": 0.38461538461538464,
+      "5": 0.2730769230769231,
+      "10": 0.17307692307692307
+    },
+    "ndcg": {
+      "1": 0.7307692307692307,
+      "3": 0.7885757010284583,
+      "5": 0.8259381187333363,
+      "10": 0.8352167962320893
+    },
+    "mrr": 0.8044871794871795,
+    "latency_p50_ms": 589.4568338990211,
+    "latency_p95_ms": 694.6908750105649
+  },
+  "cases": [
+    {
+      "id": "q01",
+      "split": "tune",
+      "category": "table_number",
+      "firstRelevantRank": null,
+      "latencyMs": 3040.3,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.5139,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.507,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.505,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4853,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.4798,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.468,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 79",
+          "score": 0.4607,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4604,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "page 70",
+          "score": 0.46,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4595,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "split": "tune",
+      "category": "table_number",
+      "firstRelevantRank": 1,
+      "latencyMs": 660.2,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.5113,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4882,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4881,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.4848,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4792,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.4761,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4755,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 73",
+          "score": 0.4714,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 79",
+          "score": 0.4711,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Berkshire\u2019s Performance",
+          "pages": "pages 12-13",
+          "score": 0.4667,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "split": "tune",
+      "category": "table_number",
+      "firstRelevantRank": 1,
+      "latencyMs": 590.7,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 61-62",
+          "score": 0.6978,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 62",
+          "score": 0.5702,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 63",
+          "score": 0.5611,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 64-65",
+          "score": 0.5449,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 65",
+          "score": 0.5425,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 62-63",
+          "score": 0.5284,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 64",
+          "score": 0.522,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+          "pages": "pages 82-83",
+          "score": 0.4881,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "page 133",
+          "score": 0.4604,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 132-133",
+          "score": 0.4479,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "split": "tune",
+      "category": "table_number",
+      "firstRelevantRank": 1,
+      "latencyMs": 581.6,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.6422,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.6178,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.6136,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.6075,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "page 70",
+          "score": 0.597,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.5566,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.5533,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Berkshire\u2019s Performance",
+          "pages": "pages 12-13",
+          "score": 0.5433,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.5289,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.5164,
+          "relevant": true
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "split": "tune",
+      "category": "table_number",
+      "firstRelevantRank": 1,
+      "latencyMs": 567.9,
+      "retrieved": [
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500",
+          "pages": "pages 23-24",
+          "score": 0.5434,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Stock Performance Graph",
+          "pages": "page 59",
+          "score": 0.3607,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.3389,
+          "relevant": false
+        },
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500 > SECURITIES AND EXCHANGE COMMISSION",
+          "pages": "page 25",
+          "score": 0.3358,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 73",
+          "score": 0.3287,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Capital Discipline",
+          "pages": "page 10",
+          "score": 0.3205,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 107",
+          "score": 0.3194,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.3144,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.3124,
+          "relevant": false
+        },
+        {
+          "section": "Table of Contents",
+          "pages": "page 3",
+          "score": 0.3118,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "split": "tune",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 620.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Dividends",
+          "pages": "page 58",
+          "score": 0.5995,
+          "relevant": true
+        },
+        {
+          "section": "CEO's Letter > Capital Discipline",
+          "pages": "pages 10-11",
+          "score": 0.5465,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4638,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 19-20",
+          "score": 0.4488,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.4477,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Capital Discipline",
+          "pages": "pages 9-10",
+          "score": 0.4403,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4362,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "pages 66-67",
+          "score": 0.4257,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 20-21",
+          "score": 0.4176,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4163,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "split": "tune",
+      "category": "prose_fact",
+      "firstRelevantRank": 2,
+      "latencyMs": 578.6,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 79",
+          "score": 0.4903,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description",
+          "pages": "page 27",
+          "score": 0.486,
+          "relevant": true
+        },
+        {
+          "section": "Appendices > Operating Companies",
+          "pages": "page 151",
+          "score": 0.4149,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4104,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4071,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 28",
+          "score": 0.4056,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+          "pages": "page 51",
+          "score": 0.4002,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "pages 36-37",
+          "score": 0.3977,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.3974,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "page 36",
+          "score": 0.3963,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "split": "tune",
+      "category": "prose_fact",
+      "firstRelevantRank": 2,
+      "latencyMs": 584.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "pages 66-67",
+          "score": 0.5778,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "pages 14-15",
+          "score": 0.536,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 79",
+          "score": 0.4984,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4625,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "page 13",
+          "score": 0.454,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 29",
+          "score": 0.4506,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4457,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 32",
+          "score": 0.4411,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.4336,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.4312,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "split": "tune",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 572.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 2. Description of Properties > Burlington Northern Santa Fe",
+          "pages": "page 55",
+          "score": 0.6442,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 67-68",
+          "score": 0.5835,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "page 32",
+          "score": 0.4245,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "pages 15-16",
+          "score": 0.3824,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "page 33",
+          "score": 0.3741,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "pages 32-33",
+          "score": 0.3388,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 16",
+          "score": 0.3308,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Integrity",
+          "pages": "pages 8-9",
+          "score": 0.3254,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "pages 32-33",
+          "score": 0.3192,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "page 33",
+          "score": 0.3166,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "split": "tune",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 601.0,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+          "pages": "page 51",
+          "score": 0.5162,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 4. Mine Safety Disclosures > Executive Officers of the Registrant",
+          "pages": "page 58",
+          "score": 0.4362,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter",
+          "pages": "pages 5-6",
+          "score": 0.4301,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter",
+          "pages": "page 5",
+          "score": 0.4038,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 21",
+          "score": 0.3909,
+          "relevant": false
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "page 153",
+          "score": 0.382,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter",
+          "pages": "page 5",
+          "score": 0.3415,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "pages 15-16",
+          "score": 0.3243,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter",
+          "pages": "page 6",
+          "score": 0.3231,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 22",
+          "score": 0.3089,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "split": "tune",
+      "category": "prose_fact",
+      "firstRelevantRank": 2,
+      "latencyMs": 565.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > \u2610 TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+          "pages": "pages 25-26",
+          "score": 0.4796,
+          "relevant": false
+        },
+        {
+          "section": "Appendices > Shareholder Event and Meeting Information",
+          "pages": "page 150",
+          "score": 0.4358,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > \u2610 TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+          "pages": "pages 25-26",
+          "score": 0.4253,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspection",
+          "pages": "page 142",
+          "score": 0.4184,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 21-22",
+          "score": 0.3837,
+          "relevant": true
+        },
+        {
+          "section": "Appendices > Shareholder Event and Meeting Information",
+          "pages": "page 150",
+          "score": 0.342,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > SIGNATURES",
+          "pages": "page 148",
+          "score": 0.3316,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 22",
+          "score": 0.3105,
+          "relevant": true
+        },
+        {
+          "section": "Table of Contents",
+          "pages": "page 3",
+          "score": 0.2988,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.2916,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "split": "tune",
+      "category": "paraphrase",
+      "firstRelevantRank": 1,
+      "latencyMs": 601.5,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Dividends",
+          "pages": "page 58",
+          "score": 0.3673,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (15) Insurance subsidiary disclosures",
+          "pages": "pages 112-113",
+          "score": 0.3655,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.361,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Capital Discipline",
+          "pages": "pages 10-11",
+          "score": 0.3501,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.3487,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.335,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "pages 14-15",
+          "score": 0.3235,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.3173,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.3155,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.3155,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "split": "tune",
+      "category": "paraphrase",
+      "firstRelevantRank": 1,
+      "latencyMs": 597.7,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+          "pages": "page 51",
+          "score": 0.4393,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We need qualified personnel to manage and operate our various businesses.",
+          "pages": "page 51",
+          "score": 0.412,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Decentralized Model",
+          "pages": "page 8",
+          "score": 0.3486,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 21",
+          "score": 0.337,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.3265,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 21-22",
+          "score": 0.3193,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Risk Management",
+          "pages": "page 11",
+          "score": 0.3115,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Culture and Foundational Values",
+          "pages": "pages 6-7",
+          "score": 0.3098,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 17",
+          "score": 0.293,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "pages 14-15",
+          "score": 0.288,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "split": "tune",
+      "category": "paraphrase",
+      "firstRelevantRank": 1,
+      "latencyMs": 622.3,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1C. Cybersecurity",
+          "pages": "pages 54-55",
+          "score": 0.5254,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1C. Cybersecurity",
+          "pages": "page 55",
+          "score": 0.4553,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1C. Cybersecurity",
+          "pages": "page 54",
+          "score": 0.4205,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description",
+          "pages": "page 27",
+          "score": 0.3395,
+          "relevant": false
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "pages 153-154",
+          "score": 0.3295,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description",
+          "pages": "page 27",
+          "score": 0.3249,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 30",
+          "score": 0.3244,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "pages 29-30",
+          "score": 0.3191,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Financial Strength",
+          "pages": "page 9",
+          "score": 0.3184,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Berkshire",
+          "pages": "page 7",
+          "score": 0.3153,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "split": "tune",
+      "category": "exact_term",
+      "firstRelevantRank": 1,
+      "latencyMs": 591.7,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1B. Unresolved Staff Comments",
+          "pages": "page 54",
+          "score": 0.502,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > \u2610 TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+          "pages": "pages 25-26",
+          "score": 0.1923,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > \u2610 TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+          "pages": "pages 26-27",
+          "score": 0.1875,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We need qualified personnel to manage and operate our various businesses.",
+          "pages": "page 51",
+          "score": 0.1795,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "pages 71-72",
+          "score": 0.1786,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+          "pages": "page 85",
+          "score": 0.1733,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "page 36",
+          "score": 0.1727,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "pages 32-33",
+          "score": 0.1724,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > Unpaid Losses and Loss Adjustment Expenses \u2014 Refer to Notes 1 and 16 to the financial statements",
+          "pages": "page 91",
+          "score": 0.171,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "pages 70-71",
+          "score": 0.1702,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "split": "tune",
+      "category": "exact_term",
+      "firstRelevantRank": null,
+      "latencyMs": 572.8,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (19) Notes payable and other borrowings",
+          "pages": "page 123",
+          "score": 0.3327,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "page 145",
+          "score": 0.3191,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (19) Notes payable and other borrowings",
+          "pages": "page 122",
+          "score": 0.3116,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (19) Notes payable and other borrowings",
+          "pages": "pages 122-123",
+          "score": 0.3115,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 80",
+          "score": 0.3071,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Interest Rate Risk",
+          "pages": "page 88",
+          "score": 0.3037,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.2805,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.2722,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (19) Notes payable and other borrowings",
+          "pages": "pages 122-123",
+          "score": 0.2675,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (21) Fair value measurements",
+          "pages": "page 126",
+          "score": 0.2652,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "split": "tune",
+      "category": "exact_term",
+      "firstRelevantRank": 1,
+      "latencyMs": 567.8,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 80",
+          "score": 0.5229,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "pages 80-81",
+          "score": 0.492,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (13) Goodwill and other intangible assets",
+          "pages": "page 112",
+          "score": 0.4901,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF CASH FLOWS",
+          "pages": "page 96",
+          "score": 0.4726,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other Critical Accounting Estimates",
+          "pages": "pages 86-87",
+          "score": 0.4583,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other Critical Accounting Estimates",
+          "pages": "page 86",
+          "score": 0.4505,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (20) Income taxes",
+          "pages": "pages 123-124",
+          "score": 0.4437,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 133-134",
+          "score": 0.4401,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 134-135",
+          "score": 0.4392,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED BALANCE SHEETS",
+          "pages": "pages 92-93",
+          "score": 0.429,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "split": "tune",
+      "category": "multi_section",
+      "firstRelevantRank": 1,
+      "latencyMs": 621.1,
+      "retrieved": [
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 19-20",
+          "score": 0.538,
+          "relevant": true
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 20",
+          "score": 0.5026,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (4)Investments in equity securities",
+          "pages": "pages 105-106",
+          "score": 0.4584,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 106",
+          "score": 0.4525,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 107",
+          "score": 0.4385,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 61",
+          "score": 0.4359,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4328,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Stock Performance Graph",
+          "pages": "page 59",
+          "score": 0.4267,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (1)Significant accounting policies and practices",
+          "pages": "page 97",
+          "score": 0.4254,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4159,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "split": "tune",
+      "category": "multi_section",
+      "firstRelevantRank": 1,
+      "latencyMs": 564.1,
+      "retrieved": [
+        {
+          "section": "CEO's Letter > Capital Discipline",
+          "pages": "pages 10-11",
+          "score": 0.5662,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+          "pages": "page 59",
+          "score": 0.5662,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.5307,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Capital Discipline",
+          "pages": "pages 9-10",
+          "score": 0.4652,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4619,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4563,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.3921,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 20-21",
+          "score": 0.3894,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.3792,
+          "relevant": false
+        },
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500",
+          "pages": "pages 23-24",
+          "score": 0.3739,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "split": "tune",
+      "category": "unanswerable",
+      "firstRelevantRank": null,
+      "latencyMs": 570.2,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4464,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.416,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.4148,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4135,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.4126,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4118,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.411,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "page 70",
+          "score": 0.4002,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Berkshire\u2019s Performance",
+          "pages": "pages 12-13",
+          "score": 0.3933,
+          "relevant": null
+        },
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500",
+          "pages": "pages 23-24",
+          "score": 0.3915,
+          "relevant": null
+        }
+      ]
+    },
+    {
+      "id": "q21",
+      "split": "tune",
+      "category": "unanswerable",
+      "firstRelevantRank": null,
+      "latencyMs": 560.2,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4899,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Berkshire\u2019s Performance",
+          "pages": "pages 12-13",
+          "score": 0.4746,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 4. Mine Safety Disclosures > Executive Officers of the Registrant",
+          "pages": "page 58",
+          "score": 0.4595,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.4559,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4511,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4444,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "page 70",
+          "score": 0.4408,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+          "pages": "page 51",
+          "score": 0.4299,
+          "relevant": null
+        },
+        {
+          "section": "Table of Contents",
+          "pages": "page 3",
+          "score": 0.42,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "pages 14-15",
+          "score": 0.4196,
+          "relevant": null
+        }
+      ]
+    },
+    {
+      "id": "q22",
+      "split": "tune",
+      "category": "unanswerable",
+      "firstRelevantRank": null,
+      "latencyMs": 686.8,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.5237,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.5144,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Market Information",
+          "pages": "page 58",
+          "score": 0.4997,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+          "pages": "page 59",
+          "score": 0.4785,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Shareholders",
+          "pages": "page 58",
+          "score": 0.4675,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4631,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.448,
+          "relevant": null
+        },
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500",
+          "pages": "pages 23-24",
+          "score": 0.4474,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4452,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Stock Performance Graph",
+          "pages": "page 59",
+          "score": 0.4443,
+          "relevant": null
+        }
+      ]
+    },
+    {
+      "id": "q23",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 10,
+      "latencyMs": 587.5,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 79",
+          "score": 0.5048,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4978,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4953,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.4753,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4626,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.4591,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4481,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.4444,
+          "relevant": false
+        },
+        {
+          "section": "Table of Contents",
+          "pages": "page 3",
+          "score": 0.4427,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED BALANCE SHEETS",
+          "pages": "pages 92-93",
+          "score": 0.4426,
+          "relevant": true
+        }
+      ]
+    },
+    {
+      "id": "q24",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": null,
+      "latencyMs": 624.5,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.4913,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4892,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4815,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.475,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4749,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses",
+          "pages": "page 114",
+          "score": 0.4716,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "pages 80-81",
+          "score": 0.4644,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 79",
+          "score": 0.4621,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4583,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4581,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 1,
+      "latencyMs": 642.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.6288,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4696,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 133-134",
+          "score": 0.4563,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.4557,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4535,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 67-68",
+          "score": 0.4529,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.4451,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 134-135",
+          "score": 0.4386,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "page 70",
+          "score": 0.4375,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.437,
+          "relevant": true
+        }
+      ]
+    },
+    {
+      "id": "q26",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 5,
+      "latencyMs": 648.4,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 63",
+          "score": 0.5171,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 64-65",
+          "score": 0.5142,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 65",
+          "score": 0.5138,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 61-62",
+          "score": 0.4976,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.4763,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (15) Insurance subsidiary disclosures",
+          "pages": "page 113",
+          "score": 0.4687,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED BALANCE SHEETS",
+          "pages": "pages 92-93",
+          "score": 0.447,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 65-66",
+          "score": 0.4449,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 64",
+          "score": 0.4322,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.4322,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q27",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 4,
+      "latencyMs": 574.6,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 68",
+          "score": 0.6171,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 68-69",
+          "score": 0.5803,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 68",
+          "score": 0.5707,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 67-68",
+          "score": 0.5647,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.539,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 68-69",
+          "score": 0.5344,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 69",
+          "score": 0.5312,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "pages 15-16",
+          "score": 0.4955,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 16",
+          "score": 0.4899,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4737,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q28",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 1,
+      "latencyMs": 616.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.6215,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "pages 66-67",
+          "score": 0.6071,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 61-62",
+          "score": 0.5612,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 65",
+          "score": 0.5327,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.5304,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.5241,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 64",
+          "score": 0.5225,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 63",
+          "score": 0.5223,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 64-65",
+          "score": 0.5192,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.5109,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q29",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 2,
+      "latencyMs": 637.0,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.5414,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (20) Income taxes",
+          "pages": "pages 124-125",
+          "score": 0.5146,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.5087,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.5049,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "page 70",
+          "score": 0.4917,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4893,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 80",
+          "score": 0.4884,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4875,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (14) Supplemental cash flow information",
+          "pages": "page 112",
+          "score": 0.4718,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4714,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q30",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 1,
+      "latencyMs": 574.1,
+      "retrieved": [
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500",
+          "pages": "pages 23-24",
+          "score": 0.6772,
+          "relevant": true
+        },
+        {
+          "section": "Table of Contents",
+          "pages": "page 3",
+          "score": 0.4559,
+          "relevant": false
+        },
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500 > SECURITIES AND EXCHANGE COMMISSION",
+          "pages": "page 25",
+          "score": 0.4081,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4015,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.3933,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.3917,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 107",
+          "score": 0.3891,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 80",
+          "score": 0.3882,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Stock Performance Graph",
+          "pages": "page 59",
+          "score": 0.387,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Berkshire\u2019s Performance",
+          "pages": "pages 12-13",
+          "score": 0.3859,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q31",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 3,
+      "latencyMs": 612.8,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 29",
+          "score": 0.5268,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "pages 29-30",
+          "score": 0.4932,
+          "relevant": false
+        },
+        {
+          "section": "Appendices > Operating Companies",
+          "pages": "page 151",
+          "score": 0.48,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 29",
+          "score": 0.4794,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 61-62",
+          "score": 0.4721,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "pages 13-14",
+          "score": 0.4634,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+          "pages": "pages 82-83",
+          "score": 0.4609,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 62-63",
+          "score": 0.4506,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "page 14",
+          "score": 0.4422,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses",
+          "pages": "page 114",
+          "score": 0.4281,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q32",
+      "split": "test",
+      "category": "table_number",
+      "firstRelevantRank": 1,
+      "latencyMs": 589.5,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.6121,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 107",
+          "score": 0.5921,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 108",
+          "score": 0.5765,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 61",
+          "score": 0.5622,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 106",
+          "score": 0.5259,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 107",
+          "score": 0.5224,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 80",
+          "score": 0.4732,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "pages 80-81",
+          "score": 0.4709,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "page 145",
+          "score": 0.4667,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (21) Fair value measurements",
+          "pages": "page 126",
+          "score": 0.4467,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q33",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 694.7,
+      "retrieved": [
+        {
+          "section": "CEO's Letter > Berkshire\u2019s Performance",
+          "pages": "pages 12-13",
+          "score": 0.5977,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.5837,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.5736,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.572,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.5686,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.5458,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.5438,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "page 70",
+          "score": 0.5413,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.5167,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 80",
+          "score": 0.5161,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q34",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 559.8,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Management\u2019s Report on Internal Control Over Financial Reporting",
+          "pages": "page 89",
+          "score": 0.5486,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > Opinions on the Financial Statements and Internal Control over Financial Reporting",
+          "pages": "page 90",
+          "score": 0.5276,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-144",
+          "score": 0.5204,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > REPORT OF INDEPENDENT REGISTERED PUBLIC ACCOUNTING FIRM",
+          "pages": "page 90",
+          "score": 0.4806,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > REPORT OF INDEPENDENT REGISTERED PUBLIC ACCOUNTING FIRM",
+          "pages": "page 143",
+          "score": 0.4636,
+          "relevant": false
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "pages 153-154",
+          "score": 0.4551,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1C. Cybersecurity",
+          "pages": "pages 54-55",
+          "score": 0.4505,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > EXHIBIT INDEX",
+          "pages": "pages 146-147",
+          "score": 0.4476,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4382,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > Basis for Opinions",
+          "pages": "page 90",
+          "score": 0.4359,
+          "relevant": true
+        }
+      ]
+    },
+    {
+      "id": "q35",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 574.5,
+      "retrieved": [
+        {
+          "section": "Appendices > Stock Transfer Agency",
+          "pages": "page 152",
+          "score": 0.5564,
+          "relevant": true
+        },
+        {
+          "section": "Appendices > Stock Transfer Agency",
+          "pages": "page 152",
+          "score": 0.4531,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description",
+          "pages": "page 27",
+          "score": 0.3755,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.3736,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.3615,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > \u2610 TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+          "pages": "page 25",
+          "score": 0.3565,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Shareholders",
+          "pages": "page 58",
+          "score": 0.3529,
+          "relevant": false
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "pages 153-154",
+          "score": 0.351,
+          "relevant": false
+        },
+        {
+          "section": "Table of Contents",
+          "pages": "page 3",
+          "score": 0.3503,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+          "pages": "page 59",
+          "score": 0.3387,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q36",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 584.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Shareholders",
+          "pages": "page 58",
+          "score": 0.6568,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.4661,
+          "relevant": false
+        },
+        {
+          "section": "Appendices > Stock Transfer Agency",
+          "pages": "page 152",
+          "score": 0.465,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.4362,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4103,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+          "pages": "page 59",
+          "score": 0.4049,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Market Information",
+          "pages": "page 58",
+          "score": 0.3966,
+          "relevant": false
+        },
+        {
+          "section": "Appendices > Stock Transfer Agency",
+          "pages": "page 152",
+          "score": 0.3886,
+          "relevant": false
+        },
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500",
+          "pages": "pages 23-24",
+          "score": 0.3561,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter",
+          "pages": "page 5",
+          "score": 0.3449,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q37",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 574.4,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 2. Description of Properties > Burlington Northern Santa Fe",
+          "pages": "page 55",
+          "score": 0.627,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 67-68",
+          "score": 0.5265,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "page 32",
+          "score": 0.3862,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "pages 15-16",
+          "score": 0.3651,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "page 33",
+          "score": 0.354,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "pages 32-33",
+          "score": 0.3224,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 16",
+          "score": 0.3217,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Integrity",
+          "pages": "pages 8-9",
+          "score": 0.3138,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "pages 32-33",
+          "score": 0.2877,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "page 33",
+          "score": 0.2823,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q38",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 560.1,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 62-63",
+          "score": 0.5763,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 62",
+          "score": 0.5701,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 61-62",
+          "score": 0.5504,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+          "pages": "pages 82-83",
+          "score": 0.5022,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "page 14",
+          "score": 0.441,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 64-65",
+          "score": 0.4346,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 63",
+          "score": 0.4266,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "pages 13-14",
+          "score": 0.4205,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 29",
+          "score": 0.4198,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 65",
+          "score": 0.4196,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q39",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 567.0,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "page 33",
+          "score": 0.5959,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 68-69",
+          "score": 0.3997,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 67-68",
+          "score": 0.3923,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 69",
+          "score": 0.374,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "page 32",
+          "score": 0.3737,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 2. Description of Properties > Burlington Northern Santa Fe",
+          "pages": "page 55",
+          "score": 0.367,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+          "pages": "pages 32-33",
+          "score": 0.3636,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 68",
+          "score": 0.3629,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 69",
+          "score": 0.3535,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 68",
+          "score": 0.3472,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q40",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 626.1,
+      "retrieved": [
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "pages 15-16",
+          "score": 0.5162,
+          "relevant": true
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "pages 18-19",
+          "score": 0.4864,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 18",
+          "score": 0.4584,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+          "pages": "page 51",
+          "score": 0.4536,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 79",
+          "score": 0.3961,
+          "relevant": false
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "page 153",
+          "score": 0.3888,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Manufacturing Businesses",
+          "pages": "page 37",
+          "score": 0.3771,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.3687,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Service and Retailing Businesses",
+          "pages": "pages 47-48",
+          "score": 0.3682,
+          "relevant": false
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "pages 153-154",
+          "score": 0.3673,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q41",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 576.0,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Market Information",
+          "pages": "page 58",
+          "score": 0.6349,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.5374,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.5322,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Shareholders",
+          "pages": "page 58",
+          "score": 0.5049,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+          "pages": "page 59",
+          "score": 0.5009,
+          "relevant": false
+        },
+        {
+          "section": "Appendices > Stock Transfer Agency",
+          "pages": "page 152",
+          "score": 0.4979,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > \u2610 TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+          "pages": "page 25",
+          "score": 0.497,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.4622,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4524,
+          "relevant": false
+        },
+        {
+          "section": "Appendices > Stock Transfer Agency",
+          "pages": "page 152",
+          "score": 0.4321,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q42",
+      "split": "test",
+      "category": "paraphrase",
+      "firstRelevantRank": 2,
+      "latencyMs": 649.6,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1. Business Description",
+          "pages": "page 27",
+          "score": 0.5254,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Decentralized Model",
+          "pages": "page 8",
+          "score": 0.4662,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4465,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "pages 15-16",
+          "score": 0.4453,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Berkshire",
+          "pages": "page 7",
+          "score": 0.4258,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Our Culture",
+          "pages": "page 7",
+          "score": 0.4224,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (1)Significant accounting policies and practices",
+          "pages": "page 97",
+          "score": 0.4154,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "page 33",
+          "score": 0.408,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Culture and Foundational Values",
+          "pages": "pages 6-7",
+          "score": 0.3846,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description",
+          "pages": "page 27",
+          "score": 0.3833,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q43",
+      "split": "test",
+      "category": "paraphrase",
+      "firstRelevantRank": 1,
+      "latencyMs": 559.7,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "pages 66-67",
+          "score": 0.43,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 32",
+          "score": 0.4291,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 32",
+          "score": 0.4242,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 67",
+          "score": 0.4013,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "pages 14-15",
+          "score": 0.3693,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 31",
+          "score": 0.3609,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (15) Insurance subsidiary disclosures",
+          "pages": "pages 112-113",
+          "score": 0.3602,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "pages 31-32",
+          "score": 0.3577,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 29",
+          "score": 0.3553,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 27",
+          "score": 0.3489,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q44",
+      "split": "test",
+      "category": "paraphrase",
+      "firstRelevantRank": 1,
+      "latencyMs": 704.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+          "pages": "page 59",
+          "score": 0.4118,
+          "relevant": true
+        },
+        {
+          "section": "CEO's Letter > Capital Discipline",
+          "pages": "pages 10-11",
+          "score": 0.392,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.3657,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.3541,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 5. Market forRegistrant\u2019s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Dividends",
+          "pages": "page 58",
+          "score": 0.3468,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+          "pages": "page 128",
+          "score": 0.3297,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (14) Supplemental cash flow information",
+          "pages": "page 112",
+          "score": 0.3193,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF CHANGES IN SHAREHOLDERS\u2019 EQUITY",
+          "pages": "page 95",
+          "score": 0.3161,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 81",
+          "score": 0.3113,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF CASH FLOWS",
+          "pages": "page 96",
+          "score": 0.2979,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q45",
+      "split": "test",
+      "category": "paraphrase",
+      "firstRelevantRank": 5,
+      "latencyMs": 572.3,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+          "pages": "page 137",
+          "score": 0.3927,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+          "pages": "pages 139-140",
+          "score": 0.3649,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+          "pages": "pages 137-138",
+          "score": 0.3597,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+          "pages": "page 136",
+          "score": 0.3564,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 17",
+          "score": 0.3439,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > Changes in regulations and regulatory actions can adversely affect our operating results and our ability to allocate capital.",
+          "pages": "page 54",
+          "score": 0.3139,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+          "pages": "page 136",
+          "score": 0.3125,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+          "pages": "page 137",
+          "score": 0.3019,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "pages 70-71",
+          "score": 0.2948,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+          "pages": "pages 137-138",
+          "score": 0.2914,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q46",
+      "split": "test",
+      "category": "paraphrase",
+      "firstRelevantRank": 1,
+      "latencyMs": 678.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > Basis for Opinions",
+          "pages": "page 90",
+          "score": 0.3862,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Management\u2019s Report on Internal Control Over Financial Reporting",
+          "pages": "page 89",
+          "score": 0.3337,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > Unpaid Losses and Loss Adjustment Expenses \u2014 Retroactive Reinsurance Contracts\u2014 Refer to Notes 1 and 17 to the financial statements",
+          "pages": "page 91",
+          "score": 0.3196,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > Opinions on the Financial Statements and Internal Control over Financial Reporting",
+          "pages": "page 90",
+          "score": 0.3185,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 9A. Controls and Procedures",
+          "pages": "page 142",
+          "score": 0.2954,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > Basis for Opinions",
+          "pages": "page 90",
+          "score": 0.2915,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > Definition and Limitations of Internal Control over Financial Reporting",
+          "pages": "pages 90-91",
+          "score": 0.2912,
+          "relevant": true
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "pages 153-154",
+          "score": 0.2842,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 8. Financial Statements and Supplementary Data > REPORT OF INDEPENDENT REGISTERED PUBLIC ACCOUNTING FIRM",
+          "pages": "page 90",
+          "score": 0.2834,
+          "relevant": true
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "page 153",
+          "score": 0.2605,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q47",
+      "split": "test",
+      "category": "exact_term",
+      "firstRelevantRank": 1,
+      "latencyMs": 569.1,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+          "pages": "pages 138-139",
+          "score": 0.1799,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 3. Legal Proceedings",
+          "pages": "page 57",
+          "score": 0.1646,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses",
+          "pages": "page 116",
+          "score": 0.1605,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 64-65",
+          "score": 0.1532,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Contractual Obligations",
+          "pages": "page 82",
+          "score": 0.1529,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 65",
+          "score": 0.1522,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (17) Retroactive reinsurance",
+          "pages": "page 120",
+          "score": 0.1482,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 61",
+          "score": 0.1478,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses",
+          "pages": "pages 115-116",
+          "score": 0.1451,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses",
+          "pages": "page 118",
+          "score": 0.1443,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q48",
+      "split": "test",
+      "category": "exact_term",
+      "firstRelevantRank": 1,
+      "latencyMs": 567.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 67-68",
+          "score": 0.6768,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 68-69",
+          "score": 0.613,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 68-69",
+          "score": 0.5557,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+          "pages": "page 70",
+          "score": 0.5427,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 61-62",
+          "score": 0.5279,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Investment Gains (Losses)",
+          "pages": "page 80",
+          "score": 0.5234,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.517,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (20) Income taxes",
+          "pages": "pages 124-125",
+          "score": 0.4997,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 68",
+          "score": 0.489,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.4874,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q49",
+      "split": "test",
+      "category": "exact_term",
+      "firstRelevantRank": 1,
+      "latencyMs": 596.9,
+      "retrieved": [
+        {
+          "section": "Appendices > Shareholder Event and Meeting Information",
+          "pages": "page 150",
+          "score": 0.253,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.183,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (24) Pension plans > Projected benefit obligations",
+          "pages": "page 131",
+          "score": 0.1759,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 22",
+          "score": 0.1726,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Investment Gains (Losses)",
+          "pages": "page 80",
+          "score": 0.1689,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Investment Gains (Losses)",
+          "pages": "page 80",
+          "score": 0.1617,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Equity Price Risk",
+          "pages": "page 87",
+          "score": 0.1579,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 17",
+          "score": 0.1563,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 19",
+          "score": 0.1559,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 106",
+          "score": 0.1519,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q50",
+      "split": "test",
+      "category": "exact_term",
+      "firstRelevantRank": 1,
+      "latencyMs": 631.2,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 29",
+          "score": 0.4626,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "pages 28-29",
+          "score": 0.3515,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "pages 30-31",
+          "score": 0.2533,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 31",
+          "score": 0.2385,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 30",
+          "score": 0.2138,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 28",
+          "score": 0.2071,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 31",
+          "score": 0.2049,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 65",
+          "score": 0.2021,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 64",
+          "score": 0.1987,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 63-64",
+          "score": 0.1986,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q51",
+      "split": "test",
+      "category": "multi_section",
+      "firstRelevantRank": 4,
+      "latencyMs": 560.9,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 107",
+          "score": 0.5671,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 107",
+          "score": 0.5469,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+          "pages": "page 106",
+          "score": 0.5453,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 20",
+          "score": 0.4779,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 61",
+          "score": 0.4549,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 80",
+          "score": 0.4519,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4248,
+          "relevant": true
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 19-20",
+          "score": 0.4,
+          "relevant": true
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 20-21",
+          "score": 0.3867,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 143-145",
+          "score": 0.382,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q52",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 680.8,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 67-68",
+          "score": 0.6006,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 68",
+          "score": 0.5534,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 68",
+          "score": 0.5474,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 68-69",
+          "score": 0.5196,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "pages 68-69",
+          "score": 0.4875,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.4831,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4813,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 16",
+          "score": 0.4747,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4674,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+          "pages": "page 69",
+          "score": 0.457,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q53",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 602.4,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > Climate change and the regulation of greenhouse gas (\u201cGHG\u201d) emissions may impact our businesses.",
+          "pages": "page 52",
+          "score": 0.5132,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "page 35",
+          "score": 0.4048,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > Changes in regulations and regulatory actions can adversely affect our operating results and our ability to allocate capital.",
+          "pages": "page 53",
+          "score": 0.3967,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "page 36",
+          "score": 0.3452,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "pages 35-36",
+          "score": 0.3374,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > Changes in regulations and regulatory actions can adversely affect our operating results and our ability to allocate capital.",
+          "pages": "page 54",
+          "score": 0.3369,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 28",
+          "score": 0.3368,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "pages 36-37",
+          "score": 0.3325,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+          "pages": "page 51",
+          "score": 0.3303,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "page 36",
+          "score": 0.3273,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q54",
+      "split": "test",
+      "category": "prose_fact",
+      "firstRelevantRank": 1,
+      "latencyMs": 556.4,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 29",
+          "score": 0.6324,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+          "pages": "pages 82-83",
+          "score": 0.5026,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 61-62",
+          "score": 0.4995,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "pages 62-63",
+          "score": 0.4825,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses",
+          "pages": "page 119",
+          "score": 0.4741,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 29",
+          "score": 0.4672,
+          "relevant": true
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Underwriting",
+          "pages": "page 62",
+          "score": 0.4548,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "pages 29-30",
+          "score": 0.4315,
+          "relevant": true
+        },
+        {
+          "section": "CEO's Letter > Insurance Operations",
+          "pages": "pages 13-14",
+          "score": 0.4143,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses",
+          "pages": "page 114",
+          "score": 0.4031,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q55",
+      "split": "test",
+      "category": "multi_section",
+      "firstRelevantRank": 1,
+      "latencyMs": 631.1,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+          "pages": "page 51",
+          "score": 0.5446,
+          "relevant": true
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "page 153",
+          "score": 0.4909,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > Item 4. Mine Safety Disclosures > Executive Officers of the Registrant",
+          "pages": "page 58",
+          "score": 0.4679,
+          "relevant": true
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 22",
+          "score": 0.4438,
+          "relevant": false
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "pages 153-154",
+          "score": 0.3929,
+          "relevant": false
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.373,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 21",
+          "score": 0.3717,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Our Culture",
+          "pages": "page 7",
+          "score": 0.3549,
+          "relevant": false
+        },
+        {
+          "section": "Appendices > Shareholder Event and Meeting Information",
+          "pages": "page 150",
+          "score": 0.3514,
+          "relevant": false
+        },
+        {
+          "section": "CEO's Letter > Berkshire",
+          "pages": "page 7",
+          "score": 0.3514,
+          "relevant": false
+        }
+      ]
+    },
+    {
+      "id": "q56",
+      "split": "test",
+      "category": "unanswerable",
+      "firstRelevantRank": null,
+      "latencyMs": 641.7,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+          "pages": "page 94",
+          "score": 0.5445,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+          "pages": "page 95",
+          "score": 0.4774,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+          "pages": "pages 144-145",
+          "score": 0.4655,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+          "pages": "pages 131-132",
+          "score": 0.4647,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4587,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+          "pages": "page 79",
+          "score": 0.4486,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+          "pages": "page 60",
+          "score": 0.4443,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Insurance\u2014Investment Income",
+          "pages": "page 66",
+          "score": 0.443,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Foreign Currency Risk",
+          "pages": "page 89",
+          "score": 0.4399,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 7. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+          "pages": "page 80",
+          "score": 0.4386,
+          "relevant": null
+        }
+      ]
+    },
+    {
+      "id": "q57",
+      "split": "test",
+      "category": "unanswerable",
+      "firstRelevantRank": null,
+      "latencyMs": 576.6,
+      "retrieved": [
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+          "pages": "page 51",
+          "score": 0.4234,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 4. Mine Safety Disclosures > Executive Officers of the Registrant",
+          "pages": "page 58",
+          "score": 0.3017,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 22",
+          "score": 0.2992,
+          "relevant": null
+        },
+        {
+          "section": "Directors and Officers of the Company",
+          "pages": "page 153",
+          "score": 0.2832,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "page 21",
+          "score": 0.2323,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "page 36",
+          "score": 0.2232,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 21-22",
+          "score": 0.2149,
+          "relevant": null
+        },
+        {
+          "section": "Appendices > Shareholder Event and Meeting Information",
+          "pages": "page 150",
+          "score": 0.2147,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > SIGNATURES",
+          "pages": "page 148",
+          "score": 0.2046,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Non-Insurance Operations",
+          "pages": "page 17",
+          "score": 0.2042,
+          "relevant": null
+        }
+      ]
+    },
+    {
+      "id": "q58",
+      "split": "test",
+      "category": "unanswerable",
+      "firstRelevantRank": null,
+      "latencyMs": 658.4,
+      "retrieved": [
+        {
+          "section": "CEO's Letter > Berkshire",
+          "pages": "page 7",
+          "score": 0.4075,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 19-20",
+          "score": 0.4069,
+          "relevant": null
+        },
+        {
+          "section": "Berkshire\u2019s Performance vs. the S&P 500",
+          "pages": "pages 23-24",
+          "score": 0.4,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 1A. Risk Factors > Climate change and the regulation of greenhouse gas (\u201cGHG\u201d) emissions may impact our businesses.",
+          "pages": "page 52",
+          "score": 0.3979,
+          "relevant": null
+        },
+        {
+          "section": "CEO's Letter > Equity Investments",
+          "pages": "pages 20-21",
+          "score": 0.3921,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description",
+          "pages": "page 27",
+          "score": 0.3919,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+          "pages": "pages 36-37",
+          "score": 0.3907,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 6. [Reserved]",
+          "pages": "page 59",
+          "score": 0.3867,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > EXHIBIT INDEX",
+          "pages": "pages 146-147",
+          "score": 0.3821,
+          "relevant": null
+        },
+        {
+          "section": "FORM 10-K > Item 1. Business Description > Insurance Businesses",
+          "pages": "page 28",
+          "score": 0.3795,
+          "relevant": null
+        }
+      ]
+    }
+  ]
+}

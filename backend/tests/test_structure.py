@@ -1,5 +1,11 @@
 from rag_system.domain import OutlineEntry, TextLine
-from rag_system.ingestion.structure import BlockKind, Section, build_sections, is_table_row
+from rag_system.ingestion.structure import (
+    BlockKind,
+    Section,
+    build_sections,
+    is_table_row,
+    split_table_row,
+)
 from tests.builders import BODY, LEFT, body, filler, heading, page, plain_page
 
 
@@ -181,3 +187,12 @@ def test_table_rows_end_in_two_or_more_numeric_cells() -> None:
     assert is_table_row("Building — — 19,609")
     assert not is_table_row("Revenues increased in 2025")
     assert not is_table_row("Amount % Amount %")
+
+
+def test_split_table_row_separates_label_and_cells() -> None:
+    assert split_table_row("Cash and cash equivalents* $ 47,719 $ 44,333") == (
+        "Cash and cash equivalents*",
+        ["47,719", "44,333"],
+    )
+    assert split_table_row("Building — — 19,609") == ("Building", ["—", "—", "19,609"])
+    assert split_table_row("No numbers here") == ("No numbers here", [])

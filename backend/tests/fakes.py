@@ -7,7 +7,7 @@ from collections import Counter
 from collections.abc import Callable, Sequence
 from typing import TypeVar
 
-from rag_system.domain import Chunk, SearchHit, SparseVector
+from rag_system.domain import Chunk, SearchHit, SearchUnit, SparseVector
 from rag_system.ports import (
     ChatModel,
     ChatReply,
@@ -82,16 +82,20 @@ def _sparse_dot(a: SparseVector, b: SparseVector) -> float:
     )
 
 
+def as_units(chunks: Sequence[Chunk]) -> list[SearchUnit]:
+    return [SearchUnit.for_chunk(chunk) for chunk in chunks]
+
+
 class InMemoryStore(VectorStore[V]):
     def __init__(self, score: Callable[[V, V], float]) -> None:
-        self.records: dict[str, tuple[Chunk, V]] = {}
+        self.records: dict[str, tuple[SearchUnit, V]] = {}
         self.operations: list[str] = []
         self._score = score
 
-    def upsert(self, chunks: Sequence[Chunk], vectors: Sequence[V]) -> None:
+    def upsert(self, units: Sequence[SearchUnit], vectors: Sequence[V]) -> None:
         self.operations.append("upsert")
-        for chunk, vector in zip(chunks, vectors, strict=True):
-            self.records[chunk.id] = (chunk, vector)
+        for unit, vector in zip(units, vectors, strict=True):
+            self.records[unit.id] = (unit, vector)
 
     def delete_document(self, document_id: str) -> None:
         self.operations.append(f"delete:{document_id}")
@@ -100,7 +104,8 @@ class InMemoryStore(VectorStore[V]):
 
     def search(self, vector: V, top_k: int) -> list[SearchHit]:
         scored = [
-            SearchHit(chunk, self._score(vector, stored)) for chunk, stored in self.records.values()
+            SearchHit(unit.chunk, self._score(vector, stored), unit.matched)
+            for unit, stored in self.records.values()
         ]
         matches = [hit for hit in scored if hit.score > 0]
         return sorted(matches, key=lambda hit: hit.score, reverse=True)[:top_k]

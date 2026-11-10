@@ -34,6 +34,9 @@ class _InferenceClient:
             try:
                 return request()
             except RateLimitError as error:
+                if _is_quota_exhausted(error):
+                    # A monthly plan quota, not a burst limit: waiting will not help.
+                    raise UpstreamServiceError(f"Pinecone {what} quota used up: {error}") from error
                 if attempt == RATE_LIMIT_RETRIES:
                     raise UpstreamServiceError(f"Pinecone {what} rate limited: {error}") from error
                 logger.warning("Rate limited; retrying in %.0f s (attempt %d)", wait, attempt)
@@ -124,3 +127,9 @@ def _sparse(item: Any) -> SparseVector:
         indices=[int(index) for index in item.sparse_indices],
         values=[float(value) for value in item.sparse_values],
     )
+
+
+def _is_quota_exhausted(error: RateLimitError) -> bool:
+    """Pinecone reports both burst rate limits and monthly plan limits as HTTP 429; the plan
+    limit says RESOURCE_EXHAUSTED ("You've reached the rerank request limit (500)...")."""
+    return "RESOURCE_EXHAUSTED" in str(error)

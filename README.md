@@ -3,8 +3,9 @@
 > 📖 **New to RAG?** Start with the [RAG Engineering Glossary](docs/RAG_GLOSSARY.md) — 28 terms explained from scratch using the Berkshire report, with diagrams, examples, and our evaluation results.
 
 Ask questions about company PDFs and get answers that cite the document and page. Built with Flask,
-Pinecone (vector index, and `llama-text-embed-v2` embeddings through Pinecone Inference), Amazon
-Bedrock (answer model; Titan embeddings as an alternative) and AWS Textract for scanned pages.
+Pinecone (vector indexes, plus `llama-text-embed-v2`, `pinecone-sparse-english-v0` and the
+`bge-reranker-v2-m3` reranker through Pinecone Inference), Google Gemini for answers (through its
+OpenAI-compatible API; Amazon Bedrock is also supported) and AWS Textract for scanned pages.
 
 ```
 INGEST  PDF ─► lines + font style, outline (pypdfium2) ─┬─► clean ─► sections ─► chunks ─► llama-text-embed-v2 ─► Pinecone
@@ -17,8 +18,9 @@ INGEST  PDF ─► lines + font style, outline (pypdfium2) ─┬─► clean �
         every chunk is written to two indexes: dense (llama-text-embed-v2) and sparse
         (pinecone-sparse-english-v0, exact terms)
 
-ASK     question ─► retrieval pipeline (below) ─► answer model on Bedrock ─► answer with [n] citations
-                                                  (Qwen3-235B, falls back to Nova 2 Lite)
+ASK     question ─► retrieval pipeline (below) ─► answer model ─► answer with [n] citations
+                                                  (gemini-3.5-flash, falls back to gemini-3.5-flash-lite;
+                                                   Bedrock Qwen3/Nova when RAG_ANSWER_PROVIDER=bedrock)
 ```
 
 ## Setup
@@ -52,6 +54,8 @@ uv run rag ingest ../data/documents/*.pdf      # creates the Pinecone index on f
 uv run rag search "Does Berkshire pay a dividend?"   # retrieved chunks only, no answer model
 uv run rag chat                                # interactive: ask, read answer, repeat; 'exit' quits
 uv run rag ask "How did insurance float change in 2025?"   # one question
+uv run rag eval --pipeline all --label <name>  # retrieval scoreboard
+uv run rag eval-answers --label <name>         # answer every golden question and grade it
 uv run rag serve                               # Flask API on http://127.0.0.1:5001
 ```
 
@@ -151,9 +155,40 @@ What the experiments showed:
   on held-out questions: it had been fitted to the one tune question it was designed from.
 - **Tuned hybrid generalised for recall, not ordering:** on held-out questions Hit@5 rose from
   79% to 91%, but Hit@1 fell from 61% to 58%. It finds more evidence; the reranker orders it.
+- **Table-row indexing (small-to-big) was the largest single gain.** Each labelled table row is
+  also indexed on its own, linearized as a sentence ("CONSOLIDATED BALANCE SHEETS: Total assets:
+  2025: 1,222,176; 2024: 1,153,881"), and a matching row returns its whole table chunk. A table
+  chunk's vector blends twenty line items; a row's vector is about one. Held-out test split:
+
+  | Pipeline | Index | Hit@1 | Hit@5 | MRR | p50 latency |
+  |---|---|---|---|---|---|
+  | basic | chunks | 61% | 79% | 0.690 | ~600 ms |
+  | advanced | chunks | 70% | 97% | 0.790 | ~1,400 ms |
+  | **basic** | **chunks + rows** | **73%** | **94%** | **0.798** | **~600 ms** |
+  | hybrid | chunks + rows | 70% | 94% | 0.785 | ~800 ms |
+  | **advanced** | **chunks + rows** | **70%** | **94%** | **0.809** | ~1,700 ms |
+
+  With rows, plain dense search matches the previous best pipeline at a third of the latency and
+  no reranker calls; the reranker now adds only +0.011 MRR. Table-number MRR (advanced) rose from
+  0.641 to 0.675. The two balance-sheet questions it was aimed at improved least: "cash and cash
+  equivalents" went from not found to rank 8, and "total assets" is still not in the top 10,
+  outranked by rows of other statements that also mention "Berkshire ... 2025".
+- **Evaluation has a cost.** Pinecone's free plan allows 500 rerank requests a month; four full
+  scoreboard runs (116 rerank calls each) used it up. Retrieval evaluation now skips unanswerable
+  questions (58 to 52 calls) and caches reranker scores in `evals/.cache/` keyed by model,
+  question and candidates, so an unchanged re-run costs no rerank calls.
 - **Weakest category: table numbers.** "Cash and cash equivalents" and "total assets" are single
   rows inside balance-sheet chunks; prose that discusses them outranks the table.
 - **Caveat:** 33 held-out questions is still small: one question is about 3 points of Hit@K.
+
+## Answer evaluation
+
+`rag eval-answers` answers all 58 golden questions with the full pipeline and grades each answer:
+correctness against the expected facts (LLM judge), "not in the report" for unanswerable questions,
+faithfulness to the retrieved sources (LLM judge), valid `[n]` citations, key figures present
+(no LLM), and whether a wrong answer was a retrieval or a generation failure. It writes JSON and a
+readable Markdown page to `evals/results/`. The judge is the answer model (the only working model
+on the free tier), so verdicts may be lenient; the key-number check is independent of it.
 
 ## Checks
 
@@ -215,4 +250,3 @@ uv run mypy src tests    # strict
 - Pinecone's free plan runs in `us-east-1`, so document text leaves the Sydney region.
 - No upload endpoint or web UI: documents are ingested from the CLI, and questions are asked in the
   terminal (`rag chat`) or through the API.
-- No retrieval evaluation set yet (recall@k on known question/page pairs).

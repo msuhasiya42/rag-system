@@ -23,7 +23,15 @@ class Settings(BaseSettings):
     embedding_model_id: str = "amazon.titan-embed-text-v2:0"  # Bedrock provider
     embedding_concurrency: int = Field(default=8, ge=1, le=32)  # Bedrock: one text per call
 
-    # Tried in order; the next one is used when a model is throttled or unavailable.
+    # Which service writes answers. Bedrock is blocked for this AWS account ("Error 002"), so the
+    # default is Gemini through its OpenAI-compatible API (free tier: Flash models only).
+    answer_provider: Literal["gemini", "bedrock"] = "gemini"
+    gemini_api_key: SecretStr | None = None
+    # Tried in order; the next is used when one is overloaded (503) or out of quota (429).
+    gemini_model_ids: list[str] = ["gemini-3.5-flash", "gemini-3.5-flash-lite"]
+    answer_timeout_seconds: float = Field(default=90.0, gt=0)
+
+    # Bedrock models, tried in order; the next one is used when a model is throttled or unavailable.
     answer_model_ids: list[str] = [
         "qwen.qwen3-235b-a22b-2507-v1:0",
         "global.amazon.nova-2-lite-v1:0",
@@ -59,6 +67,8 @@ class Settings(BaseSettings):
     # raised Hit@5 from 91% to 97% and kept paraphrase matches the reranker alone buried.
     rerank_blend_weight: float | None = Field(default=2.0, ge=0.0, le=10.0)
 
+    # Also index each labelled table row on its own (small-to-big retrieval). Applies at ingest.
+    index_table_rows: bool = True
     chunk_size_chars: int = Field(default=1800, ge=200)
     chunk_overlap_chars: int = Field(default=300, ge=0)
     default_top_k: int = Field(default=6, ge=1, le=20)

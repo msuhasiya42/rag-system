@@ -116,3 +116,13 @@ def test_reranker_sends_section_and_text_and_returns_hits_in_its_order() -> None
     sent = inference.calls[0]["documents"]
     assert sent[1] == {"id": "d#1", "text": "Cover\nNotes due 2027"}
     assert reranker.rerank("q", [], top_n=3) == []
+
+
+def test_a_monthly_quota_fails_at_once_instead_of_retrying() -> None:
+    quota = RateLimitError(message="RESOURCE_EXHAUSTED: rerank request limit (500) reached")
+    waits: list[float] = []
+
+    with pytest.raises(UpstreamServiceError, match="quota used up"):
+        _embedder(StubInference(failures=[quota]), waits).embed_query("hi")
+
+    assert waits == []  # no pointless back-off

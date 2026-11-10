@@ -1,7 +1,7 @@
 import pytest
 
 from rag_system.domain import TextLine
-from rag_system.ingestion.chunking import chunk_sections, document_id_for
+from rag_system.ingestion.chunking import chunk_sections, document_id_for, search_units
 from rag_system.ingestion.structure import Block, BlockKind, PlacedLine, Section
 
 
@@ -133,3 +133,41 @@ def test_overlap_must_be_smaller_than_chunk_size() -> None:
 
 def test_document_id_is_a_slug_of_the_file_name() -> None:
     assert document_id_for("Berkshire 2025 Annual_Report.PDF") == "berkshire-2025-annual-report"
+
+
+def test_table_rows_become_search_units_that_point_to_their_chunk() -> None:
+    table = _table(
+        "(dollars in millions)",
+        "2025 2024",
+        "Assets:",
+        "Cash and cash equivalents $ 47,719 $ 44,333",
+        "Railroad, Utilities and Energy:",
+        "Total assets $ 1,222,176 $ 1,153,881",
+    )
+    sections = [Section(("Statements", "BALANCE SHEETS"), [table])]
+
+    units = search_units("doc", "doc.pdf", sections, 1000, 0, table_rows=True)
+
+    chunk_unit, *rows = units
+    assert chunk_unit.id == "doc#00000" and not chunk_unit.matched
+    assert [row.id for row in rows] == ["doc#00000-r000", "doc#00000-r001"]
+    assert all(row.chunk == chunk_unit.chunk for row in rows)  # small unit, big result
+    assert rows[1].matched == "Total assets $ 1,222,176 $ 1,153,881"
+    # Linearized: values paired with years; "Total" rows drop the group label.
+    assert rows[0].text == (
+        "BALANCE SHEETS: Assets Cash and cash equivalents: 2025: 47,719; 2024: 44,333 "
+        "(dollars in millions)"
+    )
+    assert rows[1].text == (
+        "BALANCE SHEETS: Total assets: 2025: 1,222,176; 2024: 1,153,881 (dollars in millions)"
+    )
+
+
+def test_without_table_rows_there_is_one_unit_per_chunk() -> None:
+    table = _table("2025 2024", "Revenue 100 90", "Costs 60 50")
+    sections = [Section(("S",), [_paragraph(*_lines(2)), table])]
+
+    units = search_units("doc", "doc.pdf", sections, 1000, 0, table_rows=False)
+
+    assert [unit.id for unit in units] == ["doc#00000"]
+    assert units[0].text == units[0].chunk.contextual_text()
