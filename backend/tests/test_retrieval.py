@@ -118,3 +118,27 @@ def test_weighted_rrf_lets_one_list_count_for_less() -> None:
 
     assert equal[0].score == pytest.approx(equal[1].score)  # a perfect tie
     assert _ids(dense_trusted) == ["a", "b"]  # dense's order wins
+
+
+def test_blended_reranking_keeps_a_strong_first_place_from_retrieval() -> None:
+    # Retrieval found the paraphrase match first; the word-overlap reranker would bury it.
+    inner = ScriptedRetriever("dividend policy since 1967", "payouts profits owners hand", "noise")
+    question = "hand out profits to owners as payouts"
+
+    pure = RerankingRetriever(inner, FakeReranker(), candidates=3).retrieve(question, 3)
+    blended = RerankingRetriever(
+        inner, FakeReranker(), candidates=3, blend_weight=1.0, rrf_k=1
+    ).retrieve(question, 3)
+
+    assert _ids(pure)[0] == "payouts profits owners hand"
+    # Tie on fused score: retrieval's first place (seen first) is kept on top.
+    assert _ids(blended)[:2] == ["dividend policy since 1967", "payouts profits owners hand"]
+
+
+def test_blended_reranking_ranks_every_candidate_before_fusing() -> None:
+    reranker = FakeReranker()
+    inner = ScriptedRetriever("a", "b", "c", "d")
+
+    RerankingRetriever(inner, reranker, candidates=4, blend_weight=2.0, rrf_k=1).retrieve("q", 2)
+
+    assert reranker.calls == [("q", 4, 4)]  # all candidates reranked, top 2 taken after fusion

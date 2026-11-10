@@ -54,6 +54,10 @@ class Settings(BaseSettings):
     rrf_k: int = Field(default=1, ge=0, le=100)
     hybrid_sparse_weight: float = Field(default=0.5, ge=0.0, le=2.0)
     rerank_model: str = "bge-reranker-v2-m3"
+    # Fuse the reranker's order with the retrieval order (weighted RRF, k=rrf_k) instead of
+    # replacing it; empty = pure reranking. Chosen on the tune split; on held-out questions it
+    # raised Hit@5 from 91% to 97% and kept paraphrase matches the reranker alone buried.
+    rerank_blend_weight: float | None = Field(default=2.0, ge=0.0, le=10.0)
 
     chunk_size_chars: int = Field(default=1800, ge=200)
     chunk_overlap_chars: int = Field(default=300, ge=0)

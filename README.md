@@ -84,7 +84,7 @@ Pipelines are stacks of small retrievers (`retrieval.py`), chosen with `--pipeli
 |---|---|
 | `basic` | `DenseRetriever` |
 | `hybrid` | `HybridRetriever(Dense, Sparse)`: both in parallel, weighted reciprocal rank fusion |
-| `advanced` (default) | `RerankingRetriever(Hybrid)`: `bge-reranker-v2-m3` reorders the top 20 |
+| `advanced` (default) | `RerankingRetriever(Hybrid)`: `bge-reranker-v2-m3` reranks the top 20, and its order is blended with the hybrid order (weighted RRF) |
 | `basic-rerank` | `RerankingRetriever(Dense)`: isolates the reranker's effect |
 
 `evals/golden.json` holds 58 questions about the Berkshire report (52 answerable, 6 deliberately
@@ -97,14 +97,15 @@ stated in two places lists both as alternatives. Questions are split:
 `uv run rag eval --pipeline all --label <name>` prints a per-question rank matrix and a
 scoreboard per split, and saves JSON to `evals/results/`.
 
-Held-out **test** split (33 answerable questions, k=10):
+Held-out **test** split (33 answerable questions, k=10), each row adding one step:
 
 | Pipeline | Hit@1 | Hit@5 | Recall@5 | nDCG@5 | MRR | p50 latency |
 |---|---|---|---|---|---|---|
-| basic | 61% | 79% | 79% | 70% | 0.690 | ~580 ms |
-| hybrid (k=1, sparse weight 0.5) | 58% | 91% | 91% | 75% | 0.697 | ~630 ms |
-| **advanced** | **70%** | **91%** | **91%** | **80%** | **0.778** | ~1,520 ms |
-| basic-rerank | 70% | 88% | 88% | 79% | 0.769 | ~1,380 ms |
+| basic: dense | 61% | 79% | 79% | 70% | 0.690 | ~600 ms |
+| hybrid: + sparse, RRF k=1, sparse weight 0.5 | 58% | 91% | 91% | 75% | 0.697 | ~590 ms |
+| advanced, pure rerank (reranker order replaces hybrid order) | 70% | 91% | 91% | 80% | 0.778 | ~1,500 ms |
+| **advanced: rerank blended with hybrid order (weight 2)** | **70%** | **97%** | **97%** | **83%** | **0.790** | ~1,300 ms |
+| basic-rerank, blended | 67% | 91% | 91% | 79% | 0.765 | ~1,470 ms |
 
 Tune split (19 answerable questions), where the settings were chosen:
 
@@ -113,8 +114,18 @@ Tune split (19 answerable questions), where the settings were chosen:
 | basic | 74% | 89% | 87% | 81% | 0.795 |
 | hybrid, textbook RRF (k=60, equal weights) | 58% | 84% | 79% | 69% | 0.690 |
 | hybrid, tuned (k=1, sparse weight 0.5) | 74% | 95% | 89% | 82% | 0.811 |
-| advanced | 68% | 89% | 84% | 78% | 0.789 |
-| basic-rerank | 68% | 89% | 87% | 79% | 0.795 |
+| advanced, pure rerank | 68% | 89% | 84% | 78% | 0.789 |
+| **advanced, blended** | **74%** | **95%** | **89%** | **82%** | **0.816** |
+
+MRR by question type (all 52 answerable questions):
+
+| Type | basic | hybrid | advanced, pure rerank | advanced, blended |
+|---|---|---|---|---|
+| exact term (7) | 0.620 | 0.683 | 0.833 | 0.857 |
+| multi-section (4) | 0.812 | 0.812 | 1.000 | 1.000 |
+| paraphrase (8) | 0.838 | 0.775 | 0.585 | 0.671 |
+| prose fact (18) | 0.881 | 0.898 | 0.935 | 0.921 |
+| table number (15) | 0.514 | 0.536 | 0.622 | 0.641 |
 
 What the experiments showed:
 - **Textbook hybrid search lowered quality.** The sparse model weights every query word equally
@@ -130,6 +141,12 @@ What the experiments showed:
   terms (total liabilities: not found to rank 1; BNSF tax rate: 7 to 1). It still loses some
   (U.S. federal tax paid: rank 2 to not found) and doubles latency. Cohere rerankers are not
   available on Pinecone's free plan.
+- **Blending the reranker with the hybrid order beat replacing it.** A cross-encoder favours
+  literal word overlap, so pure reranking dropped paraphrase MRR from 0.775 to 0.585. Fusing
+  its order with the hybrid order (weighted RRF, reranker weight 2) brought every paraphrase
+  answer back into the top 5 and raised held-out Hit@5 from 91% to 97%. A "confidence gate"
+  (skip the reranker when its top score is low) scored best on the tune split but never fired
+  on held-out questions: it had been fitted to the one tune question it was designed from.
 - **Tuned hybrid generalised for recall, not ordering:** on held-out questions Hit@5 rose from
   79% to 91%, but Hit@1 fell from 61% to 58%. It finds more evidence; the reranker orders it.
 - **Weakest category: table numbers.** "Cash and cash equivalents" and "total assets" are single

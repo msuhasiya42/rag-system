@@ -80,8 +80,14 @@ def build_retriever(settings: Settings, pipeline: Pipeline | None = None) -> Ret
         return dense
     candidates = settings.retrieval_candidates
     reranker = PineconeReranker(pinecones.client, settings.rerank_model)
+
+    def reranked(inner: Retriever) -> Retriever:
+        return RerankingRetriever(
+            inner, reranker, candidates, settings.rerank_blend_weight, settings.rrf_k
+        )
+
     if pipeline == "basic-rerank":
-        return RerankingRetriever(dense, reranker, candidates)
+        return reranked(dense)
     sparse = SparseRetriever(
         PineconeSparseEncoder(pinecones.client, settings.pinecone_sparse_model), pinecones.sparse
     )
@@ -90,7 +96,7 @@ def build_retriever(settings: Settings, pipeline: Pipeline | None = None) -> Ret
     )
     if pipeline == "hybrid":
         return hybrid
-    return RerankingRetriever(hybrid, reranker, candidates)
+    return reranked(hybrid)
 
 
 def build_answer_service(settings: Settings, pipeline: Pipeline | None = None) -> AnswerService:

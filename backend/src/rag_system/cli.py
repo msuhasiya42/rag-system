@@ -184,6 +184,9 @@ def _evaluate_one(
             "chunkOverlapChars": settings.chunk_overlap_chars,
             "candidates": settings.retrieval_candidates,
             "rerankModel": settings.rerank_model if pipeline in USES_RERANKER else None,
+            "rerankBlendWeight": settings.rerank_blend_weight
+            if pipeline in USES_RERANKER
+            else None,
             "sparseModel": settings.pinecone_sparse_model if pipeline in USES_SPARSE else None,
             "rrfK": settings.rrf_k if pipeline in USES_SPARSE else None,
             "sparseWeight": settings.hybrid_sparse_weight if pipeline in USES_SPARSE else None,

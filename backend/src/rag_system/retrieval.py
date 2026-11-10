@@ -83,20 +83,39 @@ class HybridRetriever(Retriever):
 
 
 class RerankingRetriever(Retriever):
-    """Fetches a wider candidate list, then lets a cross-encoder pick and order the best.
+    """Fetches a wider candidate list, then lets a cross-encoder reorder it.
 
     It can only reorder what the inner retriever found: a chunk missing from the candidates
     cannot be recovered.
+
+    With ``blend_weight`` set, the reranker's order is fused with the inner order by weighted
+    RRF instead of replacing it. A cross-encoder favours literal word overlap and can bury a
+    paraphrase match the inner retriever ranked first; blending keeps that vote.
     """
 
-    def __init__(self, inner: Retriever, reranker: Reranker, candidates: int) -> None:
+    def __init__(
+        self,
+        inner: Retriever,
+        reranker: Reranker,
+        candidates: int,
+        blend_weight: float | None = None,
+        rrf_k: int = RRF_K,
+    ) -> None:
         self._inner = inner
         self._reranker = reranker
         self._candidates = candidates
+        self._blend_weight = blend_weight
+        self._rrf_k = rrf_k
 
     def retrieve(self, question: str, top_k: int) -> list[SearchHit]:
         candidates = self._inner.retrieve(question, max(top_k, self._candidates))
-        return self._reranker.rerank(question, candidates, top_k)
+        if self._blend_weight is None:
+            return self._reranker.rerank(question, candidates, top_k)
+        reranked = self._reranker.rerank(question, candidates, len(candidates))
+        weights = [1.0, self._blend_weight]
+        return reciprocal_rank_fusion([candidates, reranked], k=self._rrf_k, weights=weights)[
+            :top_k
+        ]
 
 
 def reciprocal_rank_fusion(
