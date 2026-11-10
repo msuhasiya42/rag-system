@@ -5,6 +5,8 @@
 > 🛠️ **How it was built:** [docs/JOURNEY.md](docs/JOURNEY.md) walks through every step, from the first PDF parse to 88% correct answers, including what failed and why.
 >
 > 🧪 **How it is tested:** [docs/EVALUATION.md](docs/EVALUATION.md) explains the golden dataset, the retrieval and answer evaluations, and the metrics (Hit@K, MRR, nDCG) with worked examples.
+>
+> 💸 **On zero budget:** [docs/ZERO_BUDGET_RAG.md](docs/ZERO_BUDGET_RAG.md) covers how to build the same system with one laptop and free tools, and which of those choices this project has measured.
 
 Ask questions about company PDFs and get answers that cite the document and page. Built with Flask,
 Pinecone (vector indexes, plus `llama-text-embed-v2`, `pinecone-sparse-english-v0` and the
