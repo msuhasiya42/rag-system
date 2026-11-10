@@ -133,6 +133,26 @@ For example, an incident-investigation agent can fetch live error rates with an 
 
 **Mental model:** **RAG is the pattern; embeddings/keyword search are retrieval techniques; web search is another source of retrieved evidence; an agent can orchestrate any of them.**
 
+### Common misconceptions: source, retrieval, and orchestration
+
+**Misconception 1: Every database query or API call is RAG.**
+
+Not necessarily. Fetching an order status and displaying `Delivered` is an ordinary API lookup. If the system instead retrieves supporting information, adds it to an LLM's context, and generates a grounded explanation, that follows the broader retrieval-augmented pattern. Structured tool calls are also often described as *tool-augmented generation*—the labels overlap rather than having a universally sharp boundary.
+
+**Misconception 2: RAG, embeddings, web search, and agents are alternatives to one another.**
+
+They answer **three different architectural questions**:
+
+| Decision | What are we deciding? | Berkshire / enterprise example |
+|---|---|---|
+| **Information source** | **Where** does the information live? | Berkshire PDF, internal wiki, public website, database |
+| **Retrieval mechanism** | **How** do we find relevant information? | Dense embeddings, BM25, hybrid search, SQL, web search |
+| **Orchestration** | **Who decides** what to retrieve and whether to try again? | Fixed RAG pipeline or an agent that chooses among tools |
+
+Our Berkshire system uses **PDFs → dense + learned sparse search → rank fusion/reranking → LLM**. An incident-investigation agent might use **internal RAG + web search + monitoring APIs**, then combine the evidence.
+
+**Design lesson:** Choose the source, the retrieval method, and the orchestrator independently. Don't add a vector database or an agent until the problem justifies it.
+
 ### What our repository actually does
 
 Our [RAG System](../README.md) reads the Berkshire annual report, extracts pages (with OCR fallback for scanned pages), builds section-aware chunks, encodes them into Pinecone dense and sparse indexes, and retrieves candidates. It optionally fuses dense/sparse rankings, reranks candidates, and sends source-labeled chunks to the answer model.
