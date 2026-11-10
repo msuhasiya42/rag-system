@@ -1,5 +1,7 @@
 # RAG System
 
+> 🧭 **Start with first principles:** [Why Do We Need RAG?](docs/WHY_RAG.md) compares standalone LLMs, long context, retrieval, live APIs, and agents with a decision tree and Berkshire experiments.
+>
 > 📖 **New to RAG?** Start with the [RAG Engineering Glossary](docs/RAG_GLOSSARY.md) — 28 terms explained from scratch using the Berkshire report, with diagrams, examples, and our evaluation results.
 >
 > 🏢 **Enterprise RAG lessons:** [docs/ENTERPRISE_RAG_LEARNINGS.md](docs/ENTERPRISE_RAG_LEARNINGS.md) covers Ring, Microsoft, Audi and KDDI, with scaling patterns, trade-offs, and experiments for this project.
