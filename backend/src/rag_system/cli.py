@@ -242,7 +242,9 @@ def _evaluate_answers(
     # its own answers can be lenient; the key-number check does not depend on it.
     judge = AnswerJudge(build_chat_model(settings))
     print(f"Answering {len(cases)} questions with pipeline '{pipeline}', top {top_k} sources")
-    results = run_answer_eval(service, judge, cases, top_k, pause, progress=print)
+    results = run_answer_eval(
+        service, judge, cases, top_k, pause, progress=lambda line: print(line, flush=True)
+    )
     summary = summarize_answers(results)
     print("\n" + format_answer_report(results, summary))
     if label:

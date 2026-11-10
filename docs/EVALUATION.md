@@ -57,6 +57,30 @@ How each step was found and measured is in the [README](../README.md#retrieval-p
 Each run writes JSON and a readable Markdown page with every question, the expected answer, the
 system's answer, the verdict and the sources, to `backend/evals/results/`.
 
+**Result** (gemini-3.5-flash, `advanced` retrieval with table rows, top 6 sources;
+[full report](../backend/evals/results/20261110-193634-gemini-flash-answers.md)):
+
+| Measure | Result |
+|---|---|
+| Correct, answerable questions | **46 / 52 = 88%** (tune 15/19, held-out 31/33 = 94%) |
+| Partial / incorrect | 3 / 3 |
+| Unanswerable questions answered "not in the report" | 4 / 4 graded (100%) |
+| Faithful to sources | 98% (one answer made an unsupported claim) |
+| Valid citations | 100% |
+| Not answered | 2 (free-tier rate limit: 429 then 503) |
+
+The 3 incorrect answers: two **retrieval** failures (cash and total assets, single rows of the
+balance sheet that are not retrieved) and one **generation** failure (insurance investment income:
+the figure was in the sources, but the answer said it was not). The 3 partial answers gave the
+core fact but missed a detail from the expected facts (a prior-year comparison, the meeting's
+city, one clause of a risk factor).
+
+Reading the 88%: the judge was inconsistent about prior-year comparisons, marking one answer
+partial for omitting one and several others correct for the same omission, so the strict score
+lies between about 82% and 94%. The no-LLM key-number check reports 70% because it also counts
+prior-year figures that the questions do not ask for, and it does not read short figures like
+"23.7%"; it needs refining before it can stand on its own.
+
 **Known limitation:** the judge is the same model that writes the answers (Gemini Flash, the only
 free model available), so verdicts may be lenient. The key-number check does not use an LLM. A
 different judge model or human spot checks would be stronger.

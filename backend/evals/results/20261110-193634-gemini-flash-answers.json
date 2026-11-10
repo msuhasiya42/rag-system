@@ -1,0 +1,1866 @@
+{
+  "label": "gemini-flash",
+  "createdAt": "20261110-193634",
+  "config": {
+    "pipeline": "advanced",
+    "topK": 6,
+    "answerProvider": "gemini",
+    "answerModels": [
+      "gemini-3.5-flash",
+      "gemini-3.5-flash-lite"
+    ],
+    "namespace": "documents-rows"
+  },
+  "summary": {
+    "questions": 58,
+    "errors": 2,
+    "answerable": 52,
+    "correct": 0.8846153846153846,
+    "partial": 0.057692307692307696,
+    "incorrect": 0.057692307692307696,
+    "abstention_correct": 1.0,
+    "faithful": 0.9821428571428571,
+    "citations_valid": 1.0,
+    "key_numbers_found": 0.7,
+    "retrieval_failures": 2,
+    "generation_failures": 4
+  },
+  "cases": [
+    {
+      "id": "q01",
+      "split": "tune",
+      "category": "table_number",
+      "question": "How much cash and cash equivalents did Berkshire have at the end of 2025?",
+      "expectedFacts": [
+        "Insurance and Other: $47,719 million; Railroad, Utilities and Energy: $4,158 million",
+        "Including restricted cash, $52,569 million at the end of 2025 (cash flow statement)"
+      ],
+      "answer": "At the end of 2025, Berkshire Hathaway Inc. reported the following cash and cash equivalents figures:\n\n* **Parent Company (Schedule I):** $14,627 million ($14.627 billion) [1][5].\n* **Insurance and Other Businesses:** Held $369.0 billion in cash, cash equivalents, and U.S. Treasury Bills (net of payables for unsettled purchases) at December 31, 2025 [2].",
+      "answerModel": "gemini-3.5-flash",
+      "judgeModel": "gemini-3.5-flash",
+      "verdict": {
+        "correctness": "incorrect",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer misses the total consolidated cash and cash equivalents facts specified in the reference answer, presenting parent company and combined short-term holdings instead."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.0,
+      "evidenceInContext": false,
+      "failureCause": "retrieval",
+      "sources": [
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "pages 12-13 | CEO's Letter > Berkshire’s Performance",
+        "pages 143-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "pages 66-67 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income"
+      ],
+      "latencyMs": 17525
+    },
+    {
+      "id": "q02",
+      "split": "tune",
+      "category": "table_number",
+      "question": "What were Berkshire's total revenues in 2025?",
+      "expectedFacts": [
+        "$371,444 million in 2025 ($371,433 million in 2024)"
+      ],
+      "answer": "In 2025, Berkshire's total revenues were $371,444 million [1].",
+      "answerModel": "gemini-3.5-flash",
+      "judgeModel": "gemini-3.5-flash",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly states Berkshire's total revenues for 2025 as $371,444 million, matching the primary expected fact and supported by source [1]."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+        "pages 12-13 | CEO's Letter > Berkshire’s Performance",
+        "page 73 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "page 70 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+        "pages 131-132 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income"
+      ],
+      "latencyMs": 15517
+    },
+    {
+      "id": "q03",
+      "split": "tune",
+      "category": "table_number",
+      "question": "What were GEICO's pre-tax underwriting earnings in 2025?",
+      "expectedFacts": [
+        "$6,824 million in 2025, down from $7,813 million in 2024"
+      ],
+      "answer": "GEICO's pre-tax underwriting earnings in 2025 were **$6,824 million** [1][4].",
+      "answerModel": "gemini-3.5-flash",
+      "judgeModel": "gemini-3.5-flash",
+      "verdict": {
+        "correctness": "partial",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly provides GEICO's pre-tax underwriting earnings for 2025 ($6,824 million), but omits the comparison to 2024."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "generation",
+      "sources": [
+        "pages 61-62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "page 62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 65-66 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "page 133 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+        "pages 62-63 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "page 61 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting"
+      ],
+      "latencyMs": 16751
+    },
+    {
+      "id": "q04",
+      "split": "tune",
+      "category": "table_number",
+      "question": "What were net earnings attributable to Berkshire shareholders in 2025?",
+      "expectedFacts": [
+        "$66,968 million in 2025 ($88,995 million in 2024)"
+      ],
+      "answer": "Net earnings attributable to Berkshire shareholders in 2025 were **$66,968 million** [1][2][3] (or approximately **$67.0 billion**) [5].",
+      "answerModel": "gemini-3.5-flash",
+      "judgeModel": "gemini-3.5-flash",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer accurately provides the requested net earnings figure for 2025 ($66,968 million or approximately $67.0 billion) fully supported by the text."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "pages 143-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 95 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME"
+      ],
+      "latencyMs": 18197
+    },
+    {
+      "id": "q05",
+      "split": "tune",
+      "category": "table_number",
+      "question": "How did Berkshire's per-share market value change in 1965 compared with the S&P 500?",
+      "expectedFacts": [
+        "Berkshire +49.5%, S&P 500 with dividends +10.0%"
+      ],
+      "answer": "In 1965, Berkshire’s per-share market value increased by 49.5%, compared to a 10.0% increase for the S&P 500 (with dividends included) [1]. \n\n*(Note: Data for 1965 reflects the year ended September 30 [1].)*",
+      "answerModel": "gemini-3.5-flash",
+      "judgeModel": "gemini-3.5-flash",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly states both facts required by the reference answer and accurately cites the provided sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 23-24 | Berkshire’s Performance vs. the S&P 500",
+        "page 59 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Stock Performance Graph",
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 25 | Berkshire’s Performance vs. the S&P 500 > SECURITIES AND EXCHANGE COMMISSION",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS"
+      ],
+      "latencyMs": 16128
+    },
+    {
+      "id": "q06",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "Does Berkshire pay a cash dividend?",
+      "expectedFacts": [
+        "Berkshire has not declared a cash dividend since 1967"
+      ],
+      "answer": "No. Berkshire has not declared a cash dividend since 1967 [1]. \n\nBerkshire's policy is to not pay cash dividends so long as more than one dollar of market value for shareholders is reasonably likely to be created by each dollar of retained earnings [2].",
+      "answerModel": "gemini-3.5-flash",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly states that Berkshire has not paid a cash dividend since 1967, which matches the expected fact and is supported by the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 58 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Dividends",
+        "pages 10-11 | CEO's Letter > Capital Discipline",
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 66 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income",
+        "pages 15-16 | CEO's Letter > Non-Insurance Operations",
+        "page 10 | CEO's Letter > Capital Discipline"
+      ],
+      "latencyMs": 15167
+    },
+    {
+      "id": "q07",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "How many people did Berkshire's subsidiaries employ at the end of 2025?",
+      "expectedFacts": [
+        "Approximately 387,800 people worldwide"
+      ],
+      "answer": "At the end of 2025, Berkshire and its operating subsidiaries employed approximately 387,800 people worldwide [1]. \n\nEmployment counts for specific business segments included:\n* **Manufacturing businesses:** approximately 175,600 people [5]\n* **Insurance businesses:** approximately 42,600 people [2]\n* **Service businesses (excluding McLane):** approximately 31,200 people [4]\n* **Pilot and subsidiaries:** approximately 29,300 people [6]",
+      "answerModel": "gemini-3.5-flash",
+      "judgeModel": "gemini-3.5-flash",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly states the expected fact of approximately 387,800 people worldwide and all provided context details are faithful to the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 27 | FORM 10-K > Item 1. Business Description",
+        "page 27 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "page 79 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+        "page 46 | FORM 10-K > Item 1. Business Description > Service and Retailing Businesses",
+        "page 37 | FORM 10-K > Item 1. Business Description > Manufacturing Businesses",
+        "page 49 | FORM 10-K > Item 1. Business Description > Service and Retailing Businesses"
+      ],
+      "latencyMs": 17251
+    },
+    {
+      "id": "q08",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "How large was Berkshire's insurance float at the end of 2025?",
+      "expectedFacts": [
+        "About $176 billion, up from $171 billion at the end of 2024"
+      ],
+      "answer": "* Berkshire's insurance float stood at approximately $176 billion at the end of 2025 [1][2].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly states that Berkshire's insurance float was approximately $176 billion at the end of 2025, matching the expected facts."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 14-15 | CEO's Letter > Insurance Operations",
+        "pages 66-67 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income",
+        "page 13 | CEO's Letter > Insurance Operations",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "page 28 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "page 27 | FORM 10-K > Item 1. Business Description > Insurance Businesses"
+      ],
+      "latencyMs": 15412
+    },
+    {
+      "id": "q09",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "How many route miles of track does BNSF operate?",
+      "expectedFacts": [
+        "Over 32,500 route miles in 28 states, plus three Canadian provinces"
+      ],
+      "answer": "Based on the provided documents, BNSF operates over 32,500 route miles of track (excluding multiple main tracks, yard tracks, and sidings) [1][2]. Specifically:\n* BNSF owns over 23,000 route miles (including easements) [1].\n* BNSF operates over 9,000 route miles of trackage rights [1]. \n\nAdditionally, the total BNSF Railway system—including single and multiple main tracks, yard tracks, and sidings—consisted of over 50,000 operated miles of track as of December 31, 2025 [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified the route miles operated by BNSF along with additional track details from the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 55 | FORM 10-K > Item 2. Description of Properties > Burlington Northern Santa Fe",
+        "pages 67-68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "page 32 | FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+        "pages 15-16 | CEO's Letter > Non-Insurance Operations",
+        "page 33 | FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+        "pages 53-54 | FORM 10-K > Item 1A. Risk Factors > Changes in regulations and regulatory actions can adversely affect our operating results and our ability to allocate capital."
+      ],
+      "latencyMs": 14334
+    },
+    {
+      "id": "q10",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "Who succeeded Warren Buffett as CEO, and when did it take effect?",
+      "expectedFacts": [
+        "Gregory E. Abel, appointed in May 2025, effective January 1, 2026"
+      ],
+      "answer": "Mr. Gregory E. Abel succeeded Warren E. Buffett as Chief Executive Officer [1][3]. The change took effect on January 1, 2026 [1][3].",
+      "answerModel": "gemini-3.5-flash",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer correctly identifies Gregory E. Abel as the successor and January 1, 2026 as the effective date, matching all expected facts."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 51 | FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+        "page 153 | Directors and Officers of the Company",
+        "page 58 | FORM 10-K > Item 4. Mine Safety Disclosures > Executive Officers of the Registrant",
+        "page 5 | CEO's Letter",
+        "page 148 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > SIGNATURES",
+        "pages 5-6 | CEO's Letter"
+      ],
+      "latencyMs": 14813
+    },
+    {
+      "id": "q11",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "When is the 2026 annual shareholders meeting?",
+      "expectedFacts": [
+        "Saturday, May 2, 2026, in Omaha"
+      ],
+      "answer": "The 2026 annual meeting of shareholders is scheduled for May 2, 2026 [1][2][3].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "partial",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer gives the correct date (May 2, 2026) but omits the location (Omaha)."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "generation",
+      "sources": [
+        "page 142 | FORM 10-K > Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspection",
+        "pages 25-26 | FORM 10-K > ☐ TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+        "pages 21-22 | CEO's Letter > Equity Investments",
+        "page 150 | Appendices > Shareholder Event and Meeting Information",
+        "pages 25-26 | FORM 10-K > ☐ TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+        "page 58 | FORM 10-K > Item 4. Mine Safety Disclosures > Executive Officers of the Registrant"
+      ],
+      "latencyMs": 14727
+    },
+    {
+      "id": "q12",
+      "split": "tune",
+      "category": "paraphrase",
+      "question": "Does the company hand out its profits to owners as regular payouts?",
+      "expectedFacts": [
+        "No cash dividend since 1967"
+      ],
+      "answer": "Based on the provided documents:\n\n* Berkshire has not declared a cash dividend since 1967 [4]. \n* The company's approach to cash dividends is that it will not pay dividends as long as more than one dollar of market value for shareholders is reasonably likely to be created by each dollar of retained earnings [5]. \n* Instead of cash dividends, share repurchases are used as a capital allocation option to buy back shares when they trade below the estimate of intrinsic value [5].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly stated that Berkshire has not paid cash dividends since 1967 and explained its dividend policy."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 143-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "pages 112-113 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (15) Insurance subsidiary disclosures",
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 58 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Dividends",
+        "pages 10-11 | CEO's Letter > Capital Discipline",
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS"
+      ],
+      "latencyMs": 22499
+    },
+    {
+      "id": "q13",
+      "split": "tune",
+      "category": "paraphrase",
+      "question": "What could go wrong if Berkshire loses its top decision makers?",
+      "expectedFacts": [
+        "Risk factor: dependence on a few key people for major investment and capital allocation decisions"
+      ],
+      "answer": "Based on the provided sources, if the services of Berkshire's key personnel were to become unavailable, it could have a material adverse effect on the company's operations [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "partial",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer mentions the material adverse effect on operations but misses the specific detail about dependence for major investment and capital allocation decisions."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "generation",
+      "sources": [
+        "page 51 | FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+        "page 21 | CEO's Letter > Equity Investments",
+        "page 11 | CEO's Letter > Risk Management",
+        "page 51 | FORM 10-K > Item 1A. Risk Factors > We need qualified personnel to manage and operate our various businesses.",
+        "pages 5-6 | CEO's Letter",
+        "pages 131-132 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income"
+      ],
+      "latencyMs": 15679
+    },
+    {
+      "id": "q14",
+      "split": "tune",
+      "category": "paraphrase",
+      "question": "How does Berkshire protect itself against hackers?",
+      "expectedFacts": [
+        "A cybersecurity risk management framework run by the business groups, with third-party assessments and Audit Committee oversight"
+      ],
+      "answer": "Based on the provided documents, Berkshire protects itself and its business groups against cybersecurity threats through the following measures:\n\n* **Framework and Tailored Solutions:** Berkshire has implemented a cybersecurity and cyber-related information management framework that allows each Business Group to tailor solutions to identify, manage, and mitigate risks based on their unique assessments [2].\n* **Third-Party Partnerships:** Berkshire and its Business Groups engage and partner with a wide range of third parties to assess, audit, educate, implement, operate, protect, and remediate cybersecurity-related elements [1][2]. They also continuously monitor the risks associated with these third-party service providers [1].\n* **CISO Reporting and Internal Audits:** Each Business Group's Chief Information Security Officer (CISO) provides at least an annual report on their cybersecurity program and material risks to senior management and Berkshire’s internal audit group [2]. \n* **Board Oversight:** The Audit Committee of Berkshire’s Board of Directors oversees the cybersecurity risk management program, receives periodic reports on incidents, is updated on trends, and approves workplans for internal audits [1]. These audits include internal and external penetration testing, attack simulations, vulnerability assessments, and cybersecurity program reviews [1][3].\n* **Day-to-Day Operations:** Senior management of the Business Groups is responsible for the day-to-day operations of protecting their information systems, which includes maintaining incident reporting processes for significant cybersecurity events [2][3].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer accurately captures the expected facts regarding Berkshire's cybersecurity framework, third-party involvement, and Audit Committee oversight."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 54-55 | FORM 10-K > Item 1C. Cybersecurity",
+        "page 54 | FORM 10-K > Item 1C. Cybersecurity",
+        "page 55 | FORM 10-K > Item 1C. Cybersecurity",
+        "page 9 | CEO's Letter > Financial Strength",
+        "page 27 | FORM 10-K > Item 1. Business Description",
+        "page 27 | FORM 10-K > Item 1. Business Description"
+      ],
+      "latencyMs": 19255
+    },
+    {
+      "id": "q15",
+      "split": "tune",
+      "category": "exact_term",
+      "question": "What does Item 1B Unresolved Staff Comments say?",
+      "expectedFacts": [
+        "None."
+      ],
+      "answer": "Item 1B. Unresolved Staff Comments states: \"None.\" [2]",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system accurately identified that Item 1B states 'None' based on the provided sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 25-26 | FORM 10-K > ☐ TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+        "page 54 | FORM 10-K > Item 1B. Unresolved Staff Comments",
+        "page 85 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+        "page 51 | FORM 10-K > Item 1A. Risk Factors > We need qualified personnel to manage and operate our various businesses.",
+        "pages 143-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "pages 29-30 | FORM 10-K > Item 1. Business Description > Insurance Businesses"
+      ],
+      "latencyMs": 14492
+    },
+    {
+      "id": "q16",
+      "split": "tune",
+      "category": "exact_term",
+      "question": "When are the 1.125% Senior Notes due?",
+      "expectedFacts": [
+        "2027"
+      ],
+      "answer": "Based on the provided documents, the 1.125% Senior Notes are due in **2027** [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified that the 1.125% Senior Notes are due in 2027 based on the provided document."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 25 | FORM 10-K > ☐ TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF",
+        "page 122 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (19) Notes payable and other borrowings",
+        "page 123 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (19) Notes payable and other borrowings",
+        "page 145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "pages 122-123 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (19) Notes payable and other borrowings"
+      ],
+      "latencyMs": 18101
+    },
+    {
+      "id": "q17",
+      "split": "tune",
+      "category": "exact_term",
+      "question": "What were the goodwill impairment losses in 2025?",
+      "expectedFacts": [
+        "$1,555 million in 2025 ($399 million in 2024)"
+      ],
+      "answer": "Based on the provided documents, the goodwill impairment losses in 2025 were $(1,555) million [2]. These losses related to certain building products, consumer products, and retailing businesses [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer accurately provides the 2025 goodwill impairment losses of $1,555 million as stated in the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 80-81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 80 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "pages 86-87 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other Critical Accounting Estimates",
+        "page 61 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "page 112 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (13) Goodwill and other intangible assets",
+        "page 86 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other Critical Accounting Estimates"
+      ],
+      "latencyMs": 14193
+    },
+    {
+      "id": "q18",
+      "split": "tune",
+      "category": "multi_section",
+      "question": "What are Berkshire's five largest equity holdings?",
+      "expectedFacts": [
+        "American Express, Apple, Bank of America, Coca-Cola and Chevron (65% of equity fair value at end of 2025)"
+      ],
+      "answer": "Based on the sources provided, Berkshire's five largest equity holdings at December 31, 2025 and 2024 were:\n\n* American Express Company [2]\n* Apple Inc. [2]\n* Bank of America Corporation [2]\n* The Coca-Cola Company [2]\n* Chevron Corporation [2]",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified all five largest equity holdings as listed in the source documents."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 19-20 | CEO's Letter > Equity Investments",
+        "pages 105-106 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (4)Investments in equity securities",
+        "page 20 | CEO's Letter > Equity Investments",
+        "page 106 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+        "page 97 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (1)Significant accounting policies and practices",
+        "page 107 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments"
+      ],
+      "latencyMs": 18459
+    },
+    {
+      "id": "q19",
+      "split": "tune",
+      "category": "multi_section",
+      "question": "How does Berkshire decide when to buy back its own shares?",
+      "expectedFacts": [
+        "When the repurchase price is believed to be below Berkshire's intrinsic value, conservatively determined",
+        "Not if consolidated cash, equivalents and T-Bills would fall below $30 billion"
+      ],
+      "answer": "Berkshire decides to buy back its own shares based on the following criteria:\n\n* **Intrinsic Value:** Berkshire will repurchase its Class A and Class B common stock when the Chief Executive Officer (after consultation with the Chairman of the Board) believes that the repurchase price is below Berkshire's intrinsic value, conservatively determined [2][3][4]. \n* **Cash and Treasury Holdings Limit:** Repurchases will not be made if they would reduce the total value of Berkshire’s consolidated cash, cash equivalents, and U.S. Treasury Bill holdings below $30 billion [2][3][4].\n* **No Obligations or Maximums:** The program does not specify a maximum number of shares to be repurchased, does not obligate Berkshire to buy any specific dollar amount or number of shares, and has no expiration date [2][3].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer includes all expected facts and is fully supported by the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 10-11 | CEO's Letter > Capital Discipline",
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+        "page 59 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "pages 9-10 | CEO's Letter > Capital Discipline",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other"
+      ],
+      "latencyMs": 16089
+    },
+    {
+      "id": "q20",
+      "split": "tune",
+      "category": "unanswerable",
+      "question": "What is Berkshire's revenue forecast for 2030?",
+      "expectedFacts": [
+        "Not in the report; the answer should say so"
+      ],
+      "answer": "The provided sources do not contain a revenue forecast for 2030.",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": true,
+        "faithful": true,
+        "explanation": "The question is unanswerable from the report, and the system correctly stated that the sources do not contain the answer."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": false,
+      "failureCause": "",
+      "sources": [
+        "pages 12-13 | CEO's Letter > Berkshire’s Performance",
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+        "page 70 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BHE",
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "pages 131-132 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+        "pages 23-24 | Berkshire’s Performance vs. the S&P 500"
+      ],
+      "latencyMs": 14954
+    },
+    {
+      "id": "q21",
+      "split": "tune",
+      "category": "unanswerable",
+      "question": "How much was Berkshire's CEO paid in 2025?",
+      "expectedFacts": [
+        "Not in the report (executive compensation is in the proxy statement)"
+      ],
+      "answer": "",
+      "answerModel": null,
+      "judgeModel": null,
+      "verdict": null,
+      "error": "All answer models failed: gemini-3.5-flash: HTTP 429; gemini-3.5-flash-lite: HTTP 503",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": false,
+      "failureCause": "error",
+      "sources": [],
+      "latencyMs": 12584
+    },
+    {
+      "id": "q22",
+      "split": "tune",
+      "category": "unanswerable",
+      "question": "What is the price of a Berkshire Class B share today?",
+      "expectedFacts": [
+        "Not in the report; a live price is not in any annual report"
+      ],
+      "answer": "The provided sources do not contain the current price of a Berkshire Class B share today.",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": true,
+        "faithful": true,
+        "explanation": "The system correctly identified that the price is not in the sources and abstained from answering."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": false,
+      "failureCause": "",
+      "sources": [
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+        "page 141 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 59 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS"
+      ],
+      "latencyMs": 18279
+    },
+    {
+      "id": "q23",
+      "split": "test",
+      "category": "table_number",
+      "question": "What were Berkshire's total assets at the end of 2025?",
+      "expectedFacts": [
+        "$1,222,176 million ($1,153,881 million at end of 2024)"
+      ],
+      "answer": "At the end of 2025, Berkshire Hathaway Inc. (Parent Company) had total assets of $ 740,409 (in millions) [3].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "incorrect",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system provided the parent company's assets instead of the consolidated total assets because the consolidated balance sheet was missing from the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.0,
+      "evidenceInContext": false,
+      "failureCause": "retrieval",
+      "sources": [
+        "pages 14-15 | CEO's Letter > Insurance Operations",
+        "pages 81-82 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "pages 143-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 79 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations"
+      ],
+      "latencyMs": 18374
+    },
+    {
+      "id": "q24",
+      "split": "test",
+      "category": "table_number",
+      "question": "What were Berkshire's total liabilities at the end of 2025?",
+      "expectedFacts": [
+        "$502,473 million ($502,226 million at end of 2024)"
+      ],
+      "answer": "At the end of 2025, Berkshire's total liabilities were $502,473 million [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly states Berkshire's total liabilities at the end of 2025 as $502,473 million based on the provided source."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 92-93 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED BALANCE SHEETS",
+        "page 114 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses",
+        "pages 143-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "pages 82-83 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other"
+      ],
+      "latencyMs": 13621
+    },
+    {
+      "id": "q25",
+      "split": "test",
+      "category": "table_number",
+      "question": "What were net earnings per average equivalent Class A share in 2025?",
+      "expectedFacts": [
+        "$46,563 in 2025 ($61,900 in 2024)"
+      ],
+      "answer": "Based on the provided documents, the net earnings per average equivalent Class A share in 2025 were $46,563 [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly provides the net earnings per average equivalent Class A share in 2025 as $46,563, matching the reference facts and sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+        "pages 12-13 | CEO's Letter > Berkshire’s Performance"
+      ],
+      "latencyMs": 14646
+    },
+    {
+      "id": "q26",
+      "split": "test",
+      "category": "table_number",
+      "question": "How much were insurance premiums earned in 2025?",
+      "expectedFacts": [
+        "$88,902 million in 2025 ($88,257 million in 2024)"
+      ],
+      "answer": "Based on the provided documents, insurance premiums earned in 2025 were $88,902 million [2].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified the insurance premiums earned in 2025 as $88,902 million from the financial statements."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+        "page 63 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 61-62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 64-65 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 65-66 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting"
+      ],
+      "latencyMs": 15104
+    },
+    {
+      "id": "q27",
+      "split": "test",
+      "category": "table_number",
+      "question": "What were BNSF's railroad operating revenues in 2025?",
+      "expectedFacts": [
+        "$23,350 million, flat versus $23,355 million in 2024"
+      ],
+      "answer": "In 2025, BNSF's railroad operating revenues were $23,350 million (or $23.35 billion) [2].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified BNSF's railroad operating revenues for 2025 as $23,350 million."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 68-69 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "pages 67-68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "pages 15-16 | CEO's Letter > Non-Insurance Operations",
+        "page 68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "pages 68-69 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "page 68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF"
+      ],
+      "latencyMs": 14284
+    },
+    {
+      "id": "q28",
+      "split": "test",
+      "category": "table_number",
+      "question": "What was pre-tax net investment income from the insurance operations in 2025?",
+      "expectedFacts": [
+        "$15,261 million in 2025, down 8.9% from $16,748 million"
+      ],
+      "answer": "Based on the provided documents, pre-tax net investment income from insurance operations was $15,261 million in 2025 [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer correctly identifies the pre-tax net investment income for 2025 as $15,261 million."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 66 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income",
+        "page 67 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income",
+        "pages 66-67 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "pages 61-62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 65-66 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting"
+      ],
+      "latencyMs": 16296
+    },
+    {
+      "id": "q29",
+      "split": "test",
+      "category": "table_number",
+      "question": "How much U.S. federal income tax did Berkshire pay in 2025?",
+      "expectedFacts": [
+        "$11,753 million in 2025 ($26,482 million in 2024)"
+      ],
+      "answer": "Based on the provided documents, Berkshire paid $11,753 million in U.S. federal income tax in 2025 [6].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified the U.S. federal income tax paid by Berkshire in 2025 as $11,753 million from the provided source."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 12-13 | CEO's Letter > Berkshire’s Performance",
+        "page 95 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+        "page 66 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "pages 124-125 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (20) Income taxes"
+      ],
+      "latencyMs": 18463
+    },
+    {
+      "id": "q30",
+      "split": "test",
+      "category": "table_number",
+      "question": "What was Berkshire's compounded annual gain from 1965 to 2025 compared with the S&P 500?",
+      "expectedFacts": [
+        "19.7% for Berkshire versus 10.5% for the S&P 500 with dividends"
+      ],
+      "answer": "Based on Berkshire Hathaway's performance data:\n\n* **Berkshire's compounded annual gain (1965-2025):** 19.7% [1]\n* **S&P 500 compounded annual gain (with dividends included, 1965-2025):** 10.5% [1]",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified Berkshire's and the S&P 500's compounded annual gains from 1965 to 2025 as matching the expected facts."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 23-24 | Berkshire’s Performance vs. the S&P 500",
+        "pages 12-13 | CEO's Letter > Berkshire’s Performance",
+        "page 80 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 73 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing"
+      ],
+      "latencyMs": 22537
+    },
+    {
+      "id": "q31",
+      "split": "test",
+      "category": "table_number",
+      "question": "How many employees does GEICO have?",
+      "expectedFacts": [
+        "29,541"
+      ],
+      "answer": "Based on the provided documents, GEICO has 29,541 employees [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified the number of GEICO employees from the source document."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 151 | Appendices > Operating Companies",
+        "page 29 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "pages 6-7 | CEO's Letter > Culture and Foundational Values",
+        "pages 61-62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "page 29 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "pages 29-30 | FORM 10-K > Item 1. Business Description > Insurance Businesses"
+      ],
+      "latencyMs": 14727
+    },
+    {
+      "id": "q32",
+      "split": "test",
+      "category": "table_number",
+      "question": "How large were the 2025 impairment losses on the Kraft Heinz and Occidental investments?",
+      "expectedFacts": [
+        "$8,255 million other-than-temporary impairment"
+      ],
+      "answer": "Based on the provided documents, the 2025 impairment losses on the investments in Kraft Heinz and Occidental were:\n\n* **Kraft Heinz:** A pre-tax impairment loss of approximately $5.0 billion recorded in the second quarter of 2025 [2]. (The after-tax other-than-temporary impairment for Kraft Heinz and Occidental combined was $(8,255) million [4].)\n* **Occidental:** A pre-tax impairment loss of approximately $5.7 billion recorded in the fourth quarter of 2025 [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified the impairment losses for both Kraft Heinz and Occidental as well as the combined after-tax total."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 108 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+        "page 107 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+        "page 61 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "page 145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "pages 80-81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other"
+      ],
+      "latencyMs": 14795
+    },
+    {
+      "id": "q33",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "What were Berkshire's operating earnings in 2025?",
+      "expectedFacts": [
+        "$44.5 billion in 2025, below $47.4 billion in 2024"
+      ],
+      "answer": "Based on the provided documents, Berkshire delivered operating earnings of $44.5 billion in 2025 [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly provides Berkshire's operating earnings for 2025 as $44.5 billion, matching the reference facts and source document [1]."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.5,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 12-13 | CEO's Letter > Berkshire’s Performance",
+        "page 73 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Manufacturing, Service and Retailing",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations"
+      ],
+      "latencyMs": 14548
+    },
+    {
+      "id": "q34",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "Which firm audits Berkshire's financial statements?",
+      "expectedFacts": [
+        "Deloitte & Touche LLP"
+      ],
+      "answer": "Based on the provided documents, Berkshire's financial statements and internal control over financial reporting have been audited by Deloitte & Touche LLP [1][2][3].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly identifies Deloitte & Touche LLP as Berkshire's auditor, which is supported by the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 89 | FORM 10-K > Management’s Report on Internal Control Over Financial Reporting",
+        "pages 143-144 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 90 | FORM 10-K > Item 8. Financial Statements and Supplementary Data > Opinions on the Financial Statements and Internal Control over Financial Reporting",
+        "pages 143-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "page 143 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > REPORT OF INDEPENDENT REGISTERED PUBLIC ACCOUNTING FIRM",
+        "pages 54-55 | FORM 10-K > Item 1C. Cybersecurity"
+      ],
+      "latencyMs": 13980
+    },
+    {
+      "id": "q35",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "Who is Berkshire's stock transfer agent?",
+      "expectedFacts": [
+        "EQ Shareowner Services, a division of Equiniti Trust Company"
+      ],
+      "answer": "Based on the provided documents, Berkshire's transfer agent and registrar for its common stock is EQ Shareowner Services (\"EQ\"), a division of Equiniti Trust Company [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified EQ Shareowner Services, a division of Equiniti Trust Company, as the stock transfer agent."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 152 | Appendices > Stock Transfer Agency",
+        "page 152 | Appendices > Stock Transfer Agency",
+        "page 3 | Table of Contents",
+        "page 27 | FORM 10-K > Item 1. Business Description",
+        "page 59 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+        "page 106 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments"
+      ],
+      "latencyMs": 14882
+    },
+    {
+      "id": "q36",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "How many record holders of Class A and Class B stock does Berkshire have?",
+      "expectedFacts": [
+        "About 950 Class A and 16,500 Class B record holders"
+      ],
+      "answer": "At February 13, 2026, Berkshire had approximately:\n* 950 record holders of its Class A common stock [1]\n* 16,500 record holders of its Class B common stock [1]",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly stated the number of Class A and Class B record holders based on the text."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 58 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Shareholders",
+        "page 152 | Appendices > Stock Transfer Agency",
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 59 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program"
+      ],
+      "latencyMs": 15331
+    },
+    {
+      "id": "q37",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "How many route miles of track does BNSF own?",
+      "expectedFacts": [
+        "Over 23,000 route miles"
+      ],
+      "answer": "BNSF owns over 23,000 route miles of track, including easements [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer accurately states that BNSF owns over 23,000 route miles of track based on the provided sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 55 | FORM 10-K > Item 2. Description of Properties > Burlington Northern Santa Fe",
+        "pages 67-68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "page 32 | FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+        "pages 15-16 | CEO's Letter > Non-Insurance Operations",
+        "page 33 | FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+        "page 16 | CEO's Letter > Non-Insurance Operations"
+      ],
+      "latencyMs": 14558
+    },
+    {
+      "id": "q38",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "By how much did GEICO's premiums written increase in 2025?",
+      "expectedFacts": [
+        "$2.3 billion (5.3%), mainly from more policies-in-force"
+      ],
+      "answer": "GEICO's premiums written increased by $2.3 billion (5.3%) in 2025 compared to 2024 [1][3].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer correctly identifies that GEICO's premiums written increased by $2.3 billion (5.3%) in 2025, which matches the expected facts and source text."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 62-63 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 61-62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 82-83 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+        "pages 13-14 | CEO's Letter > Insurance Operations",
+        "page 133 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income"
+      ],
+      "latencyMs": 13963
+    },
+    {
+      "id": "q39",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "What share of BNSF Railway's greenhouse gas emissions comes from locomotive diesel fuel?",
+      "expectedFacts": [
+        "About 80% in the 2018 baseline year"
+      ],
+      "answer": "Based on the provided documents, consumption of diesel fuel by locomotives accounted for approximately 80% of BNSF Railway's greenhouse gas emissions in its baseline year of 2018 [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer accurately states that approximately 80% of BNSF Railway's greenhouse gas emissions came from locomotive diesel fuel in the 2018 baseline year, as found in the source text."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 33 | FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+        "page 32 | FORM 10-K > Item 1. Business Description > Burlington Northern Santa Fe",
+        "page 55 | FORM 10-K > Item 2. Description of Properties > Burlington Northern Santa Fe",
+        "pages 68-69 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "pages 67-68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "page 69 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF"
+      ],
+      "latencyMs": 18247
+    },
+    {
+      "id": "q40",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "Who is president of Berkshire's consumer products, service and retailing businesses?",
+      "expectedFacts": [
+        "Adam Johnson"
+      ],
+      "answer": "Mr. Adam Johnson is the president of Berkshire's consumer products, service, and retailing businesses [1][2].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified Adam Johnson as the president of Berkshire's relevant businesses, matching the expected facts and supported by the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 51 | FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+        "pages 15-16 | CEO's Letter > Non-Insurance Operations",
+        "pages 18-19 | CEO's Letter > Non-Insurance Operations",
+        "page 18 | CEO's Letter > Non-Insurance Operations",
+        "page 22 | CEO's Letter > Equity Investments",
+        "pages 47-48 | FORM 10-K > Item 1. Business Description > Service and Retailing Businesses"
+      ],
+      "latencyMs": 14310
+    },
+    {
+      "id": "q41",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "What are the ticker symbols of Berkshire's Class A and Class B shares?",
+      "expectedFacts": [
+        "BRK.A and BRK.B on the New York Stock Exchange"
+      ],
+      "answer": "The ticker symbols for Berkshire's Class A and Class B common stock are BRK.A and BRK.B, respectively [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified the ticker symbols for Berkshire's Class A and Class B shares as BRK.A and BRK.B."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 58 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Market Information",
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock",
+        "page 152 | Appendices > Stock Transfer Agency",
+        "page 59 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+        "page 58 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Shareholders"
+      ],
+      "latencyMs": 14231
+    },
+    {
+      "id": "q42",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "Is Berkshire run from headquarters, or do its businesses largely run themselves?",
+      "expectedFacts": [
+        "A decentralized model: operating autonomy grounded in deserved trust"
+      ],
+      "answer": "Based on the provided documents, Berkshire Hathaway's operating subsidiaries are managed on an unusually decentralized basis with few centralized or integrated business functions [1][4]. \n\n* **Autonomy and Independence:** Berkshire operates with autonomy grounded in deserved trust, minimizing bureaucracy to provide its managers the independence to focus on their businesses [2]. Decisions are made by those closest to the business [2].\n* **Headquarters' Role:** Berkshire's Chief Executive Officer is ultimately responsible for significant capital allocation decisions, investment activities, and evaluating the operating performance of the businesses [1][4]. Senior corporate management establishes and monitors corporate governance practices, and the Board of Directors is responsible for selecting a CEO successor [1]. \n* **Subsidiary Management:** Each operating subsidiary establishes its own specific policies and practices concerning human capital and the attraction and retention of personnel [6].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer accurately captures the decentralized management model and details the specific roles of headquarters versus the independent businesses."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 27 | FORM 10-K > Item 1. Business Description",
+        "page 8 | CEO's Letter > Decentralized Model",
+        "page 7 | CEO's Letter > Our Culture",
+        "pages 131-132 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+        "pages 15-16 | CEO's Letter > Non-Insurance Operations",
+        "page 27 | FORM 10-K > Item 1. Business Description"
+      ],
+      "latencyMs": 17984
+    },
+    {
+      "id": "q43",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "How much money do the insurance businesses make from investing their funds?",
+      "expectedFacts": [
+        "Pre-tax net investment income of $15,261 million in 2025"
+      ],
+      "answer": "Based on the provided documents, the specific earnings or total money made from investing insurance funds (insurance investment income) are described as follows:\n\n* After-tax earnings from insurance investment income declined by $1.2 billion (8.5%) in 2025 compared to 2024, reflecting lower interest income (attributable to lower interest rates) and dividend income [3].\n* Insurance investment income increased by $4.1 billion in 2024 compared to 2023, driven by higher interest income from short-term investments [3]. \n* Additionally, insurance investment income in 2025 was impacted by large capital distributions to Berkshire at the end of 2024 [3]. The income earned on cash and investments from capital distributed to Berkshire is included in \"other\" earnings [1][3]. \n\nThe sources do not provide the total dollar amount of insurance investment income for these years, only the year-over-year changes and the factors influencing them.",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "incorrect",
+        "abstained": false,
+        "faithful": false,
+        "explanation": "The system failed to provide the specific expected fact (Pre-tax net investment income of $15,261 million in 2025) and incorrectly claimed the sources do not provide the total dollar amount."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.0,
+      "evidenceInContext": true,
+      "failureCause": "generation",
+      "sources": [
+        "pages 66-67 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income",
+        "page 32 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "pages 31-32 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "page 29 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "pages 14-15 | CEO's Letter > Insurance Operations"
+      ],
+      "latencyMs": 18999
+    },
+    {
+      "id": "q44",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "Has the company bought back any of its own stock recently?",
+      "expectedFacts": [
+        "No Class A or Class B shares were repurchased in the fourth quarter of 2025"
+      ],
+      "answer": "Based on the provided documents, Berkshire Hathaway did not make any share repurchases in 2025 (including the fourth quarter of 2025) [2][3].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly stated that Berkshire Hathaway did not make share repurchases in 2025 based on the provided documents."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 10-11 | CEO's Letter > Capital Discipline",
+        "page 59 | FORM 10-K > Item 5. Market forRegistrant’s Common Equity, Related Security Holder Matters and Issuer Purchases of Equity > Common Stock Repurchase Program",
+        "page 81 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other",
+        "page 95 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF CHANGES IN SHAREHOLDERS’ EQUITY",
+        "pages 9-10 | CEO's Letter > Capital Discipline",
+        "page 128 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (22) Common stock"
+      ],
+      "latencyMs": 13981
+    },
+    {
+      "id": "q45",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "What is the company doing about the danger of its power lines starting fires?",
+      "expectedFacts": [
+        "BHE has taken a leadership role on wildfire risk with regulators, public officials and industry"
+      ],
+      "answer": "Based on the provided sources, the company takes the following actions regarding wildfire risks and its power lines:\n\n* **Mitigation Programs:** BHE's utility mitigation programs are among the most comprehensive in the industry [5].\n* **Collaboration:** BHE takes a leadership role by working with regulators, public officials, and the communities it serves [5].\n* **Acknowledging Responsibility:** When a BHE utility is responsible for a wildfire, it has acknowledged that responsibility, including settlements related primarily to the 2020 Labor Day fires [5]. Settlements have also been reached for substantially all individual plaintiffs, timber companies, and insurance subrogation plaintiffs, as well as wrongful death claims and federal government demands/complaints for the Archie Creek, Slater, and 2022 wildfires [2][3].\n* **Seeking Judicial Relief:** PacifiCorp maintains that it is not an insurer of last resort and will continue to seek judicial relief where responsibility does not exist [5].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer accurately and completely captures the expected fact and additional relevant details from the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 137-138 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+        "page 137 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+        "pages 139-140 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+        "page 136 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+        "page 17 | CEO's Letter > Non-Insurance Operations",
+        "page 54 | FORM 10-K > Item 1A. Risk Factors > Changes in regulations and regulatory actions can adversely affect our operating results and our ability to allocate capital."
+      ],
+      "latencyMs": 19832
+    },
+    {
+      "id": "q46",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "Who checks the company's books from the outside?",
+      "expectedFacts": [
+        "Deloitte & Touche LLP, the independent registered public accounting firm"
+      ],
+      "answer": "Based on the provided documents, Deloitte & Touche LLP, an independent registered public accounting firm, audits the company's financial statements and internal control over financial reporting [3][5].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified Deloitte & Touche LLP as the independent auditor/accounting firm checking the books."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 90-91 | FORM 10-K > Item 8. Financial Statements and Supplementary Data > Definition and Limitations of Internal Control over Financial Reporting",
+        "page 90 | FORM 10-K > Item 8. Financial Statements and Supplementary Data > Basis for Opinions",
+        "page 89 | FORM 10-K > Management’s Report on Internal Control Over Financial Reporting",
+        "page 91 | FORM 10-K > Item 8. Financial Statements and Supplementary Data > Unpaid Losses and Loss Adjustment Expenses — Retroactive Reinsurance Contracts— Refer to Notes 1 and 17 to the financial statements",
+        "page 90 | FORM 10-K > Item 8. Financial Statements and Supplementary Data > Opinions on the Financial Statements and Internal Control over Financial Reporting",
+        "pages 143-144 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule"
+      ],
+      "latencyMs": 16310
+    },
+    {
+      "id": "q47",
+      "split": "test",
+      "category": "exact_term",
+      "question": "What does Note 27 cover?",
+      "expectedFacts": [
+        "Contingencies and commitments"
+      ],
+      "answer": "Based on the provided sources, Note 27 covers contingencies and commitments, specifically including:\n* Certain litigation involving Berkshire subsidiaries [1].\n* Matters related to wildfires, including complaints and demands filed against PacifiCorp in Oregon and California regarding economic losses, noneconomic losses, punitive damages, and attorneys' fees, as well as subrogation complaints by insurance carriers [4].\n* Amounts sought in unsettled wildfire complaints and demands (including the James mass complaints) and potential damages under Oregon law for gross negligence, recklessness, willfulness, malice, or intentional trespass [5].\n* Correspondence and complaints from the U.S. and Oregon Departments of Justice regarding wildfire costs and damages on federal and state lands, including a settlement agreement between PacifiCorp and the United States of America [6].\n* Court activity related to the James case, such as PacifiCorp's appellate brief addressing procedural and legal issues, amicus briefs, plaintiffs' answering and cross-appeal, and the Oregon Court of Appeals order for expedited oral argument [2].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer accurately identifies that Note 27 covers contingencies and commitments, along with the specific details provided in the sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 57 | FORM 10-K > Item 3. Legal Proceedings",
+        "pages 138-139 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+        "pages 133-134 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+        "page 136 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+        "page 136 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments",
+        "page 136 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (27) Contingencies and commitments"
+      ],
+      "latencyMs": 16470
+    },
+    {
+      "id": "q48",
+      "split": "test",
+      "category": "exact_term",
+      "question": "What was BNSF's effective income tax rate in 2025?",
+      "expectedFacts": [
+        "23.7% (24.3% in 2024)"
+      ],
+      "answer": "Based on the provided documents, BNSF's effective income tax rate in 2025 was 23.7% [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly identifies BNSF's effective income tax rate in 2025 as 23.7%, supported by the source document."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 0.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "pages 67-68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "pages 68-69 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "pages 68-69 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "page 80 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Investment Gains (Losses)",
+        "pages 133-134 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income"
+      ],
+      "latencyMs": 14705
+    },
+    {
+      "id": "q49",
+      "split": "test",
+      "category": "exact_term",
+      "question": "What is the Invest in Yourself 5K?",
+      "expectedFacts": [
+        "A run/walk presented by Brooks during the shareholder meeting weekend"
+      ],
+      "answer": "Based on the provided documents, the Berkshire Hathaway “Invest in Yourself” 5K is an annual event presented by Brooks Running [1]. It involves running, jogging, or walking through the streets of Downtown Omaha, with participants encouraged to join to move towards the best version of themselves [1]. \n\nKey details of the event include:\n* **Date and Time:** Sunday, May 3, from 8am – 11am [1].\n* **Location:** Lewis & Clark Landing at The Riverfront [1].\n* **Registration:** Opens on March 1, 2026, and can be completed by visiting www.investinyourself5k.com [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer correctly describes the 5K as a run/walk presented by Brooks during the shareholder meeting weekend."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 150 | Appendices > Shareholder Event and Meeting Information",
+        "page 80 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Investment Gains (Losses)",
+        "page 131 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (24) Pension plans > Projected benefit obligations",
+        "page 66 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Investment Income",
+        "page 88 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Interest Rate Risk",
+        "page 87 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Equity Price Risk"
+      ],
+      "latencyMs": 15170
+    },
+    {
+      "id": "q50",
+      "split": "test",
+      "category": "exact_term",
+      "question": "What is the deductible under TRIA?",
+      "expectedFacts": [
+        "20% of aggregate direct subject earned premium of the prior year; about $2.5 billion for Berkshire's insurers in 2026"
+      ],
+      "answer": "Based on the provided documents, under TRIA:\n\n* The deductible is 20% of the aggregate direct subject earned premium for relevant commercial lines of business in the immediately preceding calendar year [1].\n* Berkshire’s insurance group aggregate deductible is expected to be approximately $2.5 billion in 2026 [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer accurately states both expected facts regarding the TRIA deductible based on the provided text."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 29 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "pages 28-29 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "page 30 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "pages 30-31 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "pages 29-30 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "pages 118-119 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses"
+      ],
+      "latencyMs": 14023
+    },
+    {
+      "id": "q51",
+      "split": "test",
+      "category": "multi_section",
+      "question": "What happened with Berkshire's investment in Kraft Heinz?",
+      "expectedFacts": [
+        "The CEO letter calls it disappointing",
+        "Other-than-temporary impairment losses recorded in 2025"
+      ],
+      "answer": "Based on the provided sources, here is what happened with Berkshire's investment in Kraft Heinz:\n\n* **Disappointing Returns:** Berkshire's investment in Kraft Heinz has been disappointing, with returns well short of adequate even when considering the preferred equity component in the original investment [1].\n* **Board Resignation:** On May 19, 2025, Berkshire's representatives on the Kraft Heinz Board of Directors resigned [2]. \n* **Reporting Lag:** Because the timing and extent of financial information received from Kraft Heinz became limited to what is publicly available, Berkshire began recognizing equity method effects for Kraft Heinz on a one-quarter lag starting in the second quarter of 2025 [2].\n* **Impairment Losses:** In the second quarter of 2025, Berkshire recorded a pre-tax impairment loss of approximately $5.0 billion (an after-tax loss of $3.76 billion) on its investment in Kraft Heinz common stock, concluding the unrealized loss was other than temporary [3][5][6]. This reduced the carrying value of the investment to fair value based on the quoted market price [3].\n* **Carrying and Fair Values:** As of December 31, 2025, Berkshire owned 27.5% of the outstanding Kraft Heinz common stock [4]. The carrying value of the investment was $8,634 million and its fair value was $7,897 million [4].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified that the CEO called the investment disappointing and that other-than-temporary impairment losses were recorded in 2025."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 20 | CEO's Letter > Equity Investments",
+        "page 107 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+        "page 107 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+        "page 106 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (5)Equity method investments",
+        "page 61 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "page 80 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Other"
+      ],
+      "latencyMs": 19495
+    },
+    {
+      "id": "q52",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "How did BNSF's operating earnings change in 2025?",
+      "expectedFacts": [
+        "Railroad operating earnings rose 7.8% to $8,055 million"
+      ],
+      "answer": "In 2025, BNSF's railroad operating earnings increased to $8,055 million (or $8.1 billion), up 7.8% from $7,469 million in 2024 [2][3]. Pre-tax earnings also increased by 7.9% to $7.175 billion [2]. \n\nThis increase was primarily driven by lower operating expenses resulting from:\n* Improved operating efficiencies and employee productivity [1][5]\n* Lower litigation accruals [1][5]\n* The absence of a December 2024 charge related to the SMART-TD labor union agreement [4][5]\n* A lower effective income tax rate [1]",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The answer correctly identifies that BNSF's railroad operating earnings rose 7.8% to $8,055 million."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": 1.0,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 60 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+        "pages 67-68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "pages 15-16 | CEO's Letter > Non-Insurance Operations",
+        "page 68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "pages 68-69 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF",
+        "page 68 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > BNSF"
+      ],
+      "latencyMs": 17083
+    },
+    {
+      "id": "q53",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "How could climate change regulation affect Berkshire?",
+      "expectedFacts": [
+        "Risk factor: climate change and GHG regulation may impact its businesses"
+      ],
+      "answer": "Based on the provided sources, climate change and greenhouse gas (GHG) regulations could affect Berkshire in the following ways:\n\n* **Compliance Costs and Financial Results:** Emerging GHG and climate-related policies and legislation can influence the transition to a lower GHG-emitting economy, which in turn could increase compliance costs for Berkshire businesses—particularly BNSF and BHE, which represent the vast majority of Berkshire's direct emissions [1]. \n* **Regulatory Penalties:** Failure to comply with new or existing regulations, or the reinterpretation of existing climate change regulations, could have a significant adverse effect on Berkshire's financial results [1]. For instance, environmental laws such as the Federal Clean Air Act give regulators the authority to levy substantial penalties, including fines, injunctive relief, and other sanctions for noncompliance [2].\n* **Impact on Operations:** Laws and regulations regarding air quality, emissions performance standards, and climate change may impact the operations of BHE's generating facilities, potentially requiring them to reduce emissions [2]. Additionally, the potential adoption of state or federal clean energy standards could impact electricity generators and natural gas providers [2][5].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system answer accurately captures the expected facts and is fully supported by the provided sources."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 52 | FORM 10-K > Item 1A. Risk Factors > Climate change and the regulation of greenhouse gas (“GHG”) emissions may impact our businesses.",
+        "page 35 | FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+        "page 36 | FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+        "page 53 | FORM 10-K > Item 1A. Risk Factors > Changes in regulations and regulatory actions can adversely affect our operating results and our ability to allocate capital.",
+        "pages 35-36 | FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy",
+        "page 36 | FORM 10-K > Item 1. Business Description > Berkshire Hathaway Energy"
+      ],
+      "latencyMs": 18149
+    },
+    {
+      "id": "q54",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "What is GEICO's share of the U.S. private passenger auto insurance market?",
+      "expectedFacts": [
+        "About 11.6%, the third largest"
+      ],
+      "answer": "Based on A.M. Best data for 2024 published in 2025, GEICO’s market share of the private passenger automobile insurance market was the third largest at approximately 11.6% (based on written premiums) [1].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified GEICO's market share as approximately 11.6% and the third largest, matching the expected facts and source text."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 29 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "page 29 | FORM 10-K > Item 1. Business Description > Insurance Businesses",
+        "pages 61-62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "pages 82-83 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Property and casualty insurance unpaid losses",
+        "page 62 | FORM 10-K > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Insurance—Underwriting",
+        "page 119 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (16) Unpaid losses and loss adjustment expenses"
+      ],
+      "latencyMs": 13767
+    },
+    {
+      "id": "q55",
+      "split": "test",
+      "category": "multi_section",
+      "question": "Who are Berkshire's key executives besides Greg Abel?",
+      "expectedFacts": [
+        "Ajit Jain (Vice Chairman, insurance) and Adam Johnson",
+        "The executive officers listed in Item 4"
+      ],
+      "answer": "Based on the provided sources, Berkshire's key executives and leadership roles besides Gregory E. Abel include:\n\n* **Warren E. Buffett:** Chairman of the Board of Directors (and former CEO) [1][2][3][6].\n* **Ajit Jain:** Vice Chairman of Insurance Operations [1][2][3].\n* **Marc D. Hamburg:** Senior Vice President and Chief Financial Officer (Principal Financial Officer) [2][3][5][6].\n* **Adam Johnson:** President of Berkshire's Consumer Products, Service and Retailing operations (and President of NetJets) [1][4].\n* **Michael J. O’Sullivan:** Senior Vice President and General Counsel [2][5].\n* **Daniel J. Jaksich:** Vice President and Controller (Principal Accounting Officer) [2][5][6].\n* **Mark D. Millard:** Vice President [2][5].\n* **Jo Ellen Rieck:** Vice President [2][5].\n* **Kerby S. Ham:** Treasurer [2][5].\n* **Rebecca K. Amick:** Director of Internal Auditing [2][5].\n* **Katie Farmer:** Associated with BNSF [4].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": false,
+        "faithful": true,
+        "explanation": "The system correctly identified Berkshire's key executives and officers listed in the report besides Greg Abel."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": true,
+      "failureCause": "",
+      "sources": [
+        "page 51 | FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+        "page 153 | Directors and Officers of the Company",
+        "page 58 | FORM 10-K > Item 4. Mine Safety Disclosures > Executive Officers of the Registrant",
+        "page 22 | CEO's Letter > Equity Investments",
+        "pages 153-154 | Directors and Officers of the Company",
+        "page 148 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > SIGNATURES"
+      ],
+      "latencyMs": 14307
+    },
+    {
+      "id": "q56",
+      "split": "test",
+      "category": "unanswerable",
+      "question": "What were Berkshire's total revenues in 2015?",
+      "expectedFacts": [
+        "Not in the report: statements cover 2023-2025; the 2015 row on page 24 is market value change"
+      ],
+      "answer": "The provided sources do not contain Berkshire's total revenues for 2015 [1][2][3][4][5][6].",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": true,
+        "faithful": true,
+        "explanation": "The question is unanswerable from the provided sources and the system correctly abstained."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": false,
+      "failureCause": "",
+      "sources": [
+        "page 94 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF EARNINGS",
+        "pages 144-145 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > Opinion on the Financial Statement Schedule",
+        "pages 14-15 | CEO's Letter > Insurance Operations",
+        "pages 131-132 | FORM 10-K > NOTES TO CONSOLIDATED FINANCIAL STATEMENTS > (25) Accumulated other comprehensive income",
+        "page 95 | FORM 10-K > Consolidated Financial Statements > CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME",
+        "pages 12-13 | CEO's Letter > Berkshire’s Performance"
+      ],
+      "latencyMs": 15860
+    },
+    {
+      "id": "q57",
+      "split": "test",
+      "category": "unanswerable",
+      "question": "Who will succeed Greg Abel as CEO?",
+      "expectedFacts": [
+        "Not in the report (the successor on page 21 is for a different role)"
+      ],
+      "answer": "The provided sources do not contain information about who will succeed Greg Abel as CEO.",
+      "answerModel": "gemini-3.5-flash-lite",
+      "judgeModel": "gemini-3.5-flash-lite",
+      "verdict": {
+        "correctness": "correct",
+        "abstained": true,
+        "faithful": true,
+        "explanation": "The question is unanswerable and the system correctly stated that the sources do not contain the answer."
+      },
+      "error": "",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": false,
+      "failureCause": "",
+      "sources": [
+        "page 51 | FORM 10-K > Item 1A. Risk Factors > We are dependent on a few key people for our major investment and capital allocation decisions.",
+        "page 153 | Directors and Officers of the Company",
+        "page 58 | FORM 10-K > Item 4. Mine Safety Disclosures > Executive Officers of the Registrant",
+        "page 22 | CEO's Letter > Equity Investments",
+        "page 148 | FORM 10-K > Item 15. Exhibits and Financial Statement Schedules > SIGNATURES",
+        "page 21 | CEO's Letter > Equity Investments"
+      ],
+      "latencyMs": 15174
+    },
+    {
+      "id": "q58",
+      "split": "test",
+      "category": "unanswerable",
+      "question": "What is Berkshire's ESG rating?",
+      "expectedFacts": [
+        "Not in the report; only credit ratings of bonds are mentioned"
+      ],
+      "answer": "",
+      "answerModel": null,
+      "judgeModel": null,
+      "verdict": null,
+      "error": "All answer models failed: gemini-3.5-flash: HTTP 429; gemini-3.5-flash-lite: HTTP 503",
+      "citationsValid": true,
+      "keyNumbersFound": null,
+      "evidenceInContext": false,
+      "failureCause": "error",
+      "sources": [],
+      "latencyMs": 9501
+    }
+  ]
+}
