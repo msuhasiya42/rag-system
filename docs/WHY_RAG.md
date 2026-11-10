@@ -60,6 +60,79 @@ flowchart TD
 
 **Trade-off:** Additional ingestion, indexes, ranking, evaluation, operational complexity, and potential omissions.
 
+### What does "Augmented" mean in RAG?
+
+**RAG stands for Retrieval-Augmented Generation.**
+
+- **Retrieval:** Find relevant information from an external source.
+- **Augmented:** **Supplement the model's input** with that information.
+- **Generation:** Have the LLM produce an answer using the supplied evidence.
+
+For example, without augmentation, we ask:
+
+```text
+Question: Does Berkshire Hathaway pay cash dividends?
+```
+
+With augmentation, the model receives the question **plus a passage found in the annual report**:
+
+```text
+Source [1]: Berkshire annual report, dividend-policy section
+[Relevant source passage retrieved from the PDF]
+
+Question: Does Berkshire Hathaway pay cash dividends?
+Instruction: Answer using the provided source and cite it.
+```
+
+The source passage is intentionally a placeholder in this illustration; its exact wording comes from the retrieved document. **Augmentation does not retrain the model, modify its weights, or guarantee correctness.** It supplies additional context for this request.
+
+### Is RAG the same as ChatGPT searching the web?
+
+**They can use the same underlying idea: retrieve external evidence, then generate an answer from it.** What differs is the source, retrieval implementation, and control.
+
+```mermaid
+flowchart TD
+  Q[User question] --> W[Web search]
+  Q --> V[Our private/document search]
+  W --> WC[Relevant public pages and snippets]
+  V --> VC[Relevant indexed chunks]
+  WC --> L[LLM receives external context]
+  VC --> L
+  L --> A[Grounded answer with citations]
+```
+
+| Question | Web-search-augmented answer | Our Berkshire RAG implementation |
+|---|---|---|
+| Where is the source content? | Usually publicly accessible web pages | PDFs indexed in our Pinecone indexes |
+| Who prepares and indexes the corpus? | Search provider / web infrastructure | Our ingestion code (PDF parsing, chunking, encoding) |
+| How is evidence retrieved? | Search engine, potentially keyword, semantic, or hybrid ranking | Dense + learned sparse search, weighted RRF, optional cross-encoder reranking |
+| Can it access private internal docs? | Not through ordinary public web search; permissions/connectors are needed | Possible when enterprise sources and ACL enforcement are added; **not a guarantee of our current demo** |
+| What do we control? | Typically less control over public search indexing and ranking | Chunking, index content, retrieval ranking, metadata, evaluation, and answer prompt |
+
+**Important:** RAG **does not require embeddings**. Dense vector similarity is **one** retrieval method; others include BM25 keyword search, learned sparse retrieval, hybrid search, and suitable structured lookups. Search engines may also use embeddings internally—even if they return ordinary text snippets. Seeing text in the LLM prompt tells us **what was retrieved**, not **how it was found**.
+
+**When might web search be better?** A question about a public, newly published Berkshire announcement that we have not indexed. **When might our document RAG be better?** A question requiring a particular version of the PDF, precise page references, repeated queries against curated material, or controlled retrieval testing.
+
+### How is an agent different?
+
+**An agent is a controller for deciding which actions to take, not a replacement retrieval technology.**
+
+```text
+User asks a question
+      ↓
+Agent decides: web search, document RAG, SQL, or an API?
+      ↓
+Tool returns evidence
+      ↓
+Agent checks: Do I need another search or tool call?
+      ↓
+Answer using the collected evidence
+```
+
+For example, an incident-investigation agent can fetch live error rates with an API, search prior incidents in RAG, and consult public documentation via web search. **Each tool has a different job**. A direct single web-search answer does not necessarily involve a multi-step agent, and a RAG pipeline can operate perfectly well without an agent.
+
+**Mental model:** **RAG is the pattern; embeddings/keyword search are retrieval techniques; web search is another source of retrieved evidence; an agent can orchestrate any of them.**
+
 ### What our repository actually does
 
 Our [RAG System](../README.md) reads the Berkshire annual report, extracts pages (with OCR fallback for scanned pages), builds section-aware chunks, encodes them into Pinecone dense and sparse indexes, and retrieves candidates. It optionally fuses dense/sparse rankings, reranks candidates, and sends source-labeled chunks to the answer model.
