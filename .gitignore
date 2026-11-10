@@ -1,0 +1,22 @@
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets and local settings
+.env
+.env.local
+
+# Downloaded source documents (public, but large; re-download with the README command)
+data/
+
+# Frontend
+node_modules/
+dist/
