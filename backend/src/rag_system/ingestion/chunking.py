@@ -28,11 +28,6 @@ def document_id_for(file_name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", stem.lower()).strip("-") or "document"
 
 
-def embedding_text(chunk: Chunk) -> str:
-    """The section path is embedded with the text: it tells the model what the text is about."""
-    return f"{chunk.section}\n{chunk.text}" if chunk.section else chunk.text
-
-
 def chunk_sections(
     document_id: str,
     document_name: str,

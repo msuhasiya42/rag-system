@@ -3,17 +3,31 @@
 import hashlib
 import math
 import re
-from collections.abc import Sequence
+from collections import Counter
+from collections.abc import Callable, Sequence
+from typing import TypeVar
 
-from rag_system.domain import Chunk, SearchHit
+from rag_system.domain import Chunk, SearchHit, SparseVector
 from rag_system.ports import (
     ChatModel,
     ChatReply,
     Embedder,
     OcrEngine,
+    Reranker,
+    SparseEncoder,
     UpstreamServiceError,
     VectorStore,
 )
+
+V = TypeVar("V")
+
+
+def _words(text: str) -> list[str]:
+    return re.findall(r"\w+", text.lower())
+
+
+def _bucket(word: str, size: int) -> int:
+    return int(hashlib.md5(word.encode()).hexdigest(), 16) % size
 
 
 class FakeEmbedder(Embedder):
@@ -35,34 +49,86 @@ class FakeEmbedder(Embedder):
 
     def _vector(self, text: str) -> list[float]:
         vector = [0.0] * self.DIMENSIONS
-        for word in re.findall(r"\w+", text.lower()):
-            bucket = int(hashlib.md5(word.encode()).hexdigest(), 16) % self.DIMENSIONS
-            vector[bucket] += 1.0
+        for word in _words(text):
+            vector[_bucket(word, self.DIMENSIONS)] += 1.0
         norm = math.sqrt(sum(value * value for value in vector)) or 1.0
         return [value / norm for value in vector]
 
 
-class InMemoryVectorStore(VectorStore):
-    def __init__(self) -> None:
-        self.records: dict[str, tuple[Chunk, list[float]]] = {}
-        self.operations: list[str] = []
+class FakeSparseEncoder(SparseEncoder):
+    """Exact-word counts: only texts sharing literal words match, like keyword search."""
 
-    def upsert(self, chunks: Sequence[Chunk], vectors: Sequence[Sequence[float]]) -> None:
+    VOCABULARY = 10_000
+
+    def encode_documents(self, texts: Sequence[str]) -> list[SparseVector]:
+        return [self._encode(text) for text in texts]
+
+    def encode_query(self, text: str) -> SparseVector:
+        return self._encode(text)
+
+    def _encode(self, text: str) -> SparseVector:
+        counts = Counter(_bucket(word, self.VOCABULARY) for word in _words(text))
+        return SparseVector(indices=list(counts), values=[float(n) for n in counts.values()])
+
+
+def _dense_dot(a: Sequence[float], b: Sequence[float]) -> float:
+    return sum(x * y for x, y in zip(a, b, strict=True))
+
+
+def _sparse_dot(a: SparseVector, b: SparseVector) -> float:
+    weights = dict(zip(b.indices, b.values, strict=True))
+    return sum(
+        value * weights.get(index, 0.0) for index, value in zip(a.indices, a.values, strict=True)
+    )
+
+
+class InMemoryStore(VectorStore[V]):
+    def __init__(self, score: Callable[[V, V], float]) -> None:
+        self.records: dict[str, tuple[Chunk, V]] = {}
+        self.operations: list[str] = []
+        self._score = score
+
+    def upsert(self, chunks: Sequence[Chunk], vectors: Sequence[V]) -> None:
         self.operations.append("upsert")
         for chunk, vector in zip(chunks, vectors, strict=True):
-            self.records[chunk.id] = (chunk, list(vector))
+            self.records[chunk.id] = (chunk, vector)
 
     def delete_document(self, document_id: str) -> None:
         self.operations.append(f"delete:{document_id}")
         for key in [key for key in self.records if key.startswith(f"{document_id}#")]:
             del self.records[key]
 
-    def search(self, vector: Sequence[float], top_k: int) -> list[SearchHit]:
+    def search(self, vector: V, top_k: int) -> list[SearchHit]:
         scored = [
-            SearchHit(chunk, sum(a * b for a, b in zip(vector, stored, strict=True)))
-            for chunk, stored in self.records.values()
+            SearchHit(chunk, self._score(vector, stored)) for chunk, stored in self.records.values()
         ]
-        return sorted(scored, key=lambda hit: hit.score, reverse=True)[:top_k]
+        matches = [hit for hit in scored if hit.score > 0]
+        return sorted(matches, key=lambda hit: hit.score, reverse=True)[:top_k]
+
+
+class InMemoryVectorStore(InMemoryStore[Sequence[float]]):
+    def __init__(self) -> None:
+        super().__init__(_dense_dot)
+
+
+class InMemorySparseStore(InMemoryStore[SparseVector]):
+    def __init__(self) -> None:
+        super().__init__(_sparse_dot)
+
+
+class FakeReranker(Reranker):
+    """Scores by how many question words appear in the chunk text."""
+
+    def __init__(self) -> None:
+        self.calls: list[tuple[str, int, int]] = []  # question, candidates, top_n
+
+    def rerank(self, question: str, hits: Sequence[SearchHit], top_n: int) -> list[SearchHit]:
+        self.calls.append((question, len(hits), top_n))
+        wanted = set(_words(question))
+        scored = [
+            SearchHit(hit.chunk, float(len(wanted & set(_words(hit.chunk.text))))) for hit in hits
+        ]
+        return sorted(scored, key=lambda hit: hit.score, reverse=True)[:top_n]
 
 
 class FakeChatModel(ChatModel):

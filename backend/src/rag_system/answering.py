@@ -1,7 +1,8 @@
 """Retrieve relevant chunks and ask a model to answer from them, with citations."""
 
 from rag_system.domain import Answer, SearchHit
-from rag_system.ports import ChatModel, Embedder, VectorStore
+from rag_system.ports import ChatModel
+from rag_system.retrieval import Retriever
 
 NO_RESULTS_ANSWER = "I couldn't find anything relevant in the indexed documents."
 
@@ -18,13 +19,12 @@ Rules:
 
 
 class AnswerService:
-    def __init__(self, embedder: Embedder, store: VectorStore, model: ChatModel) -> None:
-        self._embedder = embedder
-        self._store = store
+    def __init__(self, retriever: Retriever, model: ChatModel) -> None:
+        self._retriever = retriever
         self._model = model
 
     def retrieve(self, question: str, top_k: int) -> list[SearchHit]:
-        return self._store.search(self._embedder.embed_query(question), top_k)
+        return self._retriever.retrieve(question, top_k)
 
     def answer(self, question: str, top_k: int) -> Answer:
         hits = self.retrieve(question, top_k)

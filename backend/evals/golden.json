@@ -1,0 +1,1105 @@
+{
+  "document": "berkshire-2025-annual-report.pdf",
+  "notes": "Evidence is labelled by page and section, not chunk id, so the set stays valid when chunking changes. A retrieved chunk supports an evidence item when its page range overlaps the item's pages and, if a section is given, its section path contains that text (case-insensitive). Every evidence item is needed for full recall. Split: 'tune' questions (q01-q22) were used to choose settings such as the RRF k and sparse weight; 'test' questions (q23+) are held out and only used to check those choices.",
+  "cases": [
+    {
+      "id": "q01",
+      "split": "tune",
+      "category": "table_number",
+      "question": "How much cash and cash equivalents did Berkshire have at the end of 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            92
+          ],
+          "section": "CONSOLIDATED BALANCE SHEETS"
+        },
+        {
+          "pages": [
+            96
+          ],
+          "section": "CONSOLIDATED STATEMENTS OF CASH FLOWS"
+        }
+      ],
+      "expected_facts": [
+        "Insurance and Other: $47,719 million; Railroad, Utilities and Energy: $4,158 million",
+        "Including restricted cash, $52,569 million at the end of 2025 (cash flow statement)"
+      ]
+    },
+    {
+      "id": "q02",
+      "split": "tune",
+      "category": "table_number",
+      "question": "What were Berkshire's total revenues in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            94
+          ],
+          "section": "CONSOLIDATED STATEMENTS OF EARNINGS"
+        }
+      ],
+      "expected_facts": [
+        "$371,444 million in 2025 ($371,433 million in 2024)"
+      ]
+    },
+    {
+      "id": "q03",
+      "split": "tune",
+      "category": "table_number",
+      "question": "What were GEICO's pre-tax underwriting earnings in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            61,
+            62
+          ],
+          "section": "Insurance—Underwriting"
+        }
+      ],
+      "expected_facts": [
+        "$6,824 million in 2025, down from $7,813 million in 2024"
+      ]
+    },
+    {
+      "id": "q04",
+      "split": "tune",
+      "category": "table_number",
+      "question": "What were net earnings attributable to Berkshire shareholders in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            60
+          ],
+          "section": "Item 7"
+        },
+        {
+          "pages": [
+            94
+          ],
+          "section": "CONSOLIDATED STATEMENTS OF EARNINGS"
+        }
+      ],
+      "expected_facts": [
+        "$66,968 million in 2025 ($88,995 million in 2024)"
+      ]
+    },
+    {
+      "id": "q05",
+      "split": "tune",
+      "category": "table_number",
+      "question": "How did Berkshire's per-share market value change in 1965 compared with the S&P 500?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            23
+          ],
+          "section": "Performance vs. the S&P 500"
+        }
+      ],
+      "expected_facts": [
+        "Berkshire +49.5%, S&P 500 with dividends +10.0%"
+      ]
+    },
+    {
+      "id": "q06",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "Does Berkshire pay a cash dividend?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            58
+          ],
+          "section": "Dividends"
+        }
+      ],
+      "expected_facts": [
+        "Berkshire has not declared a cash dividend since 1967"
+      ]
+    },
+    {
+      "id": "q07",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "How many people did Berkshire's subsidiaries employ at the end of 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            27
+          ],
+          "section": "Item 1. Business Description"
+        }
+      ],
+      "expected_facts": [
+        "Approximately 387,800 people worldwide"
+      ]
+    },
+    {
+      "id": "q08",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "How large was Berkshire's insurance float at the end of 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            15
+          ],
+          "section": "Insurance Operations"
+        },
+        {
+          "pages": [
+            32
+          ],
+          "section": "Insurance Businesses"
+        }
+      ],
+      "expected_facts": [
+        "About $176 billion, up from $171 billion at the end of 2024"
+      ]
+    },
+    {
+      "id": "q09",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "How many route miles of track does BNSF operate?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            55
+          ],
+          "section": "Description of Properties"
+        }
+      ],
+      "expected_facts": [
+        "Over 32,500 route miles in 28 states, plus three Canadian provinces"
+      ]
+    },
+    {
+      "id": "q10",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "Who succeeded Warren Buffett as CEO, and when did it take effect?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            51
+          ],
+          "section": "key people"
+        }
+      ],
+      "expected_facts": [
+        "Gregory E. Abel, appointed in May 2025, effective January 1, 2026"
+      ]
+    },
+    {
+      "id": "q11",
+      "split": "tune",
+      "category": "prose_fact",
+      "question": "When is the 2026 annual shareholders meeting?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            22
+          ],
+          "section": "CEO's Letter"
+        },
+        {
+          "pages": [
+            150
+          ],
+          "section": "Shareholder Event"
+        }
+      ],
+      "expected_facts": [
+        "Saturday, May 2, 2026, in Omaha"
+      ]
+    },
+    {
+      "id": "q12",
+      "split": "tune",
+      "category": "paraphrase",
+      "question": "Does the company hand out its profits to owners as regular payouts?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            58
+          ],
+          "section": "Dividends"
+        }
+      ],
+      "expected_facts": [
+        "No cash dividend since 1967"
+      ]
+    },
+    {
+      "id": "q13",
+      "split": "tune",
+      "category": "paraphrase",
+      "question": "What could go wrong if Berkshire loses its top decision makers?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            51
+          ],
+          "section": "key people"
+        }
+      ],
+      "expected_facts": [
+        "Risk factor: dependence on a few key people for major investment and capital allocation decisions"
+      ]
+    },
+    {
+      "id": "q14",
+      "split": "tune",
+      "category": "paraphrase",
+      "question": "How does Berkshire protect itself against hackers?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            54,
+            55
+          ],
+          "section": "Item 1C. Cybersecurity"
+        }
+      ],
+      "expected_facts": [
+        "A cybersecurity risk management framework run by the business groups, with third-party assessments and Audit Committee oversight"
+      ]
+    },
+    {
+      "id": "q15",
+      "split": "tune",
+      "category": "exact_term",
+      "question": "What does Item 1B Unresolved Staff Comments say?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            54
+          ],
+          "section": "Item 1B"
+        }
+      ],
+      "expected_facts": [
+        "None."
+      ]
+    },
+    {
+      "id": "q16",
+      "split": "tune",
+      "category": "exact_term",
+      "question": "When are the 1.125% Senior Notes due?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            25
+          ],
+          "section": null
+        }
+      ],
+      "expected_facts": [
+        "2027"
+      ]
+    },
+    {
+      "id": "q17",
+      "split": "tune",
+      "category": "exact_term",
+      "question": "What were the goodwill impairment losses in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            80,
+            81
+          ],
+          "section": "Other"
+        }
+      ],
+      "expected_facts": [
+        "$1,555 million in 2025 ($399 million in 2024)"
+      ]
+    },
+    {
+      "id": "q18",
+      "split": "tune",
+      "category": "multi_section",
+      "question": "What are Berkshire's five largest equity holdings?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            106
+          ],
+          "section": "(4)"
+        },
+        {
+          "pages": [
+            19
+          ],
+          "section": "Equity Investments"
+        }
+      ],
+      "expected_facts": [
+        "American Express, Apple, Bank of America, Coca-Cola and Chevron (65% of equity fair value at end of 2025)"
+      ]
+    },
+    {
+      "id": "q19",
+      "split": "tune",
+      "category": "multi_section",
+      "question": "How does Berkshire decide when to buy back its own shares?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            59
+          ],
+          "section": "Common Stock Repurchase Program"
+        },
+        {
+          "pages": [
+            10
+          ],
+          "section": "Capital Discipline"
+        }
+      ],
+      "expected_facts": [
+        "When the repurchase price is believed to be below Berkshire's intrinsic value, conservatively determined",
+        "Not if consolidated cash, equivalents and T-Bills would fall below $30 billion"
+      ]
+    },
+    {
+      "id": "q20",
+      "split": "tune",
+      "category": "unanswerable",
+      "question": "What is Berkshire's revenue forecast for 2030?",
+      "answerable": false,
+      "evidence": [],
+      "expected_facts": [
+        "Not in the report; the answer should say so"
+      ]
+    },
+    {
+      "id": "q21",
+      "split": "tune",
+      "category": "unanswerable",
+      "question": "How much was Berkshire's CEO paid in 2025?",
+      "answerable": false,
+      "evidence": [],
+      "expected_facts": [
+        "Not in the report (executive compensation is in the proxy statement)"
+      ]
+    },
+    {
+      "id": "q22",
+      "split": "tune",
+      "category": "unanswerable",
+      "question": "What is the price of a Berkshire Class B share today?",
+      "answerable": false,
+      "evidence": [],
+      "expected_facts": [
+        "Not in the report; a live price is not in any annual report"
+      ]
+    },
+    {
+      "id": "q23",
+      "split": "test",
+      "category": "table_number",
+      "question": "What were Berkshire's total assets at the end of 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            92
+          ],
+          "section": "CONSOLIDATED BALANCE SHEETS"
+        }
+      ],
+      "expected_facts": [
+        "$1,222,176 million ($1,153,881 million at end of 2024)"
+      ]
+    },
+    {
+      "id": "q24",
+      "split": "test",
+      "category": "table_number",
+      "question": "What were Berkshire's total liabilities at the end of 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            93
+          ],
+          "section": "CONSOLIDATED BALANCE SHEETS"
+        }
+      ],
+      "expected_facts": [
+        "$502,473 million ($502,226 million at end of 2024)"
+      ]
+    },
+    {
+      "id": "q25",
+      "split": "test",
+      "category": "table_number",
+      "question": "What were net earnings per average equivalent Class A share in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            94
+          ],
+          "section": "CONSOLIDATED STATEMENTS OF EARNINGS"
+        }
+      ],
+      "expected_facts": [
+        "$46,563 in 2025 ($61,900 in 2024)"
+      ]
+    },
+    {
+      "id": "q26",
+      "split": "test",
+      "category": "table_number",
+      "question": "How much were insurance premiums earned in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            94
+          ],
+          "section": "CONSOLIDATED STATEMENTS OF EARNINGS"
+        }
+      ],
+      "expected_facts": [
+        "$88,902 million in 2025 ($88,257 million in 2024)"
+      ]
+    },
+    {
+      "id": "q27",
+      "split": "test",
+      "category": "table_number",
+      "question": "What were BNSF's railroad operating revenues in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            67
+          ],
+          "section": "Operations > BNSF"
+        }
+      ],
+      "expected_facts": [
+        "$23,350 million, flat versus $23,355 million in 2024"
+      ]
+    },
+    {
+      "id": "q28",
+      "split": "test",
+      "category": "table_number",
+      "question": "What was pre-tax net investment income from the insurance operations in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            66
+          ],
+          "section": "Investment Income"
+        }
+      ],
+      "expected_facts": [
+        "$15,261 million in 2025, down 8.9% from $16,748 million"
+      ]
+    },
+    {
+      "id": "q29",
+      "split": "test",
+      "category": "table_number",
+      "question": "How much U.S. federal income tax did Berkshire pay in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            125
+          ],
+          "section": "(20) Income taxes"
+        }
+      ],
+      "expected_facts": [
+        "$11,753 million in 2025 ($26,482 million in 2024)"
+      ]
+    },
+    {
+      "id": "q30",
+      "split": "test",
+      "category": "table_number",
+      "question": "What was Berkshire's compounded annual gain from 1965 to 2025 compared with the S&P 500?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            24
+          ],
+          "section": "Performance vs. the S&P 500"
+        }
+      ],
+      "expected_facts": [
+        "19.7% for Berkshire versus 10.5% for the S&P 500 with dividends"
+      ]
+    },
+    {
+      "id": "q31",
+      "split": "test",
+      "category": "table_number",
+      "question": "How many employees does GEICO have?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            151
+          ],
+          "section": "Operating Companies"
+        }
+      ],
+      "expected_facts": [
+        "29,541"
+      ]
+    },
+    {
+      "id": "q32",
+      "split": "test",
+      "category": "table_number",
+      "question": "How large were the 2025 impairment losses on the Kraft Heinz and Occidental investments?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            60,
+            61
+          ],
+          "section": "Item 7"
+        }
+      ],
+      "expected_facts": [
+        "$8,255 million other-than-temporary impairment"
+      ]
+    },
+    {
+      "id": "q33",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "What were Berkshire's operating earnings in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            12
+          ],
+          "section": "Performance"
+        }
+      ],
+      "expected_facts": [
+        "$44.5 billion in 2025, below $47.4 billion in 2024"
+      ]
+    },
+    {
+      "id": "q34",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "Which firm audits Berkshire's financial statements?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            89
+          ],
+          "section": "Report on Internal Control",
+          "alternatives": [
+            {
+              "pages": [
+                90,
+                91
+              ],
+              "section": "Item 8"
+            }
+          ]
+        }
+      ],
+      "expected_facts": [
+        "Deloitte & Touche LLP"
+      ]
+    },
+    {
+      "id": "q35",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "Who is Berkshire's stock transfer agent?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            152
+          ],
+          "section": "Stock Transfer Agency"
+        }
+      ],
+      "expected_facts": [
+        "EQ Shareowner Services, a division of Equiniti Trust Company"
+      ]
+    },
+    {
+      "id": "q36",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "How many record holders of Class A and Class B stock does Berkshire have?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            58
+          ],
+          "section": "Shareholders"
+        }
+      ],
+      "expected_facts": [
+        "About 950 Class A and 16,500 Class B record holders"
+      ]
+    },
+    {
+      "id": "q37",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "How many route miles of track does BNSF own?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            55
+          ],
+          "section": "Description of Properties"
+        }
+      ],
+      "expected_facts": [
+        "Over 23,000 route miles"
+      ]
+    },
+    {
+      "id": "q38",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "By how much did GEICO's premiums written increase in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            62
+          ],
+          "section": "Underwriting"
+        }
+      ],
+      "expected_facts": [
+        "$2.3 billion (5.3%), mainly from more policies-in-force"
+      ]
+    },
+    {
+      "id": "q39",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "What share of BNSF Railway's greenhouse gas emissions comes from locomotive diesel fuel?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            33
+          ],
+          "section": "Burlington Northern Santa Fe"
+        }
+      ],
+      "expected_facts": [
+        "About 80% in the 2018 baseline year"
+      ]
+    },
+    {
+      "id": "q40",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "Who is president of Berkshire's consumer products, service and retailing businesses?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            15
+          ],
+          "section": "Non-Insurance Operations",
+          "alternatives": [
+            {
+              "pages": [
+                51
+              ],
+              "section": "key people"
+            }
+          ]
+        }
+      ],
+      "expected_facts": [
+        "Adam Johnson"
+      ]
+    },
+    {
+      "id": "q41",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "What are the ticker symbols of Berkshire's Class A and Class B shares?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            25
+          ],
+          "section": null,
+          "alternatives": [
+            {
+              "pages": [
+                58
+              ],
+              "section": "Market Information"
+            }
+          ]
+        }
+      ],
+      "expected_facts": [
+        "BRK.A and BRK.B on the New York Stock Exchange"
+      ]
+    },
+    {
+      "id": "q42",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "Is Berkshire run from headquarters, or do its businesses largely run themselves?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            8
+          ],
+          "section": "Decentralized Model"
+        }
+      ],
+      "expected_facts": [
+        "A decentralized model: operating autonomy grounded in deserved trust"
+      ]
+    },
+    {
+      "id": "q43",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "How much money do the insurance businesses make from investing their funds?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            66
+          ],
+          "section": "Investment Income"
+        }
+      ],
+      "expected_facts": [
+        "Pre-tax net investment income of $15,261 million in 2025"
+      ]
+    },
+    {
+      "id": "q44",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "Has the company bought back any of its own stock recently?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            59
+          ],
+          "section": "Common Stock Repurchase Program"
+        }
+      ],
+      "expected_facts": [
+        "No Class A or Class B shares were repurchased in the fourth quarter of 2025"
+      ]
+    },
+    {
+      "id": "q45",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "What is the company doing about the danger of its power lines starting fires?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            16,
+            17
+          ],
+          "section": "Non-Insurance Operations"
+        }
+      ],
+      "expected_facts": [
+        "BHE has taken a leadership role on wildfire risk with regulators, public officials and industry"
+      ]
+    },
+    {
+      "id": "q46",
+      "split": "test",
+      "category": "paraphrase",
+      "question": "Who checks the company's books from the outside?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            89
+          ],
+          "section": "Report on Internal Control",
+          "alternatives": [
+            {
+              "pages": [
+                90,
+                91
+              ],
+              "section": "Item 8"
+            }
+          ]
+        }
+      ],
+      "expected_facts": [
+        "Deloitte & Touche LLP, the independent registered public accounting firm"
+      ]
+    },
+    {
+      "id": "q47",
+      "split": "test",
+      "category": "exact_term",
+      "question": "What does Note 27 cover?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            136,
+            137,
+            138,
+            139,
+            140,
+            141
+          ],
+          "section": "(27)"
+        }
+      ],
+      "expected_facts": [
+        "Contingencies and commitments"
+      ]
+    },
+    {
+      "id": "q48",
+      "split": "test",
+      "category": "exact_term",
+      "question": "What was BNSF's effective income tax rate in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            67
+          ],
+          "section": "Operations > BNSF"
+        }
+      ],
+      "expected_facts": [
+        "23.7% (24.3% in 2024)"
+      ]
+    },
+    {
+      "id": "q49",
+      "split": "test",
+      "category": "exact_term",
+      "question": "What is the Invest in Yourself 5K?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            150
+          ],
+          "section": "Shareholder Event"
+        }
+      ],
+      "expected_facts": [
+        "A run/walk presented by Brooks during the shareholder meeting weekend"
+      ]
+    },
+    {
+      "id": "q50",
+      "split": "test",
+      "category": "exact_term",
+      "question": "What is the deductible under TRIA?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            29
+          ],
+          "section": "Insurance Businesses"
+        }
+      ],
+      "expected_facts": [
+        "20% of aggregate direct subject earned premium of the prior year; about $2.5 billion for Berkshire's insurers in 2026"
+      ]
+    },
+    {
+      "id": "q51",
+      "split": "test",
+      "category": "multi_section",
+      "question": "What happened with Berkshire's investment in Kraft Heinz?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            20
+          ],
+          "section": "Equity Investments"
+        },
+        {
+          "pages": [
+            60,
+            61
+          ],
+          "section": "Item 7"
+        }
+      ],
+      "expected_facts": [
+        "The CEO letter calls it disappointing",
+        "Other-than-temporary impairment losses recorded in 2025"
+      ]
+    },
+    {
+      "id": "q52",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "How did BNSF's operating earnings change in 2025?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            67
+          ],
+          "section": "Operations > BNSF"
+        }
+      ],
+      "expected_facts": [
+        "Railroad operating earnings rose 7.8% to $8,055 million"
+      ]
+    },
+    {
+      "id": "q53",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "How could climate change regulation affect Berkshire?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            52
+          ],
+          "section": "Climate change"
+        }
+      ],
+      "expected_facts": [
+        "Risk factor: climate change and GHG regulation may impact its businesses"
+      ]
+    },
+    {
+      "id": "q54",
+      "split": "test",
+      "category": "prose_fact",
+      "question": "What is GEICO's share of the U.S. private passenger auto insurance market?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            29
+          ],
+          "section": "Insurance Businesses"
+        }
+      ],
+      "expected_facts": [
+        "About 11.6%, the third largest"
+      ]
+    },
+    {
+      "id": "q55",
+      "split": "test",
+      "category": "multi_section",
+      "question": "Who are Berkshire's key executives besides Greg Abel?",
+      "answerable": true,
+      "evidence": [
+        {
+          "pages": [
+            51
+          ],
+          "section": "key people"
+        },
+        {
+          "pages": [
+            58
+          ],
+          "section": "Executive Officers"
+        }
+      ],
+      "expected_facts": [
+        "Ajit Jain (Vice Chairman, insurance) and Adam Johnson",
+        "The executive officers listed in Item 4"
+      ]
+    },
+    {
+      "id": "q56",
+      "split": "test",
+      "category": "unanswerable",
+      "question": "What were Berkshire's total revenues in 2015?",
+      "answerable": false,
+      "evidence": [],
+      "expected_facts": [
+        "Not in the report: statements cover 2023-2025; the 2015 row on page 24 is market value change"
+      ]
+    },
+    {
+      "id": "q57",
+      "split": "test",
+      "category": "unanswerable",
+      "question": "Who will succeed Greg Abel as CEO?",
+      "answerable": false,
+      "evidence": [],
+      "expected_facts": [
+        "Not in the report (the successor on page 21 is for a different role)"
+      ]
+    },
+    {
+      "id": "q58",
+      "split": "test",
+      "category": "unanswerable",
+      "question": "What is Berkshire's ESG rating?",
+      "answerable": false,
+      "evidence": [],
+      "expected_facts": [
+        "Not in the report; only credit ratings of bonds are mentioned"
+      ]
+    }
+  ]
+}

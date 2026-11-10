@@ -12,7 +12,10 @@ INGEST  PDF ─► lines + font style, outline (pypdfium2) ─┬─► clean �
         sections: outline + bold headings; inside each, paragraphs and tables
         chunks:   ≤1800 chars, never across sections, tables kept whole; section path embedded
 
-ASK     question ─► llama-text-embed-v2 ─► Pinecone top-k ─► answer model on Bedrock ─► answer with [n] citations
+        every chunk is written to two indexes: dense (llama-text-embed-v2) and sparse
+        (pinecone-sparse-english-v0, exact terms)
+
+ASK     question ─► retrieval pipeline (below) ─► answer model on Bedrock ─► answer with [n] citations
                                                   (Qwen3-235B, falls back to Nova 2 Lite)
 ```
 
@@ -71,6 +74,67 @@ curl -s localhost:5001/api/ask -H 'content-type: application/json' \
 `{"answer", "modelId", "sources": [{"number", "documentName", "section", "pageStart", "pageEnd", "pagesLabel", "score", "text"}]}`.
 Errors use `{"error": {"code", "message", "details"?}}`: 400 for invalid input, 502 when Bedrock or
 Pinecone fails (details are logged, not returned).
+
+## Retrieval pipelines and evaluation
+
+Pipelines are stacks of small retrievers (`retrieval.py`), chosen with `--pipeline` or
+`RAG_RETRIEVAL_PIPELINE`:
+
+| Pipeline | Stack |
+|---|---|
+| `basic` | `DenseRetriever` |
+| `hybrid` | `HybridRetriever(Dense, Sparse)`: both in parallel, weighted reciprocal rank fusion |
+| `advanced` (default) | `RerankingRetriever(Hybrid)`: `bge-reranker-v2-m3` reorders the top 20 |
+| `basic-rerank` | `RerankingRetriever(Dense)`: isolates the reranker's effect |
+
+`evals/golden.json` holds 58 questions about the Berkshire report (52 answerable, 6 deliberately
+unanswerable), with evidence labelled by page and section so it survives chunking changes. A fact
+stated in two places lists both as alternatives. Questions are split:
+
+- **tune** (q01-q22): used to choose settings (RRF k, sparse weight).
+- **test** (q23-q58): held out, only used to check whether those choices generalise.
+
+`uv run rag eval --pipeline all --label <name>` prints a per-question rank matrix and a
+scoreboard per split, and saves JSON to `evals/results/`.
+
+Held-out **test** split (33 answerable questions, k=10):
+
+| Pipeline | Hit@1 | Hit@5 | Recall@5 | nDCG@5 | MRR | p50 latency |
+|---|---|---|---|---|---|---|
+| basic | 61% | 79% | 79% | 70% | 0.690 | ~580 ms |
+| hybrid (k=1, sparse weight 0.5) | 58% | 91% | 91% | 75% | 0.697 | ~630 ms |
+| **advanced** | **70%** | **91%** | **91%** | **80%** | **0.778** | ~1,520 ms |
+| basic-rerank | 70% | 88% | 88% | 79% | 0.769 | ~1,380 ms |
+
+Tune split (19 answerable questions), where the settings were chosen:
+
+| Pipeline | Hit@1 | Hit@5 | Recall@5 | nDCG@5 | MRR |
+|---|---|---|---|---|---|
+| basic | 74% | 89% | 87% | 81% | 0.795 |
+| hybrid, textbook RRF (k=60, equal weights) | 58% | 84% | 79% | 69% | 0.690 |
+| hybrid, tuned (k=1, sparse weight 0.5) | 74% | 95% | 89% | 82% | 0.811 |
+| advanced | 68% | 89% | 84% | 78% | 0.789 |
+| basic-rerank | 68% | 89% | 87% | 79% | 0.795 |
+
+What the experiments showed:
+- **Textbook hybrid search lowered quality.** The sparse model weights every query word equally
+  (`the`, `of`, `and` included), so its list is noisy on a 10-K. With RRF's usual k=60, ranks 1
+  and 3 score almost the same, so a chunk appearing in both lists outvotes dense search's correct
+  first result. A small k and a lower sparse weight fixed it.
+- **Sparse search fixes exact terms:** "When are the 1.125% Senior Notes due?" went from rank 10
+  (dense) to 4 (hybrid) to 1 (reranked).
+- **The held-out split reversed the reranker verdict.** On the tune split it looked useless
+  (MRR -0.005), because one of its failures, the paraphrase "hand out its profits as regular
+  payouts", sat there: every candidate scored below 0.007, so it was ordering noise. On the
+  36 held-out questions it is the largest gain (MRR +0.088), lifting table numbers and exact
+  terms (total liabilities: not found to rank 1; BNSF tax rate: 7 to 1). It still loses some
+  (U.S. federal tax paid: rank 2 to not found) and doubles latency. Cohere rerankers are not
+  available on Pinecone's free plan.
+- **Tuned hybrid generalised for recall, not ordering:** on held-out questions Hit@5 rose from
+  79% to 91%, but Hit@1 fell from 61% to 58%. It finds more evidence; the reranker orders it.
+- **Weakest category: table numbers.** "Cash and cash equivalents" and "total assets" are single
+  rows inside balance-sheet chunks; prose that discusses them outranks the table.
+- **Caveat:** 33 held-out questions is still small: one question is about 3 points of Hit@K.
 
 ## Checks
 

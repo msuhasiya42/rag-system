@@ -1,5 +1,6 @@
 from rag_system.answering import NO_RESULTS_ANSWER, AnswerService
 from rag_system.domain import Chunk
+from rag_system.retrieval import DenseRetriever
 from tests.fakes import FakeChatModel, FakeEmbedder, InMemoryVectorStore
 
 
@@ -21,7 +22,9 @@ def test_answer_cites_the_retrieved_sources() -> None:
     )
     model = FakeChatModel(reply="Float was $176 billion [1].")
 
-    answer = AnswerService(FakeEmbedder(), store, model).answer("How large was float?", top_k=1)
+    answer = AnswerService(DenseRetriever(FakeEmbedder(), store), model).answer(
+        "How large was float?", top_k=1
+    )
 
     assert answer.text == "Float was $176 billion [1]."
     assert answer.model_id == "fake-model"
@@ -35,7 +38,9 @@ def test_answer_cites_the_retrieved_sources() -> None:
 def test_retrieval_returns_at_most_top_k_sources() -> None:
     store = _store_with(*[_chunk(i, f"fact number {i}", i) for i in range(10)])
 
-    answer = AnswerService(FakeEmbedder(), store, FakeChatModel()).answer("fact", top_k=3)
+    answer = AnswerService(DenseRetriever(FakeEmbedder(), store), FakeChatModel()).answer(
+        "fact", top_k=3
+    )
 
     assert len(answer.sources) == 3
 
@@ -43,7 +48,9 @@ def test_retrieval_returns_at_most_top_k_sources() -> None:
 def test_empty_index_answers_without_calling_the_model() -> None:
     model = FakeChatModel()
 
-    answer = AnswerService(FakeEmbedder(), InMemoryVectorStore(), model).answer("Anything?", 5)
+    answer = AnswerService(DenseRetriever(FakeEmbedder(), InMemoryVectorStore()), model).answer(
+        "Anything?", 5
+    )
 
     assert answer.text == NO_RESULTS_ANSWER
     assert answer.model_id is None

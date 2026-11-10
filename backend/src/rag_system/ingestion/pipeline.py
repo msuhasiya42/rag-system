@@ -2,15 +2,16 @@
 
 import logging
 from collections import Counter
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
-from rag_system.domain import TextSource
-from rag_system.ingestion.chunking import chunk_sections, document_id_for, embedding_text
+from rag_system.domain import SparseVector, TextSource
+from rag_system.ingestion.chunking import chunk_sections, document_id_for
 from rag_system.ingestion.cleaning import clean_pages
 from rag_system.ingestion.pdf_reader import read_pdf
 from rag_system.ingestion.structure import build_sections
-from rag_system.ports import Embedder, OcrEngine, VectorStore
+from rag_system.ports import Embedder, OcrEngine, SparseEncoder, VectorStore
 
 logger = logging.getLogger(__name__)
 
@@ -26,19 +27,29 @@ class IngestReport:
     chunk_count: int
 
 
+@dataclass(frozen=True)
+class SparseIndexing:
+    """The optional keyword-style index written next to the dense one, for hybrid search."""
+
+    encoder: SparseEncoder
+    store: VectorStore[SparseVector]
+
+
 class IngestionService:
     def __init__(
         self,
         embedder: Embedder,
-        store: VectorStore,
+        store: VectorStore[Sequence[float]],
         ocr: OcrEngine | None,
         *,
+        sparse: SparseIndexing | None = None,
         ocr_min_text_chars: int,
         chunk_size_chars: int,
         chunk_overlap_chars: int,
     ) -> None:
         self._embedder = embedder
         self._store = store
+        self._sparse = sparse
         self._ocr = ocr
         self._ocr_min_text_chars = ocr_min_text_chars
         self._chunk_size_chars = chunk_size_chars
@@ -62,10 +73,16 @@ class IngestionService:
             len(chunks),
         )
 
-        # Embed before deleting, so a failed embedding run leaves the old version searchable.
-        vectors = self._embedder.embed_documents([embedding_text(chunk) for chunk in chunks])
+        # Encode everything before deleting, so a failed run leaves the old version searchable.
+        texts = [chunk.contextual_text() for chunk in chunks]
+        vectors = self._embedder.embed_documents(texts)
+        sparse_vectors = self._sparse.encoder.encode_documents(texts) if self._sparse else []
+
         self._store.delete_document(document_id)
         self._store.upsert(chunks, vectors)
+        if self._sparse:
+            self._sparse.store.delete_document(document_id)
+            self._sparse.store.upsert(chunks, sparse_vectors)
 
         sources = Counter(page.source for page in pages)
         return IngestReport(

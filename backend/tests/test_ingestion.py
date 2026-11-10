@@ -1,7 +1,13 @@
 from pathlib import Path
 
-from rag_system.ingestion.pipeline import IngestionService
-from tests.fakes import FakeEmbedder, FakeOcr, InMemoryVectorStore
+from rag_system.ingestion.pipeline import IngestionService, SparseIndexing
+from tests.fakes import (
+    FakeEmbedder,
+    FakeOcr,
+    FakeSparseEncoder,
+    InMemorySparseStore,
+    InMemoryVectorStore,
+)
 
 
 def _service(store: InMemoryVectorStore) -> IngestionService:
@@ -27,6 +33,24 @@ def test_ingest_indexes_text_and_ocr_pages(mixed_pdf: Path) -> None:
     revenue = next(chunk for chunk in chunks if "Annual revenue grew" in chunk.text)
     assert revenue.section == "Revenue Overview"  # from the bookmark and bold heading
     assert any("Scanned invoice total" in chunk.text for chunk in chunks)
+
+
+def test_the_sparse_index_gets_the_same_chunks(mixed_pdf: Path) -> None:
+    dense, sparse = InMemoryVectorStore(), InMemorySparseStore()
+    service = IngestionService(
+        FakeEmbedder(),
+        dense,
+        None,
+        sparse=SparseIndexing(FakeSparseEncoder(), sparse),
+        ocr_min_text_chars=50,
+        chunk_size_chars=400,
+        chunk_overlap_chars=50,
+    )
+
+    service.ingest_pdf(mixed_pdf)
+
+    assert set(sparse.records) == set(dense.records)
+    assert sparse.operations == ["delete:mixed-report", "upsert"]
 
 
 def test_the_section_path_is_embedded_with_the_chunk_text(mixed_pdf: Path) -> None:

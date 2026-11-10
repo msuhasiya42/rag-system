@@ -3,6 +3,7 @@ from collections.abc import Callable, Iterator
 from rag_system.answering import AnswerService
 from rag_system.chat import run_chat
 from rag_system.domain import Chunk
+from rag_system.retrieval import DenseRetriever
 from tests.fakes import FakeChatModel, FakeEmbedder, InMemoryVectorStore
 
 
@@ -10,7 +11,7 @@ def _service(model: FakeChatModel) -> AnswerService:
     store = InMemoryVectorStore()
     chunk = Chunk("report#00000", "report", "report.pdf", 0, "Revenue was 12 million", 3, 3)
     store.upsert([chunk], FakeEmbedder().embed_documents([chunk.text]))
-    return AnswerService(FakeEmbedder(), store, model)
+    return AnswerService(DenseRetriever(FakeEmbedder(), store), model)
 
 
 def _inputs(*lines: str | type[BaseException]) -> Callable[[str], str]:

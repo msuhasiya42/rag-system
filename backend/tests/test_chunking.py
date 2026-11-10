@@ -1,7 +1,7 @@
 import pytest
 
 from rag_system.domain import TextLine
-from rag_system.ingestion.chunking import chunk_sections, document_id_for, embedding_text
+from rag_system.ingestion.chunking import chunk_sections, document_id_for
 from rag_system.ingestion.structure import Block, BlockKind, PlacedLine, Section
 
 
@@ -27,7 +27,7 @@ def test_a_small_section_is_one_chunk_tagged_with_its_path() -> None:
     [chunk] = chunk_sections("doc", "doc.pdf", sections, 300, 60)
 
     assert chunk.section == "Form 10-K > Item 1A. Risk Factors"
-    assert embedding_text(chunk).startswith("Form 10-K > Item 1A. Risk Factors\nline 0")
+    assert chunk.contextual_text().startswith("Form 10-K > Item 1A. Risk Factors\nline 0")
 
 
 def test_chunks_never_cross_a_section_boundary() -> None:

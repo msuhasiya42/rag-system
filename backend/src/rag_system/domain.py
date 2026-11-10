@@ -57,6 +57,19 @@ class Chunk:
     page_end: int
     section: str = ""  # heading path, e.g. "Form 10-K > Item 1A. Risk Factors"
 
+    def contextual_text(self) -> str:
+        """The text with its section path in front. Used for embedding and reranking: the path
+        tells the model what the text is about ("Balance Sheets" for a list of numbers)."""
+        return f"{self.section}\n{self.text}" if self.section else self.text
+
+
+@dataclass(frozen=True)
+class SparseVector:
+    """Weights for a few vocabulary terms; every other term has weight 0."""
+
+    indices: list[int]
+    values: list[float]
+
 
 @dataclass(frozen=True)
 class SearchHit:

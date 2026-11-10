@@ -6,7 +6,12 @@ from typing import Any
 import pytest
 from pinecone.errors import ApiError, RateLimitError
 
-from rag_system.clients.pinecone_embedder import PineconeEmbedder
+from rag_system.clients.pinecone_inference import (
+    PineconeEmbedder,
+    PineconeReranker,
+    PineconeSparseEncoder,
+)
+from rag_system.domain import Chunk, SearchHit, SparseVector
 from rag_system.ports import UpstreamServiceError
 
 
@@ -67,3 +72,47 @@ def test_persistent_rate_limits_and_other_errors_raise_upstream_errors() -> None
 
     with pytest.raises(UpstreamServiceError, match="embedding failed"):
         _embedder(StubInference(failures=[ApiError("bad", 400)])).embed_query("hi")
+
+
+class StubSparseAndRerank:
+    def __init__(self) -> None:
+        self.calls: list[dict[str, Any]] = []
+
+    def embed(self, model: str, inputs: list[str], parameters: dict[str, Any]) -> Any:
+        self.calls.append({"inputs": inputs, **parameters})
+        data = [SimpleNamespace(sparse_indices=[7, 9], sparse_values=[0.5, 1.5]) for _ in inputs]
+        return SimpleNamespace(data=data)
+
+    def rerank(self, **kwargs: Any) -> Any:
+        self.calls.append(kwargs)
+        # The stub prefers the second document.
+        rows = [SimpleNamespace(index=1, score=0.9), SimpleNamespace(index=0, score=0.1)]
+        return SimpleNamespace(data=rows[: kwargs["top_n"]])
+
+
+def test_sparse_encoder_returns_indices_and_weights() -> None:
+    inference = StubSparseAndRerank()
+    encoder = PineconeSparseEncoder(SimpleNamespace(inference=inference), "sparse")  # type: ignore[arg-type]
+
+    [vector] = encoder.encode_documents(["1.125% Senior Notes"])
+    query = encoder.encode_query("senior notes")
+
+    assert vector == SparseVector(indices=[7, 9], values=[0.5, 1.5])
+    assert query.indices == [7, 9]
+    assert [call["input_type"] for call in inference.calls] == ["passage", "query"]
+
+
+def test_reranker_sends_section_and_text_and_returns_hits_in_its_order() -> None:
+    inference = StubSparseAndRerank()
+    reranker = PineconeReranker(SimpleNamespace(inference=inference), "bge")  # type: ignore[arg-type]
+    hits = [
+        SearchHit(Chunk("d#0", "d", "d.pdf", 0, "noise", 1, 1, "Other"), 0.8),
+        SearchHit(Chunk("d#1", "d", "d.pdf", 1, "Notes due 2027", 25, 25, "Cover"), 0.2),
+    ]
+
+    ranked = reranker.rerank("When are the notes due?", hits, top_n=1)
+
+    assert [(hit.chunk.id, hit.score) for hit in ranked] == [("d#1", 0.9)]
+    sent = inference.calls[0]["documents"]
+    assert sent[1] == {"id": "d#1", "text": "Cover\nNotes due 2027"}
+    assert reranker.rerank("q", [], top_n=3) == []
