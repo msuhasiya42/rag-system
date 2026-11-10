@@ -2,6 +2,8 @@
 
 > 📖 **New to RAG?** Start with the [RAG Engineering Glossary](docs/RAG_GLOSSARY.md) — 28 terms explained from scratch using the Berkshire report, with diagrams, examples, and our evaluation results.
 >
+> 🛠️ **How it was built:** [docs/JOURNEY.md](docs/JOURNEY.md) walks through every step, from the first PDF parse to 88% correct answers, including what failed and why.
+>
 > 🧪 **How it is tested:** [docs/EVALUATION.md](docs/EVALUATION.md) explains the golden dataset, the retrieval and answer evaluations, and the metrics (Hit@K, MRR, nDCG) with worked examples.
 
 Ask questions about company PDFs and get answers that cite the document and page. Built with Flask,
